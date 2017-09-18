@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "imarex",
+  "version": "0.2",
+
+  "description": "INFOnline GmbH: Market Research Extension for Firefox & Chrome",
+
+  "icons": {
+    "48": "icons/io48.png",
+    "96": "icons/io96.png"
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "19": "buttons/io19.png",
+      "38": "buttons/io38.png"
+    },
+    "default_popup": "popup/infon.html",
+    "browser_style": true,
+    "default_title": "IMAREX - INFOnline MaRe Extension"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/"],
+      "js": ["imarex.js"]
+    }
+  ]
+}
