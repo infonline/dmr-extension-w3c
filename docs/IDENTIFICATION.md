@@ -11,14 +11,17 @@ If you turn the extension into an .xpi or .zip and install it through about:addo
 **Syntax:**
 
 ```javascript
+// Firefox, Edge
 var myAddonId = browser.runtime.id;
+// Chrome, Opera
+var myAddonId = chrome.rundtime.id;
 ```
 
 **Value:**
 
 A string representing the add-on ID. If the extension specified an ID in its applications manifest.json key, runtime.id will contain that value. Otherwise, runtime.id will contain the ID that was generated for the extension.
 
-** Meaning **
+**Meaning:**
 
 - a unique identifier for the addon in all browsers on all clients
 - can be chosen by INFOnline apparently himself
@@ -42,5 +45,5 @@ chrome.instanceID.getId(function (instanceID) {
 
 - API only seems to be available on the Chrome
 - The ID is significantly shorter than the addon ID
-     - z. Eg ey1Br5fV0LA (instance ID)
-     - z. Eg glfdihaglkfpgoeikekgpiijidoffio (Addon ID)
+    - e.g. ey1Br5fV0LA (instance ID)
+    - e.g. glfdihaglkfpgoeikekgpiijidoffio (addon ID)
