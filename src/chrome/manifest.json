@@ -23,6 +23,7 @@
   },
   "permissions": [
     "tabs",
+    "gcm",
     "<all_urls>"
   ],
   "content_scripts": [
