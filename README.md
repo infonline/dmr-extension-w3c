@@ -5,6 +5,7 @@
 |Browser|Status        |
 |-------|--------------|
 |Chrome |running       |
+|Edge   |running       |
 |Firefox|not running   |
 |Opera  |running       |
 |Safari |not tested yet|
