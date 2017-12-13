@@ -1,5 +1,7 @@
 ### INFOnline web extension (imarex)
 
+- [Documentation](docs/README.md)
+
 #### Status
 
 |Browser|Status        |
