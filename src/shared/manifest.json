@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "imarex",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Jens Oswald <joswald@infonline.de>",
   "description": "INFOnline GmbH: Market Research Extension",
   "icons": {
