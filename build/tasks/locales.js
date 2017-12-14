@@ -17,6 +17,6 @@ const browserSync = BrowserSync.create();
 
 gulp.task('locales', next => pump([
   gulp.src(multiVendorPath(args.vendor, 'locales/**/*.json')),
-  gulp.dest(`dist/${args.vendor}/_locales`),
-  gulpif(args.watch, browserSync.reload()),
+  gulp.dest(`dist/${args.vendor}/locales`),
+  gulpif(args.watch, browserSync.reload),
 ], next));

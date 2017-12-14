@@ -18,5 +18,5 @@ const browserSync = BrowserSync.create();
 gulp.task('fonts', next => pump([
   gulp.src(multiVendorPath(args.vendor, 'fonts/**/*.{woff,woff2,ttf,eot,svg}')),
   gulp.dest(`dist/${args.vendor}/fonts`),
-  gulpif(args.watch, browserSync.reload()),
+  gulpif(args.watch, browserSync.reload),
 ], next));

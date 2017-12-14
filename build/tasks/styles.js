@@ -30,7 +30,7 @@ gulp.task('styles:css', next => pump([
   gulpif(args.production, cleanCSS()),
   gulpif(args.sourcemaps, sourcemaps.write()),
   gulp.dest(`dist/${args.vendor}/styles`),
-  gulpif(args.watch, browserSync.reload()),
+  gulpif(args.watch, browserSync.reload),
 ], next));
 
 gulp.task('styles:less', next => pump([
@@ -40,7 +40,7 @@ gulp.task('styles:less', next => pump([
   gulpif(args.production, cleanCSS()),
   gulpif(args.sourcemaps, sourcemaps.write()),
   gulp.dest(`dist/${args.vendor}/styles`),
-  gulpif(args.watch, browserSync.reload()),
+  gulpif(args.watch, browserSync.reload),
 ], next));
 
 gulp.task('styles:sass', next => pump([
@@ -50,7 +50,7 @@ gulp.task('styles:sass', next => pump([
   gulpif(args.production, cleanCSS()),
   gulpif(args.sourcemaps, sourcemaps.write()),
   gulp.dest(`dist/${args.vendor}/styles`),
-  gulpif(args.watch, browserSync.reload()),
+  gulpif(args.watch, browserSync.reload),
 ], next));
 
 gulp.task('styles', [

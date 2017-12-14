@@ -25,5 +25,5 @@ gulp.task('manifest', next => pump([
     2,
   ),
   gulp.dest(`dist/${args.vendor}`),
-  gulpif(args.watch, browserSync.reload()),
+  gulpif(args.watch, browserSync.reload),
 ], next));

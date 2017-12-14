@@ -17,8 +17,8 @@ import { multiVendorPath } from '../lib/vendors';
 const browserSync = BrowserSync.create();
 
 gulp.task('images', next => pump([
-  gulp.src(multiVendorPath(args.vendor, 'images/**/*.{jpg|png}')),
+  gulp.src(multiVendorPath(args.vendor, 'images/**/*')),
   gulpif(args.production, imagemin()),
-  gulp.dest(`dist/${args.vendor}`),
-  gulpif(args.watch, browserSync.reload()),
+  gulp.dest(`dist/${args.vendor}/images`),
+  gulpif(args.watch, browserSync.reload),
 ], next));

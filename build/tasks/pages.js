@@ -17,6 +17,6 @@ const browserSync = BrowserSync.create();
 
 gulp.task('pages', next => pump([
   gulp.src(multiVendorPath(args.vendor, '/pages/**/*.html')),
-  gulp.dest(gulp.dest(`dist/${args.vendor}`)),
-  gulpif(args.watch, browserSync.reload()),
+  gulp.dest(`dist/${args.vendor}/pages`),
+  gulpif(args.watch, browserSync.reload),
 ], next));

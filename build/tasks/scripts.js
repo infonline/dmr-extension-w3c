@@ -16,6 +16,6 @@ gulp.task('scripts', next => pump([
   babel(),
   gulpif(args.production, uglify()),
   gulpif(args.sourcemaps, sourcemaps.write()),
-  gulp.dest(`dist/${args.vendor}/`),
-  gulpif(args.watch, browserSync.reload()),
+  gulp.dest(`dist/${args.vendor}/scripts`),
+  gulpif(args.watch, browserSync.reload),
 ], next));
