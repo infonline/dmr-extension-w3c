@@ -16,6 +16,7 @@ import git from 'gulp-git';
 import bump from 'gulp-bump';
 import filter from 'gulp-filter';
 import semver from 'semver';
+import pump from 'pump';
 import tagVersion from 'gulp-tag-version';
 import packageDetails from '../../package.json';
 
@@ -24,29 +25,25 @@ import packageDetails from '../../package.json';
  * package.json and manifest.json up to the desired importance (see above illustration)
  *
  * @param {String} importance - Patch, minor, or major
+ * @param {Function} next - Callback
  */
-const increment = (importance) => {
+const increment = (importance, next) => {
   const newVersion = semver.inc(packageDetails.version, importance);
   // get all the files to bump version in
-  gulp.src([
-    'package.json',
-    'src/**/manifest.json',
-  ], {
-    base: './',
-  })
+  return pump([
+    gulp.src(['package.json', 'src/shared/manifest.json'], { base: './' }),
     // Bump the version number in those files
-    .pipe(bump({
-      type: importance,
-    }))
+    bump({ type: importance }),
     // Save it back to filesystem
-    .pipe(gulp.dest('./'))
+    gulp.dest('./'),
     // Commit the changed version number
-    .pipe(git.commit(`chore(release): ${newVersion}`))
+    git.commit(`chore(release): v${newVersion}`),
     // Read only one file to get the version number
-    .pipe(filter('package.json'))
+    filter('package.json'),
     // Tag it in the repository
-    .pipe(tagVersion());
+    tagVersion(),
+  ], next);
 };
-gulp.task('bump:patch', () => increment('patch'));
-gulp.task('bump:minor', () => increment('minor'));
-gulp.task('bump:major', () => increment('major'));
+gulp.task('bump:patch', next => increment('patch', next));
+gulp.task('bump:minor', next => increment('minor', next));
+gulp.task('bump:major', next => increment('major', next));
