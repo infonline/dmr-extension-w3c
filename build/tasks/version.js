@@ -31,7 +31,7 @@ import packageDetails from '../../package.json';
 const increment = (importance, next) => {
   const newVersion = semver.inc(packageDetails.version, importance);
   return pump([
-    // Ret all the files to bump version in
+    // Get all the files to bump version in
     gulp.src(['package.json', 'src/shared/manifest.json'], { base: './' }),
     // Bump the version number in those files
     bump({ type: importance }),
