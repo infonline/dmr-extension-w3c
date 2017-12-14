@@ -1,3 +1,3 @@
 ### Firefox resources
 
-This folder contains the firefox resources
+This folder contains the firefox related resources

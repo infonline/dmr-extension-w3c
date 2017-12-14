@@ -1,0 +1,36 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "arrowFunctions": true,
+      "blockBindings": true,
+      "classes": true,
+      "destructuring": true,
+      "defaultParams": true,
+      "modules": true,
+      "restParams": true,
+      "spread": true
+    }
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "browser": true
+  },
+  "extends": [
+    "airbnb-base"
+  ],
+  "globals": {
+    "exports": false,
+    "module": false,
+    "require": false,
+    "chrome": false,
+    "browser": false
+  },
+  "rules": {
+    // Deactivate rule for build, test and all javascript files in the root directory
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["build/**/*.js", "test/**/*.spec.js", "./*.js"]}]
+  }
+}

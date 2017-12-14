@@ -1,0 +1,56 @@
+{
+  "name": "imarex",
+  "version": "0.0.1",
+  "description": "INFOnline GmbH: Market Research Extension for Chrome, Edge, Firefox, Safari",
+  "main": "index.js",
+  "repository": "git@vgitbn003.infon:IAM/iam-web-extension.git",
+  "author": "Jens Oswald <joswald@infonline.de>",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-env": "^2.4.1",
+    "babel-eslint": "^8.0.3",
+    "babel-istanbul": "^0.12.2",
+    "babel-preset-stage-2": "^6.24.1",
+    "del": "^3.0.0",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-bump": "^2.8.0",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-filter": "^5.0.1",
+    "gulp-git": "^2.4.2",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^4.0.0",
+    "gulp-json-transform": "^0.4.5",
+    "gulp-less": "^3.3.2",
+    "gulp-livereload": "^3.8.1",
+    "gulp-merge-json": "^1.2.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-tag-version": "^1.3.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "gulp-zip": "^4.0.0",
+    "pump": "^2.0.0",
+    "require-dir": "^0.3.2",
+    "semver": "^5.4.1",
+    "yargs": "^10.0.3"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie"
+  ],
+  "dependencies": {
+    "browser-sync": "^2.18.13",
+    "gulp-sequence": "^0.4.6"
+  }
+}
