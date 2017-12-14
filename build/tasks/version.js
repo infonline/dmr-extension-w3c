@@ -16,6 +16,7 @@ import git from 'gulp-git';
 import bump from 'gulp-bump';
 import filter from 'gulp-filter';
 import semver from 'semver';
+import conventionalChangelog from 'gulp-conventional-changelog';
 import pump from 'pump';
 import tagVersion from 'gulp-tag-version';
 import packageDetails from '../../package.json';
@@ -29,15 +30,21 @@ import packageDetails from '../../package.json';
  */
 const increment = (importance, next) => {
   const newVersion = semver.inc(packageDetails.version, importance);
-  // get all the files to bump version in
   return pump([
+    // Ret all the files to bump version in
     gulp.src(['package.json', 'src/shared/manifest.json'], { base: './' }),
     // Bump the version number in those files
     bump({ type: importance }),
     // Save it back to filesystem
     gulp.dest('./'),
+    // Get changelog for generating the change log
+    gulp.src('CHANGELOG.md', { base: './' }),
     // Commit the changed version number
     git.commit(`chore(release): v${newVersion}`),
+    // Write conventional change log
+    conventionalChangelog({ preset: 'angular' }),
+    // Save it back to filesystem
+    gulp.dest('./'),
     // Read only one file to get the version number
     filter('package.json'),
     // Tag it in the repository

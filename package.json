@@ -13,6 +13,7 @@
     "babel-eslint": "^8.0.3",
     "babel-istanbul": "^0.12.2",
     "babel-preset-stage-2": "^6.24.1",
+    "browser-sync": "^2.18.13",
     "del": "^3.0.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -21,6 +22,7 @@
     "gulp-babel": "^7.0.0",
     "gulp-bump": "^2.8.0",
     "gulp-clean-css": "^3.9.0",
+    "gulp-conventional-changelog": "^1.1.7",
     "gulp-filter": "^5.0.1",
     "gulp-git": "^2.4.2",
     "gulp-if": "^2.0.2",
@@ -30,6 +32,7 @@
     "gulp-livereload": "^3.8.1",
     "gulp-merge-json": "^1.2.0",
     "gulp-sass": "^3.1.0",
+    "gulp-sequence": "^0.4.6",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-tag-version": "^1.3.0",
     "gulp-uglify": "^3.0.0",
@@ -48,9 +51,5 @@
     "> 1%",
     "last 2 versions",
     "not ie"
-  ],
-  "dependencies": {
-    "browser-sync": "^2.18.13",
-    "gulp-sequence": "^0.4.6"
-  }
+  ]
 }
