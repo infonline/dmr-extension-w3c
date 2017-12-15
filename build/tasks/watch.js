@@ -16,11 +16,12 @@ gulp.task('watch', (next) => {
   // Initialize browser sync
   browserSync.init({
     browser,
+    port: 8080,
     server: {
       baseDir: './demo',
-      ui: {
-        port: 8080,
-      },
+    },
+    ui: {
+      port: 8081,
     },
   });
   log('Starting', colors.cyan('\'browser sync\''));
