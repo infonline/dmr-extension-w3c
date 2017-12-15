@@ -20,15 +20,18 @@
     "default_title": "IMAREX"
   },
   "permissions": [
+    "storage",
     "tabs",
-    "gcm",
-    "store",
-    "<all_urls>"
+    "webNavigation",
+    "<all_urls>",
+    "http://*/",
+    "https://*/"
   ],
   "content_scripts": [
     {
-      "matches": ["*://*/"],
-      "js": ["scripts/content.js"]
+      "matches": ["*://*/*"],
+      "js": ["scripts/content.js"],
+      "run_at": "document_start"
     }
   ]
 }
