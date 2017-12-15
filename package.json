@@ -12,6 +12,8 @@
     "babel-env": "^2.4.1",
     "babel-eslint": "^8.0.3",
     "babel-istanbul": "^0.12.2",
+    "babel-loader": "^7.1.2",
+    "babel-preset-minify": "^0.2.0",
     "babel-preset-stage-2": "^6.24.1",
     "browser-sync": "^2.18.13",
     "del": "^3.0.0",
@@ -31,16 +33,21 @@
     "gulp-less": "^3.3.2",
     "gulp-livereload": "^3.8.1",
     "gulp-merge-json": "^1.2.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-sass": "^3.1.0",
     "gulp-sequence": "^0.4.6",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-tag-version": "^1.3.0",
+    "gulp-template": "^4.0.0",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "gulp-zip": "^4.0.0",
     "pump": "^2.0.0",
     "require-dir": "^0.3.2",
     "semver": "^5.4.1",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^3.10.0",
+    "webpack-stream": "^4.0.0",
     "yargs": "^10.0.3"
   },
   "engines": {
@@ -51,5 +58,8 @@
     "> 1%",
     "last 2 versions",
     "not ie"
-  ]
+  ],
+  "dependencies": {
+    "chrome-promise": "^2.1.2"
+  }
 }
