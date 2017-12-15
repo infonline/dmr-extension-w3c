@@ -9,6 +9,7 @@ import args from '../lib/args';
 import { multiVendorPath } from '../lib/vendors';
 
 const ENV = args.production ? 'production' : 'development';
+const IAM_SCRIPT_URL = args.scriptUri;
 /**
  * Webpack configuration
  * @type {Object}
@@ -51,6 +52,7 @@ gulp.task('scripts', next => pump([
       children: false,
     }));
   }),
-  template({ vendor: args.vendor }),
+  // Replace template strings in all scripts when found with these variables
+  template({ vendor: args.vendor, ENV, IAM_SCRIPT_URL }),
   gulp.dest(`dist/${args.vendor}/scripts`),
 ], next));

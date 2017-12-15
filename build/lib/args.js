@@ -22,6 +22,11 @@ const args = yargs
     describe: 'Compile the extension for different vendors',
     choices: ['chrome', 'edge', 'firefox', 'opera'],
   })
+  .option('script-uri', {
+    string: true,
+    default: 'https://script.ioam.de/iam.js',
+    describe: 'Compile the extension with different INFOnline measurement script URI',
+  })
   .option('sourcemaps', {
     describe: 'Force the creation of source maps',
   })

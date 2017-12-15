@@ -35,6 +35,7 @@ Run ```$ gulp --watch``` and load the ```dist```-directory into chrome.
 | `--production` | Minifies all assets                                                                    |
 | `--verbose`    | Log additional data to the console.                                                    |
 | `--vendor`     | Compile the extension for different vendors (chrome, firefox, opera)  Default: chrome  |
+| `--script-uri` | Compile the extension with different INFOnline measurement script URI                  |
 | `--sourcemaps` | Force the creation of sourcemaps. Default: !production                                 |
 
 
