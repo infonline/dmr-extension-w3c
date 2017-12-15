@@ -49,7 +49,6 @@ export const applyBrowserPrefixesFor = vendor => function iterator(source) {
   }
   return obj;
 };
-
 /**
  * Makes it possible to jump into a vendor prefixed path in gulp tasks
  *
