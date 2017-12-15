@@ -1,3 +1,13 @@
+<a name="0.2.0"></a>
+# [0.2.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.1.0...v0.2.0) (2017-12-15)
+
+
+### Features
+
+* **shared:** create first version of the web extension ([4c3a04c](https://vgitbn003.infon/IAM/iam-web-extension/commits/4c3a04c))
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/45bfb39...v0.1.0) (2017-12-14)
 
