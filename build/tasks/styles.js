@@ -18,11 +18,8 @@ import less from 'gulp-less';
 import sass from 'gulp-sass';
 import cleanCSS from 'gulp-clean-css';
 import pump from 'pump';
-import BrowserSync from 'browser-sync';
 import args from '../lib/args';
 import { multiVendorPath } from '../lib/vendors';
-
-const browserSync = BrowserSync.create();
 
 gulp.task('styles:css', next => pump([
   gulp.src(multiVendorPath(args.vendor, 'styles/*.css')),
@@ -30,7 +27,6 @@ gulp.task('styles:css', next => pump([
   gulpif(args.production, cleanCSS()),
   gulpif(args.sourcemaps, sourcemaps.write()),
   gulp.dest(`dist/${args.vendor}/styles`),
-  gulpif(args.watch, browserSync.reload),
 ], next));
 
 gulp.task('styles:less', next => pump([
@@ -40,7 +36,6 @@ gulp.task('styles:less', next => pump([
   gulpif(args.production, cleanCSS()),
   gulpif(args.sourcemaps, sourcemaps.write()),
   gulp.dest(`dist/${args.vendor}/styles`),
-  gulpif(args.watch, browserSync.reload),
 ], next));
 
 gulp.task('styles:sass', next => pump([
@@ -50,7 +45,6 @@ gulp.task('styles:sass', next => pump([
   gulpif(args.production, cleanCSS()),
   gulpif(args.sourcemaps, sourcemaps.write()),
   gulp.dest(`dist/${args.vendor}/styles`),
-  gulpif(args.watch, browserSync.reload),
 ], next));
 
 gulp.task('styles', [

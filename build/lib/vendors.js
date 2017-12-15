@@ -7,7 +7,7 @@
  * @type {Object}
  */
 const VENDOR_BROWSER_NAMES = {
-  chrome: 'google-chrome',
+  chrome: 'Google Chrome',
   edge: 'microsoft-edge',
   firefox: 'firefox',
   opera: 'opera',

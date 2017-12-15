@@ -7,16 +7,11 @@
  * gulp pages    # Will process the html files for a vendor specific web extension
  */
 import gulp from 'gulp';
-import gulpif from 'gulp-if';
 import pump from 'pump';
-import BrowserSync from 'browser-sync';
 import args from '../lib/args';
 import { multiVendorPath } from '../lib/vendors';
-
-const browserSync = BrowserSync.create();
 
 gulp.task('pages', next => pump([
   gulp.src(multiVendorPath(args.vendor, '/pages/**/*.html')),
   gulp.dest(`dist/${args.vendor}/pages`),
-  gulpif(args.watch, browserSync.reload),
 ], next));
