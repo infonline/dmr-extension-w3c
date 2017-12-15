@@ -39,12 +39,12 @@ const increment = (importance, next) => {
     gulp.dest('./'),
     // Get changelog for generating the change log
     gulp.src('CHANGELOG.md', { base: './' }),
-    // Commit the changed version number
-    git.commit(`chore(release): v${newVersion}`),
     // Write conventional change log
     conventionalChangelog({ preset: 'angular' }),
     // Save it back to filesystem
     gulp.dest('./'),
+    // Commit the changed version number
+    git.commit(`chore(release): v${newVersion}`),
     // Read only one file to get the version number
     filter('package.json'),
     // Tag it in the repository
