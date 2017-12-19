@@ -21,7 +21,7 @@ export const log = (type, ...args) => {
  * RFC4122 compliant UUID v4 generator. Will be needed for creating
  * unique and unambiguous identifications for users and ports. Uses the
  * window crypto api to make it secure at the cost of just a few bytes
- * by replacing Math.random() with getRandomValues(). For driver
+ * by replacing Math.random() with getRandomValues(). For browser
  * compliant please refer to https://caniuse.com/#search=crypto
  *
  * @return {String} RFC4122 compliant UUID v4

@@ -70,9 +70,9 @@ const init = async () => {
 /**
  * Loads the INFOnline measurement script from the sourcer endpoint, if
  * not locally cached and will execute it in the active tab. The cache
- * is designed for only cache the script when driver is active. The cache
+ * is designed for only cache the script when browser is active. The cache
  * gets automatically destroyed when background script will exit. This happens
- * when user closes the driver.
+ * when user closes the browser.
  *
  * @return {Promise<*>} Fulfill code.
  */
@@ -101,7 +101,7 @@ const onLoaded = async (sender) => {
     const { frameId, timeStamp } = sender;
     // Convert sender url in a WHATWG URL object.
     // Refer to https://url.spec.whatwg.org/#dom-url for details.
-    // For driver compliant please refer to https://caniuse.com/#search=URL.
+    // For browser compliant please refer to https://caniuse.com/#search=URL.
     const url = new URL(sender.url);
     // To avoid multiple count requests on pages who uses the history api
     // we will calculate a boolean who is always true when background script
