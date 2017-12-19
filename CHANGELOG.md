@@ -1,3 +1,13 @@
+<a name="0.3.0"></a>
+# [0.3.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.2.0...v0.3.0) (2017-12-19)
+
+
+### Features
+
+* **shared:** refactor shared sources of web extension ([da62071](https://vgitbn003.infon/IAM/iam-web-extension/commits/da62071))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.1.0...v0.2.0) (2017-12-15)
 
