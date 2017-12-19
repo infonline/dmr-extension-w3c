@@ -156,8 +156,10 @@ const onLoaded = async (sender) => {
 };
 
 /**
- * Listener for navigation committed events. Will create some stats and will save
- * the transition type respectively increments it's value.
+ * Listener for navigation committed events. Binds the necessary listener for
+ * dom content loaded, history state updated and fragment updated events.
+ * Will also create some stats and will save the transition type respectively
+ * increments it's value.
  *
  * @param {Object} sender - The message sender object.
  * @return {Promise<void>}
