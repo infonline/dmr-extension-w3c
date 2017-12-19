@@ -10,6 +10,8 @@ import { multiVendorPath } from '../lib/vendors';
 
 const ENV = args.production ? 'production' : 'development';
 const IAM_SCRIPT_URL = args.scriptUri;
+const VENDOR = args.vendor;
+const NAMESPACE = VENDOR === 'chrome' || VENDOR === 'opera' ? 'chrome' : 'browser';
 /**
  * Webpack configuration
  * @type {Object}
@@ -19,7 +21,8 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(ENV),
-      'process.env.VENDOR': JSON.stringify(args.vendor),
+      'process.env.VENDOR': JSON.stringify(VENDOR),
+      'process.env.NAMESPACE': JSON.stringify(NAMESPACE),
     }),
   ],
   module: {
@@ -27,7 +30,8 @@ const config = {
       parser: {
         amd: false,
       },
-    }, {
+    }],
+    loaders: [{
       test: /\.js$/,
       loader: 'babel-loader',
       options: {
@@ -35,11 +39,24 @@ const config = {
       },
     }],
   },
-  watch: args.watch,
 };
 
-gulp.task('scripts', next => pump([
+gulp.task('scripts:template', next => pump([
   gulp.src(multiVendorPath(args.vendor, 'scripts/**/*.js')),
+  template({
+    ENV,
+    IAM_SCRIPT_URL,
+    NAMESPACE,
+    VENDOR,
+  }, {
+    interpolate: /<%=([\s\S]+?)%>/g,
+  }),
+  gulp.dest(`dist/${args.vendor}/scripts`),
+], next));
+
+gulp.task('scripts', ['scripts:template'], next => pump([
+  gulp.src(`dist/${args.vendor}/scripts/**/*.js`),
+  // Replace template strings in all scripts when found with these variables
   named(),
   gulpWebpack(config, webpack, (err, stats) => {
     if (err) {
@@ -52,7 +69,5 @@ gulp.task('scripts', next => pump([
       children: false,
     }));
   }),
-  // Replace template strings in all scripts when found with these variables
-  template({ vendor: args.vendor, ENV, IAM_SCRIPT_URL }),
   gulp.dest(`dist/${args.vendor}/scripts`),
 ], next));
