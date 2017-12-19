@@ -1,29 +1,11 @@
 /* eslint-env browser */
-/* global chrome browser window URL */
-// Import chrome promisify library
-import ChromePromise from 'chrome-promise';
-/**
- * The ENV variable. Specifies the environment (production or development).
- * Will be injected in the script while building the web extension.
- *
- * @type {string}
- */
-const ENV = '<%=ENV%>';
-/**
- * The vendor variable. Will be injected in the script while building
- * the web extension.
- * @type {string}
- */
-const vendor = '<%=vendor%>';
-/**
- * The global variable. Either specific promisified chrome web extension
- * api or the common browser web extension api which rely on mozilla and
- * has already a promisified api. For API specific things please refer
- * to https://developer.mozilla.org/en-US/Add-ons/WebExtensions
- *
- * @type {Object}
- */
-const global = vendor === 'chrome' ? new ChromePromise({ chrome, Promise }) : browser;
+// Import web extension driver library
+import driver from './driver';
+import {
+  log,
+  uuidv4,
+  fetch,
+} from './utils';
 /**
  * The URI of the INFOnline measurement script. Will be injected in the script while building
  * the web extension.
@@ -35,218 +17,77 @@ const IAM_SCRIPT_URL = '<%=IAM_SCRIPT_URL%>';
  *
  * @type {{url: *[]}}
  */
-const URL_FILTER = { url: [{ schemes: ['http', 'https'] }] };
-/**
- * Local port cache. Makes it possible to measure different tabs simultaneously
- *
- * @type {Array}
- */
-const ports = [];
+const URL_FILTER = {
+  url: [{
+    // Listen only for http and https schemes
+    schemes: ['http', 'https'],
+  }],
+};
 /**
  * Local INFOnline measurement code cache
  *
- * @type {String}
+ * @type {*}
  */
 let iamCode;
-
-/**
- * Orchestrates the general XMLHttpRequest with a promise.
- *
- * @param {String} url - The url to fetch
- * @param {Object} [options] - Optional fetch options
- * @return {Promise<any>} Fetch result as Promise
- */
-const fetch = (url, options = { method: 'get' }) => new Promise((resolve, reject) => {
-  const request = new XMLHttpRequest();
-  request.onerror = reject;
-  request.onreadystatechange = () => {
-    if (request.status === 200 && request.readyState === 4) {
-      resolve(request.responseText);
-    }
-  };
-  request.open(options.method, url, true);
-  request.send();
-});
-
-/**
- * Finds a port by a given tab ID. This is useful when sending messages
- * to a connected port respectively tab. It will also check if the tab is
- * active to avoid accidentally request ports with inactive tabs.
- *
- * @param {Number} id - The ID of the tab
- * @return {Object} The found port.
- */
-const findPortByTab = id => ports
-  .find(port => port.sender.tab.id === id && port.sender.tab.active);
-
-/**
- * Adds a port to the local port cache. This allows multi port/tab processing
- *
- * @param {Object} port - The open port to the content script
- */
-const addPort = (port) => {
-  const pos = ports.findIndex(item => item.id === port.id);
-  if (pos === -1) {
-    ports.push(port);
-    if (ENV === 'development') {
-      console.log(`Port with ID ${port.id} added.`);
-    }
-  }
-};
-/**
- * Removes a disconnected port from the local port cache. This avoids
- * accidental messaging over inactive ports.
- *
- * @param {Object} port - The disconnected port to the content script
- */
-const removePort = (port) => {
-  const pos = ports.findIndex(item => item.id === port.id);
-  if (pos > -1) {
-    ports.splice(port);
-    if (ENV === 'development') {
-      console.log(`Port with ID ${port.id} removed.`);
-    }
-  }
-};
-
-/**
- * RFC4122 compliant UUID v4 generator. Will be needed for creating a
- * unique and unambiguous identifications for user and ports. Uses the
- * window crypto api to make it secure at the cost of just a few bytes
- * by replacing Math.random() with getRandomValues(). For browser
- * compliant please refer to https://caniuse.com/#search=crypto
- *
- * @return {String} RFC4122 compliant UUID v4
- */
-const uuidv4 = () => ([1e7] + -1e3 + -4e3 + -8e3 + -1e11)
-  // eslint-disable-next-line no-bitwise,no-mixed-operators
-  .replace(/[018]/g, c => (c ^ window.crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
-
+let localTimeStamp;
 /**
  * Initializes the web extension store
  *
  * @return {Promise<any>}
  */
-const configureStore = () => new Promise((resolve, reject) => {
-  global.storage.local
-    .get()
-    .then((data) => {
-      const results = data;
-      // Create user ID if necessary
-      if (!results.userId) {
-        results.userId = uuidv4();
-      }
-      // Create stats if necessary
-      if (!results.stats) {
-        results.stats = {
-          host: {},
-          type: {},
-        };
-      }
-      // Make user ID and stats persistent.
-      // The storage set method returns no result when fulfilled.
-      // So we have to turn an extra round an fulfill or reject manual.
-      return global.storage.local
-        .set(results)
-        .then(() => Promise.resolve(results))
-        .catch(err => Promise.reject(err));
-    })
-    .then(result => resolve(result))
-    .catch(err => reject(err));
-});
+const configureStore = async () => {
+  try {
+    const results = await driver.storage.local.get();
+    if (!results.userId) {
+      results.userId = uuidv4();
+    }
+    if (!results.stats) {
+      results.stats = {
+        host: {},
+        type: {},
+      };
+    }
+    await driver.storage.local.set(results);
+    return results;
+  } catch (err) {
+    throw err;
+  }
+};
 /**
  * Initializes the background script on every update and installation.
  * It will create the local storage items if necessary and can be extended
  * for later development in the future.
  */
-const init = () => {
-  configureStore()
-    .then((result) => {
-      if (ENV === 'development') {
-        console.log(`Background script with user ID ${result.userId} initialized.`);
-      }
-    })
-    .catch((err) => {
-      if (ENV === 'development') {
-        console.error('Background script could not be initialized due to this error:');
-        console.error(err);
-      }
-    });
+const init = async () => {
+  try {
+    const result = await configureStore();
+    log('info', `Background script with user ID ${result.userId} initialized.`);
+  } catch (err) {
+    log('error', 'Background script could not be initialized due to this error:');
+    log('error', err);
+  }
 };
 /**
  * Loads the INFOnline measurement script from the sourcer endpoint, if
  * not locally cached and will execute it in the active tab. The cache
- * is designed for only cache the script when browser is active. The cache
+ * is designed for only cache the script when driver is active. The cache
  * gets automatically destroyed when background script will exit. This happens
- * when user closes the browser.
+ * when user closes the driver.
  *
- * @param {Object} sender - The message sender object.
- * @return {Promise<Object, Error>} Fulfill with tab, code and results or with an rejection.
+ * @return {Promise<*>} Fulfill code.
  */
-const load = sender => new Promise((resolve, reject) => {
-  const { tabId } = sender;
-  // Fetch the iam script from the INFOnline sourcer
-  global.tabs
-    .get(tabId)
-    .then((tab) => {
-      if (iamCode) {
-        return Promise.resolve({ tab, code: iamCode });
-      }
-      return fetch(IAM_SCRIPT_URL)
-        .then((code) => {
-          iamCode = code;
-          return Promise.resolve(code);
-        })
-        .catch(err => Promise.reject(err));
-    })
-    // Successful fetched
-    .then(({ tab, code }) => {
-      // cache code
-      // Execute the code in the active tab
-      if (tab) {
-        return global.tabs.executeScript(tabId, { code })
-          .then(results => Promise.resolve({ tab, code, results }))
-          .catch(err => Promise.reject(err));
-      }
-      throw new Error('Sender has no active tab.');
-    })
-    // Success callback for firefox, edge
-    .then(results => resolve(results))
-    // Error handling
-    .catch(err => reject(err));
-});
-
-/**
- * Listener for navigation committed events. Will create some stats and will save
- * the transition type respectively increments it's value.
- *
- * @param {Object} sender - The message sender object.
- */
-const committed = (sender) => {
-  // Filter out any sub-frame related navigation event
-  if (sender.frameId !== 0) {
-    return;
+const loadIamScript = async () => {
+  try {
+    if (!iamCode) {
+      // No cached script. So we have to load it from the INFOnline sourcer
+      // and store it in the local iamCode variable
+      iamCode = await fetch(IAM_SCRIPT_URL);
+    }
+    // Return loaded or cached code
+    return iamCode;
+  } catch (err) {
+    throw err;
   }
-  global.storage.local
-    .get()
-    .then((data) => {
-      const results = data;
-      const { transitionType } = sender;
-      results.stats.type[transitionType] = results.stats.type[transitionType] || 0;
-      results.stats.type[transitionType] += 1;
-      // Persist the updated stats.
-      return global.storage.local.set(results);
-    })
-    .then(() => {
-      if (ENV === 'development') {
-        console.log(`User initiated navigation for ${sender.tabId} with transition type ${sender.transitionType}`);
-      }
-    })
-    .catch((err) => {
-      if (ENV === 'development') {
-        console.log(err);
-      }
-    });
 };
 
 /**
@@ -255,154 +96,108 @@ const committed = (sender) => {
  *
  * @param {Object} sender - The message sender object.
  */
-const onLoaded = (sender) => {
-  // Filter out any sub-frame related navigation event.
-  if (sender.frameId !== 0) {
-    return;
-  }
-  // Convert sender url in a WHATWG URL object.
-  // Refer to https://url.spec.whatwg.org/#dom-url for details.
-  // For browser compliant please refer to https://caniuse.com/#search=URL.
-  const url = new URL(sender.url);
-  let store;
-  // Retrieve storage data.
-  global.storage.local
-    .get()
-    .then((data) => {
-      store = data;
-      return Promise.resolve();
-    })
-    // Execute INFOnline measurement script in active tab
-    .then(() => load(sender))
-    // Create message for the content script to count this navigation event
-    .then(({ tab }) => {
-      if (tab) {
-        // Find the port by the active tab
-        const port = findPortByTab(tab.id);
-        // Create message object for instruct the content script to count
-        const message = {
-          type: 'success',
-          request: 'count',
-          // This is the actual information sent to INFOnline
-          result: {
-            cn: 'de',
-            st: 'imarexdata',
-            cp: 'profile',
-            url: url.origin,
-            usr: store.userId,
-            tab: tab.id,
-          },
-        };
-        if (port) {
-          // Send message to content script to execute the count.
-          port.postMessage(message);
-        }
+const onLoaded = async (sender) => {
+  try {
+    const { frameId, timeStamp } = sender;
+    // Convert sender url in a WHATWG URL object.
+    // Refer to https://url.spec.whatwg.org/#dom-url for details.
+    // For driver compliant please refer to https://caniuse.com/#search=URL.
+    const url = new URL(sender.url);
+    // To avoid multiple count requests on pages who uses the history api
+    // we will calculate a boolean who is always true when background script
+    // is reloaded and only true if the time difference between last count
+    // and current count above 1 second. This is necessary because of missing
+    // functionality to check if current page uses the html5 history api.
+    const valid = localTimeStamp ? ((timeStamp - localTimeStamp) / 1000) > 1 : true;
+    // Filter out any sub-frame related navigation event, attempts under 1 second
+    // and new tab requests in chrome (we have no access to this new tab pages)
+    if (frameId === 0 && valid && !url.pathname.includes('_/chrome/newtab')) {
+      localTimeStamp = timeStamp;
+      // Extract tab id from sender
+      const { tabId } = sender;
+      // Retrieve storage data.
+      const store = await driver.storage.local.get();
+      // Load INFOnline measurement script from cache or from sourcer
+      const code = await loadIamScript();
+      // Execute INFOnline measurement script
+      await driver.tabs.executeScript(tabId, { code });
+      log('info', `Count of ${url.origin} initiated on tab ${tabId}`);
+      // Create message object for instruct the content script to count
+      const message = {
+        type: 'success',
+        request: 'count',
+        // This is the actual information sent to INFOnline
+        result: {
+          cn: 'de',
+          st: 'imarexdata',
+          cp: 'profile',
+          url: url.origin,
+          usr: store.userId,
+          tab: tabId,
+        },
+      };
+      // Send count message to current tab
+      const response = await driver.tabs.sendMessage(tabId, message);
+      // Log success or failure
+      if (response) {
+        log('info', `Count of ${url.origin} succeeded on tab ${tabId}`);
+      } else if (!response) {
+        log('error', `Count of ${url.origin} failed on tab ${tabId}`);
       }
-      // Resolve
-      return Promise.resolve();
-    })
-    // Save stats in local storage
-    .then(() => {
       // Update stats
       store.stats.host[url.hostname] = store.stats.host[url.hostname] || 0;
       store.stats.host[url.hostname] += 1;
       // Persist the updated stats.
-      return global.storage.local.set(store);
-    })
-    .then(() => {
-      if (ENV === 'development') {
-        console.log(`Count of ${url.origin} initiated on tab ${sender.tabId}`);
-      }
-    })
-    .catch((err) => {
-      if (ENV === 'development') {
-        console.error(err);
-      }
-    });
-};
-
-/**
- * Listener for messages from content script
- *
- * @param {*} message - The message from the content script
- */
-const onPortMessage = (message) => {
-  const {
-    type,
-    request,
-    result,
-    error,
-  } = message;
-  if (type === 'success' && request === 'count') {
-    if (ENV === 'development') {
-      console.log(`Count of ${result.url} in tab ${result.tab} successful`);
+      await driver.storage.local.set(store);
     }
-  } else if (type === 'error') {
-    if (ENV === 'development') {
-      console.error(error);
-    }
+  } catch (err) {
+    log('error', err);
   }
 };
+
 /**
- * Listener for port disconnect event. Will remove the disonnected
- * port from the current port cache.
+ * Listener for navigation committed events. Will create some stats and will save
+ * the transition type respectively increments it's value.
  *
- * @param {Object} port - The port who disconnects
+ * @param {Object} sender - The message sender object.
+ * @return {Promise<void>}
  */
-const onPortDisconnect = (port) => {
-  removePort(port);
-};
-/**
- * Connected listener, which will be executed when a content script
- * will connect to the background script
- *
- * @param {Object} port - The content script port
- */
-const connected = (port) => {
-  // Create a port id with a UUID v4
-  // This is necessary because the general api doesn't create one
-  // and we need it for the multi port respectively tab handling.
-  // eslint-disable-next-line no-param-reassign
-  port.id = uuidv4();
-  if (ENV === 'development') {
-    console.log(`Port ID ${port.id} connected.`);
+const committed = async (sender) => {
+  try {
+    // Filter out any sub-frame related navigation event
+    if (sender.frameId === 0) {
+      const results = await driver.storage.local.get();
+      const {
+        transitionType,
+        url,
+      } = sender;
+      // Bind event handler to dom contend loaded and history state updated
+      // events.
+      if (!driver.webNavigation.onHistoryStateUpdated.hasListener(onLoaded)) {
+        driver.webNavigation.onHistoryStateUpdated.addListener(onLoaded, URL_FILTER);
+      }
+      if (!driver.webNavigation.onDOMContentLoaded.hasListener(onLoaded)) {
+        driver.webNavigation.onDOMContentLoaded.addListener(onLoaded, URL_FILTER);
+      }
+      // Support updates on url fragments. E. g. hashbang related navigation in
+      // single page applications like http://localhost!#/test123
+      if (url.includes('#')) {
+        if (!driver.webNavigation.onReferenceFragmentUpdated.hasListener(onLoaded, URL_FILTER)) {
+          driver.webNavigation.onReferenceFragmentUpdated.addListener(onLoaded, URL_FILTER);
+        }
+      }
+      // Update stats
+      results.stats.type[transitionType] = results.stats.type[transitionType] || 0;
+      results.stats.type[transitionType] += 1;
+
+      // Persist the updated stats.
+      await driver.storage.local.set(results);
+    }
+  } catch (err) {
+    log('error', err);
   }
-  // Bind listener to message events from the content script
-  port.onMessage.addListener(onPortMessage);
-  // Bind listener to disconnect events from the content script
-  port.onDisconnect.addListener(onPortDisconnect);
-  // Add port to local cache
-  addPort(port);
 };
 
-/**
- * We cannot rely on the global variable because of possible losses of event
- * bound events. So we have to handle them on the originally global variables.
- */
-if (vendor === 'chrome' || vendor === 'opera') {
-  // Chrome and opera related event binding.
-  // Bind initialization callback when extension was installed or updated
-  chrome.runtime.onInstalled.addListener(init);
-  // Monitor commited and completed navigation events and update
-  // stats accordingly.
-  chrome.webNavigation.onCommitted.addListener(committed);
-  chrome.webNavigation.onDOMContentLoaded.addListener(onLoaded, URL_FILTER);
-  // eslint-disable-next-line max-len
-  chrome.webNavigation.onHistoryStateUpdated.addListener(onLoaded, URL_FILTER);
-  // Bind connected callback for content scripts who connects to the background script
-  chrome.runtime.onConnect.addListener(connected);
-  // Bind disconnect callback for content scripts who disconnects from the background script
-} else {
-  // Mozilla related event binding.
-  // Bind initialization callback when extension was installed or updated
-  browser.runtime.onInstalled.addListener(init);
-  // Monitor commited and completed navigation events and update
-  // stats accordingly.
-  browser.webNavigation.onCommitted.addListener(committed);
-  browser.webNavigation.onDOMContentLoaded.addListener(onLoaded, URL_FILTER);
-  // eslint-disable-next-line max-len
-  browser.webNavigation.onHistoryStateUpdated.addListener(onLoaded, URL_FILTER);
-  // Bind connected callback to the
-  browser.runtime.onConnect.addListener(connected);
-}
-
+// Event binding.
+driver.runtime.onInstalled.addListener(init);
+driver.webNavigation.onCommitted.addListener(committed);

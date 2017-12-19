@@ -1,32 +1,8 @@
 /* eslint-env browser */
-/* global chrome browser document */
-/**
- * The ENV variable. Specifies the environment (production or development).
- * Will be injected in the script while building
- * the web extension.
- *
- * @type {string}
- */
-const ENV = '<%=ENV%>';
-/**
- * The vendor variable. Will be injected in the script while building
- * the web extension.
- * @type {string}
- */
-const vendor = '<%=vendor%>';
-/**
- * The global variable. Either specific chrome web extension api or
- * the common browser web extension api which rely on mozilla.
- *
- * @type {Object}
- */
-const global = vendor === 'chrome' || vendor === 'opera' ? chrome : browser;
-/**
- * Local port cache
- *
- * @type {Object}
- */
-let port;
+// Import browser driver
+import driver from './driver';
+// Import log function
+import { log } from './utils';
 /**
  * Will create the iam measurement impulse and executes the count method
  * of the iam script.
@@ -34,30 +10,16 @@ let port;
  * @param {Object} data - The data to transmit to INFOnline cube.
  */
 const count = (data) => {
-  const result = data;
-  // Include the document referrer
-  result.ref = document.referrer;
-  // Count
-  window.iom.c(result, 1);
-  // Send success message to the background script for
-  // logging purposes.
-  port.postMessage({
-    type: 'success',
-    request: 'count',
-    result,
-  });
-};
-
-/**
- * Will connect to the background script and store the returned
- * communication port local.
- */
-const connect = () => {
-  // Todo: Submit the web extension id as name and check it on the background script
-  // Connect to background script and cache returned port
-  port = global.runtime.connect({
-    name: 'imarex',
-  });
+  try {
+    const result = data;
+    // Include the document referrer
+    result.ref = document.referrer;
+    // Count
+    window.iom.c(result, 1);
+  } catch (err) {
+    // Error handling
+    throw err;
+  }
 };
 
 /**
@@ -65,30 +27,34 @@ const connect = () => {
  *
  * @param {*} message - The transmitted message object
  */
-const onMessage = (message) => {
-  const {
-    type,
-    request,
-    result,
-    error,
-  } = message;
-  // Handle normal messages
-  if (type === 'success' && request === 'message') {
-    if (ENV === 'development') {
-      console.log(message);
+const onMessage = async (message) => {
+  try {
+    const {
+      type,
+      request,
+      result,
+      error,
+    } = message;
+    // Handle normal messages
+    if (type === 'success' && request === 'message') {
+      log('info', message);
+    } else if (type === 'success' && request === 'count') {
+      count(result);
+      log('info', type, request, result);
+    } else if (type === 'error') {
+      // Throw exception locally
+      throw error;
     }
-  } else if (type === 'success' && request === 'count') {
-    count(result);
-  } else if (type === 'error') {
-    if (ENV === 'development') {
-      console.error(error);
-    }
+    // Always response with the message to signalize the successful
+    // transmission.
+    return message;
+  } catch (err) {
+    // In case of error log it and signalize the failure to background
+    // script
+    log('err', err);
+    throw err;
   }
 };
-// Connect
-connect();
-// Reconnect to background script if disconnect occurred
-port.onDisconnect.addListener(connect);
+// Add message handler as listener to the runtime on message interface
+driver.runtime.onMessage.addListener(onMessage);
 
-// Bind central message listener on registered communication port
-port.onMessage.addListener(onMessage);
