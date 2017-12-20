@@ -1,6 +1,10 @@
 /* eslint-env browser */
-// Import browser driver
-import driver from './driver';
+// Import web extension driver
+/**
+ * Web extension driver
+ * @type {Proxy|Object}
+ */
+import { driver } from './driver';
 // Import log function
 import { log } from './utils';
 /**
