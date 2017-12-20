@@ -1,6 +1,6 @@
 {
   "name": "imarex",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "INFOnline GmbH: Market Research Extension for Chrome, Edge, Firefox, Safari",
   "main": "index.js",
   "repository": "git@vgitbn003.infon:IAM/iam-web-extension.git",

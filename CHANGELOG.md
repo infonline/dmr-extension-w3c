@@ -1,3 +1,14 @@
+<a name="0.4.0"></a>
+# [0.4.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.3.0...v0.4.0) (2017-12-20)
+
+
+### Features
+
+* **shared:** add own polyfill for chrome and edge browser runtime ([01d1f92](https://vgitbn003.infon/IAM/iam-web-extension/commits/01d1f92))
+* **shared:** refactor background and content scripts ([00573ec](https://vgitbn003.infon/IAM/iam-web-extension/commits/00573ec))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.2.0...v0.3.0) (2017-12-19)
 
