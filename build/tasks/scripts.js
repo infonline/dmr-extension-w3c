@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import gulp from 'gulp';
 import { log, colors } from 'gulp-util';
 import named from 'vinyl-named';
@@ -12,6 +14,7 @@ const ENV = args.production ? 'production' : 'development';
 const IAM_SCRIPT_URL = args.scriptUri;
 const VENDOR = args.vendor;
 const NAMESPACE = VENDOR === 'chrome' || VENDOR === 'opera' ? 'chrome' : 'browser';
+const API_META_DATA = fs.readFileSync(path.join(__dirname, '../assets/shared/apiMetaData.json'), 'utf8');
 /**
  * Webpack configuration
  * @type {Object}
@@ -48,6 +51,7 @@ gulp.task('scripts:template', next => pump([
     IAM_SCRIPT_URL,
     NAMESPACE,
     VENDOR,
+    API_META_DATA,
   }, {
     interpolate: /<%=([\s\S]+?)%>/g,
   }),
