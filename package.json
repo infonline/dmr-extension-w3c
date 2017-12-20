@@ -57,8 +57,5 @@
     "> 1%",
     "last 2 versions",
     "not ie"
-  ],
-  "dependencies": {
-    "webextension-polyfill": "^0.2.1"
-  }
+  ]
 }
