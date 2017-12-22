@@ -44,6 +44,7 @@
     "gulp-zip": "^4.0.0",
     "pump": "^2.0.0",
     "require-dir": "^0.3.2",
+    "through2": "^2.0.3",
     "vinyl-named": "^1.1.0",
     "webpack": "^3.10.0",
     "webpack-stream": "^4.0.0",
