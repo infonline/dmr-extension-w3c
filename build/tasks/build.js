@@ -9,5 +9,6 @@ gulp.task('build', gulpSequence('clean', [
   'locales',
   'images',
   'fonts',
+  'thirdParty',
   'watch',
 ]));
