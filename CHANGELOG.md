@@ -1,3 +1,17 @@
+<a name="0.5.0"></a>
+# [0.5.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.4.0...v0.5.0) (2018-01-03)
+
+
+### Features
+
+* **shared:** add first version of an advanced browser action popup ([7d23a20](https://vgitbn003.infon/IAM/iam-web-extension/commits/7d23a20))
+* **shared:** add new svg icons and update png based icons ([a88d550](https://vgitbn003.infon/IAM/iam-web-extension/commits/a88d550))
+* **shared:** add profile handling to background script ([0fe8adc](https://vgitbn003.infon/IAM/iam-web-extension/commits/0fe8adc))
+* **shared:** add some utility methods ([86dabf2](https://vgitbn003.infon/IAM/iam-web-extension/commits/86dabf2))
+* **shared:** add styles for browser action popup ([23cb7b4](https://vgitbn003.infon/IAM/iam-web-extension/commits/23cb7b4))
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.3.0...v0.4.0) (2017-12-20)
 
