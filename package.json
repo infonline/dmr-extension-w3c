@@ -28,6 +28,7 @@
     "gulp-conventional-changelog": "^1.1.7",
     "gulp-filter": "^5.0.1",
     "gulp-if": "^2.0.2",
+    "gulp-inject": "^4.3.0",
     "gulp-imagemin": "^4.0.0",
     "gulp-json-transform": "^0.4.5",
     "gulp-less": "^3.3.2",
@@ -58,5 +59,8 @@
     "> 1%",
     "last 2 versions",
     "not ie"
-  ]
+  ],
+  "dependencies": {
+    "material-components-web": "^0.27.0"
+  }
 }
