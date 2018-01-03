@@ -9,6 +9,7 @@ import {
   log,
   uuidv4,
   fetch,
+  getSelectedProfile,
 } from './utils';
 
 /**
@@ -67,6 +68,14 @@ const configureStore = async () => {
 const init = async () => {
   try {
     const result = await configureStore();
+    const profile = await getSelectedProfile(driver);
+    if (profile && profile.email) {
+      driver.browserAction.setIcon({ path: { 19: 'images/io19.png' } });
+    } else {
+      // Set popup icon to a error state
+      driver.browserAction.setIcon({ path: { 19: 'images/io19-no-profile.png' } });
+      log('warn', 'No profile selected. Socio meta information is missing in IMAREX data.');
+    }
     log('info', `Background script with user ID ${result.userId} initialized.`);
   } catch (err) {
     log('error', 'Background script could not be initialized due to this error:');
@@ -134,6 +143,8 @@ const onLoaded = async (sender) => {
         localTimeStampsMap.set(tabId, localTimeStamp);
         // Retrieve storage data.
         const store = await driver.storage.local.get();
+        // Extract profile from local storage and fallback to empty object if undefined
+        const profile = await getSelectedProfile(driver) || {};
         // Load INFOnline measurement script from cache or from sourcer
         const code = await loadIamScript();
         // Execute INFOnline measurement script
@@ -151,6 +162,7 @@ const onLoaded = async (sender) => {
             url: url.origin,
             usr: store.userId,
             tab: tabId,
+            soz: JSON.stringify(profile),
           },
         };
         // Send count message to current tab
@@ -171,6 +183,30 @@ const onLoaded = async (sender) => {
   } catch (err) {
     log('error', err);
   }
+};
+
+/**
+ * Event listener for message events send to the background script
+ *
+ * @param {Event} event - The emitted message event
+ * @param {String} event.command - The sent command
+ * @param {Object|Profile} event.data - The sent event data
+ * @returns {boolean}
+ */
+const onMessage = async (event) => {
+  if (event.command === 'switchProfile') {
+    const profile = await getSelectedProfile(driver);
+    if (profile && profile.email) {
+      // Set popup icon to normal state
+      driver.browserAction.setIcon({ path: { 19: 'images/io19.png' } });
+      log('info', `Profile successfully switched to ${profile.email}`);
+    } else {
+      // Set popup icon to a error state
+      driver.browserAction.setIcon({ path: { 19: 'images/io19-no-profile.png' } });
+      log('warn', 'No profile selected. Socio meta information is missing in IMAREX data.');
+    }
+  }
+  return true;
 };
 
 /**
@@ -220,3 +256,4 @@ const committed = async (sender) => {
 // Event binding.
 driver.runtime.onInstalled.addListener(init);
 driver.webNavigation.onCommitted.addListener(committed);
+driver.runtime.onMessage.addListener(onMessage);
