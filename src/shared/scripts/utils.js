@@ -49,3 +49,46 @@ export const fetch = (url, options = { method: 'get' }) => new Promise((resolve,
   request.open(options.method, url, true);
   request.send();
 });
+/**
+ * Removes all descendant nodes from a container
+ * @param {Element} container
+ */
+export const removeAllChildren = (container) => {
+  try {
+    if (container) {
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+    } else {
+      throw new Error('No container specified');
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+/**
+ * Gets the selected profile from local storage
+ *
+ * @param {Object} driver - The browser driver
+ * @returns {Promise<Profile|Undefined>}
+ */
+export const getSelectedProfile = async (driver) => {
+  const store = await driver.storage.local.get('profiles');
+  const profile = store.profiles.find(item => item.selected === true);
+  // Remove selected attribute because it's not necessary
+  if (profile) {
+    delete profile.selected;
+  }
+  return profile;
+};
+/**
+ * Gets the current profile count
+ *
+ * @param {Object} driver - The browser driver
+ * @returns {Promise<Number>} Profile count
+ */
+export const getProfilesCount = async (driver) => {
+  const store = await driver.storage.local.get('profiles');
+  return store.profiles ? store.profiles.length : 0;
+};
