@@ -226,8 +226,14 @@ const committed = async (sender) => {
       const {
         tabId,
         transitionType,
+      } = 'sender';
+      let {
         transitionQualifiers,
       } = sender;
+      if (!transitionQualifiers) {
+        // On edge transition qualifiers are not supported yet
+        transitionQualifiers = ['notSupported'];
+      }
       // Update tab in tabs weak map
       transitionQualifiersMap.set(tabId, transitionQualifiers.join(';'));
       // Bind event handler to dom contend loaded and history state updated
@@ -241,10 +247,11 @@ const committed = async (sender) => {
       if (!driver.webNavigation.onReferenceFragmentUpdated.hasListener(onLoaded, URL_FILTER)) {
         driver.webNavigation.onReferenceFragmentUpdated.addListener(onLoaded, URL_FILTER);
       }
-      // Update stats
-      results.stats.type[transitionType] = results.stats.type[transitionType] || 0;
-      results.stats.type[transitionType] += 1;
-
+      if (transitionType) {
+        // Update stats
+        results.stats.type[transitionType] = results.stats.type[transitionType] || 0;
+        results.stats.type[transitionType] += 1;
+      }
       // Persist the updated stats.
       await driver.storage.local.set(results);
     }
