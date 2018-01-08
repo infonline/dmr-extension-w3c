@@ -12,6 +12,12 @@ const VENDOR_BROWSER_NAMES = {
   firefox: 'firefox',
   opera: 'opera',
 };
+const VENDOR_BROWSER_FULL_NAMES = {
+  chrome: 'Google Chrome',
+  edge: 'Microsoft Edge',
+  firefox: 'Firefox',
+  opera: 'Opera',
+};
 /**
  * Converts and removes keys with a browser prefix to the key without prefix
  *
@@ -64,6 +70,13 @@ export const multiVendorPath = (vendor, path) => [`src/${vendor}/${path}`, `src/
  * @return {*}
  */
 export const multiVendorBrowser = vendor => VENDOR_BROWSER_NAMES[vendor];
+/**
+ * Determines the right browser full name for browser sync options
+ *
+ * @param {String} vendor - The vendor
+ * @return {*}
+ */
+export const multiVendorBrowserFull = vendor => VENDOR_BROWSER_FULL_NAMES[vendor];
 /**
  * Returns the file type of the package considering the vendor
  *
