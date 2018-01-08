@@ -75,7 +75,7 @@ export const removeAllChildren = (container) => {
  */
 export const getSelectedProfile = async (driver) => {
   const store = await driver.storage.local.get('profiles');
-  const profile = store.profiles.find(item => item.selected === true);
+  const profile = store.profiles ? store.profiles.find(item => item.selected === true) : undefined;
   // Remove selected attribute because it's not necessary
   if (profile) {
     delete profile.selected;
@@ -92,3 +92,11 @@ export const getProfilesCount = async (driver) => {
   const store = await driver.storage.local.get('profiles');
   return store.profiles ? store.profiles.length : 0;
 };
+
+/**
+ * Capitalize first letter of a given text
+ *
+ * @param {String} text - Then text to capitalize
+ * @returns {string} Capitalized text
+ */
+export const capitalize = text => `${text.charAt(0).toUpperCase()}${text.slice(1)}`;
