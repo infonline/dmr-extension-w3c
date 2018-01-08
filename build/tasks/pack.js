@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * Web extension packaging task. This file contains the packaging task
  * for taking a build web extension an pack them into the desired packaging

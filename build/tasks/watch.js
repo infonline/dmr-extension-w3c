@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import gulp from 'gulp';
 import { colors, log } from 'gulp-util';
 import BrowserSync from 'browser-sync';

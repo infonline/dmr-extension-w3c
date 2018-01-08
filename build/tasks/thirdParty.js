@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * Web extension third party task. This file contains the third party task
  * for copying all third-party assets like fonts, styles or javascript

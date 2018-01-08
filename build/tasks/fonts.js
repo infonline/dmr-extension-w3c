@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * Web extension fonts task. This file contains the fonts task
  * for processing each font file of a vendor specific web extension

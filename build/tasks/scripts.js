@@ -1,20 +1,28 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import fs from 'fs';
 import path from 'path';
 import gulp from 'gulp';
-import { log, colors } from 'gulp-util';
+import {
+  log,
+  colors,
+} from 'gulp-util';
 import named from 'vinyl-named';
 import webpack from 'webpack';
 import gulpWebpack from 'webpack-stream';
 import pump from 'pump';
 import template from 'gulp-template';
 import args from '../lib/args';
-import { multiVendorPath } from '../lib/vendors';
+import {
+  multiVendorPath,
+  multiVendorBrowserFull,
+} from '../lib/vendors';
 
 const ENV = args.production ? 'production' : 'development';
 const IAM_SCRIPT_URL = args.scriptUri;
 const VENDOR = args.vendor;
 const NAMESPACE = VENDOR === 'chrome' || VENDOR === 'opera' ? 'chrome' : 'browser';
 const API_META_DATA = fs.readFileSync(path.join(__dirname, '../assets/shared/apiMetaData.json'), 'utf8');
+const VENDOR_FULL_NAME = multiVendorBrowserFull(args.vendor);
 /**
  * Webpack configuration
  * @type {Object}
@@ -52,6 +60,7 @@ gulp.task('scripts:template', next => pump([
     NAMESPACE,
     VENDOR,
     API_META_DATA,
+    VENDOR_FULL_NAME,
   }, {
     interpolate: /<%=([\s\S]+?)%>/g,
   }),

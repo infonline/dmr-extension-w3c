@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * Web extension locales task. This file contains the pages task
  * for processing each html file of a vendor specific web extension

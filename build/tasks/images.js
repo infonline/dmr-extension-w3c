@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * Web extension images task. This file contains the images task
  * for processing each image file of a vendor specific web extension

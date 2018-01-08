@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * Bumping version number and tagging the repository with it.
  * Please read http://semver.org/

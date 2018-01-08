@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * Web extension manifest task. This file contains the manifest task
  * for processing each manifest file of a vendor specific web extension
