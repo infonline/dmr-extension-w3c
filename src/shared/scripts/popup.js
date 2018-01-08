@@ -11,6 +11,7 @@ import { MDCSelect } from '@material/select';
 import { MDCCheckbox } from '@material/checkbox';
 import { driver } from './driver';
 import {
+  capitalize,
   getSelectedProfile,
   getProfilesCount,
   removeAllChildren,
@@ -28,6 +29,13 @@ const genderSelect = document.getElementById('gender-select-field');
 const genderSelectComponent = new MDCSelect(genderSelect);
 
 let profileCheckBoxes = [];
+/**
+ * The full name of the vendor (e. g. Google Chrome). Will be filled
+ * automatically on build.
+ *
+ * @type {string}
+ */
+const VENDOR_FULL_NAME = '<%= VENDOR_FULL_NAME %>';
 
 // Attach ripple effect to all buttons
 [].slice.call(document.querySelectorAll('.mdc-button')).forEach(node => MDCRipple.attachTo(node));
@@ -238,7 +246,10 @@ const switchToProfileView = (target = 'list') => async () => {
     validateProfileForm();
   }
 };
-
+/**
+ * Validates the profile form and all it's descendants against
+ * html5 validation rules or own rules.
+ */
 const validateProfileForm = () => {
   const results = [];
   // Check validity of all text fields
@@ -309,7 +320,10 @@ const enableSelectProfileButton = () => {
   const clone = document.importNode(template.content, true);
   removeAllChildren(container);
   container.appendChild(clone);
-  document.querySelector('#select-profile-button').addEventListener('click', switchToProfileView());
+  const button = document.querySelector('#select-profile-button');
+  const i18nKey = button.getAttribute('data-i18n-key');
+  button.innerHTML = driver.i18n.getMessage(i18nKey);
+  button.addEventListener('click', switchToProfileView());
 };
 
 /**
@@ -321,7 +335,10 @@ const enableSwitchProfileButton = () => {
   const clone = document.importNode(template.content, true);
   removeAllChildren(container);
   container.appendChild(clone);
-  document.querySelector('#switch-profile-button').addEventListener('click', switchToProfileView());
+  const button = document.querySelector('#switch-profile-button');
+  const i18nKey = button.getAttribute('data-i18n-key');
+  button.innerHTML = driver.i18n.getMessage(i18nKey);
+  button.addEventListener('click', switchToProfileView());
 };
 
 /**
@@ -333,9 +350,14 @@ const enableCreateProfileButton = () => {
   const clone = document.importNode(template.content, true);
   removeAllChildren(container);
   container.appendChild(clone);
-  document.querySelector('#create-profile-button').addEventListener('click', switchToProfileView('form'));
+  const button = document.querySelector('#create-profile-button');
+  const i18nKey = button.getAttribute('data-i18n-key');
+  button.innerHTML = driver.i18n.getMessage(i18nKey);
+  button.addEventListener('click', switchToProfileView('form'));
 };
-
+/**
+ * Clears the profile form and all its values
+ */
 const clearProfileForm = () => {
   // Extract values from the text fields
   for (let i = 0, iLen = textFields.length; i < iLen; i += 1) {
@@ -441,8 +463,11 @@ const createProfileList = (profiles, container) => {
     const secondary = document.createElement('span');
     // Primary text node
     const primaryText = document.createTextNode(item.email);
+    // Retrieve right i18n gender message for secondary text node
+    const i18nSecondaryText = driver.i18n
+      .getMessage(`profileListItemSecondaryText${capitalize(item.gender)}`);
     // Secondary text node
-    const secondaryText = document.createTextNode(item.gender);
+    const secondaryText = document.createTextNode(i18nSecondaryText);
     // List actions
     const actions = document.createElement('span');
     // Remove action icon
@@ -480,10 +505,15 @@ const createProfileList = (profiles, container) => {
     listItem.appendChild(actions);
     return listItem;
   });
-
+  /**
+   * Creates a sub header for the list.
+   *
+   * @returns {HTMLHeadingElement} - Sub header element.
+   */
   const createSubHeader = () => {
+    const i18nMessage = driver.i18n.getMessage('profileListSubHeaderText');
     const subHeader = document.createElement('h3');
-    const subHeaderText = document.createTextNode('Profiles');
+    const subHeaderText = document.createTextNode(i18nMessage);
     subHeader.classList.add('mdc-list-group__subheader');
     subHeader.appendChild(subHeaderText);
     return subHeader;
@@ -601,6 +631,44 @@ const updatePanel = (index) => {
     validateProfileForm();
   }
 };
+/**
+ * Takes all DOM nodes which have "data-i18n-key" as attribute and retrieves the
+ * the associated i18n message from the i18n store (driver.i18n) and will overwrite
+ * the text node with this message.
+ */
+const fillI18nNodes = () => {
+  try {
+    const i18nNodes = [].slice.call(document.querySelectorAll('[data-i18n-key]'));
+    if (i18nNodes.length > 0) {
+      for (let i = 0, iLen = i18nNodes.length; i < iLen; i += 1) {
+        const i18nNode = i18nNodes[i];
+        const i18nKey = i18nNode.getAttribute('data-i18n-key');
+        let message;
+        // The i18n message collection has one item which contains a placeholder.
+        // So we have to process this entry independently from the others.
+        if (i18nKey === 'panelIntroductionDescriptionText') {
+          // eslint-disable-next-line no-await-in-loop
+          message = driver.i18n.getMessage(i18nKey, VENDOR_FULL_NAME);
+        } else {
+          // eslint-disable-next-line no-await-in-loop
+          message = driver.i18n.getMessage(i18nKey);
+        }
+        log('info', message);
+        if (message) {
+          // Some i18n nodes have aria labels defined.
+          // So we have to set the aria label when key contains aria key word.
+          if (i18nKey.toLocaleLowerCase().includes('aria')) {
+            i18nNode.setAttribute('aria-label', message);
+          } else {
+            i18nNode.innerHTML = message;
+          }
+        }
+      }
+    }
+  } catch (err) {
+    log('error', err);
+  }
+};
 
 // ------------------ Event binding -------------------------- //
 
@@ -655,5 +723,7 @@ genderSelectComponent.listen('MDCSelect:change', validateProfileForm);
 
 // --------------------- Initialization -------------------------- //
 
+// Fill all text nodes with i18n messages
+fillI18nNodes();
 // Build fresh profile list
 Promise.resolve(updateProfileList());
