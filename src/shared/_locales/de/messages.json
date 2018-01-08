@@ -1,0 +1,104 @@
+{
+  "extensionName": {
+    "message": "IMAREX",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Browsererweiterung für die INFOnline Marktforschung",
+    "description": "Description of the extension"
+  },
+  "tabIntroduction": {
+    "message": "Einführung",
+    "description": "Label of introduction tab"
+  },
+  "tabProfiles": {
+    "message": "Profile",
+    "description": "Label of profile tab"
+  },
+  "tabStatistics": {
+    "message": "Statistiken",
+    "description": "Label of statistics tab"
+  },
+  "panelIntroductionHeadText": {
+    "message": "Willkommen zu IMAREX",
+    "description": "Header text on the panel introduction view"
+  },
+  "panelIntroductionDescriptionText": {
+    "message": "Dies ist eine INFOnline Browsererweiterung zur Marktforschung für $vendorFullName$",
+    "description": "Description text on the panel introduction view",
+    "placeholders": {
+      "vendorFullName" : {
+        "content" : "$1",
+        "example" : "Google Chrome"
+      }
+    }
+  },
+  "panelIntroductionAcknowledgmentText": {
+    "message": "Vielen Dank für Ihre Unterstützung",
+    "description": "Acknowledgment text on the panel introduction view"
+  },
+  "profileListSubHeaderText": {
+    "message": "Profile",
+    "description": "Sub header text for the profile list"
+  },
+  "profileListItemSecondaryTextMale": {
+    "message": "Männlich",
+    "description": "Male gender profile item secondary text"
+  },
+  "profileListItemSecondaryTextFemale": {
+    "message": "Weiblich",
+    "description": "Female gender profile item secondary text"
+  },
+  "emailTextFieldLabelText": {
+    "message": "E-Mail",
+    "description": "Label for the email text field"
+  },
+  "emailTextFieldHelperText": {
+    "message": "Ihre E-Mail-Adresse mit mindestens 3 Zeichen",
+    "description": "Helper text for the email text field"
+  },
+  "ageTextFieldLabelText": {
+    "message": "Alter",
+    "description": "Label for the age text field"
+  },
+  "ageTextFieldHelperText": {
+    "message": "Ihr Alter zwischen 1 und 100 Jahren",
+    "description": "Helper text for the age text field"
+  },
+  "genderSelectFieldLabelText": {
+    "message": "Geschlecht",
+    "description": "Label for the gender selection field"
+  },
+  "genderSelectFieldOptionMaleText": {
+    "message": "Männlich",
+    "description": "Male gender selection option label"
+  },
+  "genderSelectFieldOptionFemaleText": {
+    "message": "Weiblich",
+    "description": "Female gender selection option label"
+  },
+  "cancelProfileButtonLabelText": {
+    "message": "Abbrechen",
+    "description": "Cancel profile button label"
+  },
+  "saveProfileButtonLabelText": {
+    "message": "Speichern",
+    "description": "Save profile button label"
+  },
+  "addProfileFabAriaLabel": {
+    "message": "Profil hinzufügen",
+    "description": "Add profile FAB aria label"
+  },
+  "createProfileButtonLabelText": {
+    "message": "Profil erstellen",
+    "description": "Create profile button label"
+  },
+  "selectProfileButtonLabelText": {
+    "message": "Profil auswählen",
+    "description": "Select profile button label"
+  },
+  "switchProfileButtonLabelText": {
+    "message": "Profil wechseln",
+    "description": "Switch profile button label"
+  }
+}
