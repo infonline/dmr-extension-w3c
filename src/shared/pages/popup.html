@@ -13,13 +13,32 @@
   <div class="mdc-toolbar mdc-toolbar--fixed">
     <div class="mdc-toolbar__row">
       <div class="mdc-toolbar__section mdc-toolbar__section--align-start">
-        <img src="../images/io48.svg" class="logo">
+        <img
+          src="../images/io48.svg"
+          class="logo"
+        >
       </div>
       <div class="mdc-toolbar__section mdc-toolbar__section--align-end modified-toolbar-section">
-        <nav id="main-mdc-tab-bar" class="mdc-tab-bar mdc-tab-bar--indicator-accent" role="tablist">
-          <a class="mdc-tab mdc-tab--active" href="#panel-introduction">Introduction</a>
-          <a class="mdc-tab" href="#panel-profiles">Profiles</a>
-          <a class="mdc-tab" href="#panel-stats">Statistics</a>
+        <nav
+          id="main-mdc-tab-bar"
+          class="mdc-tab-bar mdc-tab-bar--indicator-accent"
+          role="tablist"
+        >
+          <a
+            class="mdc-tab mdc-tab--active"
+            href="#panel-introduction"
+            data-i18n-key="tabIntroduction"
+          >Introduction</a>
+          <a
+            class="mdc-tab"
+            href="#panel-profiles"
+            data-i18n-key="tabProfiles"
+          >Profiles</a>
+          <a
+            class="mdc-tab"
+            href="#panel-stats"
+            data-i18n-key="tabStatistics"
+          >Statistics</a>
           <span class="mdc-tab-bar__indicator"></span>
         </nav>
       </div>
@@ -28,21 +47,51 @@
 </section>
 <section>
   <div class="panels margin--x-auto mdc-toolbar-fixed-adjust">
-    <div class="panel active" id="panel-introduction" role="tabpanel" aria-hidden="false">
-      <p class="mdc-typography--title text--center">Welcome to IMAREX</p>
-      <p class="mdc-typography--body1 text--center">This is the INFOnline market research extension for Goggle Chrome</p>
-      <p id="profile-buttons" class="text--center">
-      </p>
-      <p class="mdc-typography--body1 text--center">Thanks for supporting us</p>
+    <div
+      class="panel active"
+      id="panel-introduction"
+      role="tabpanel"
+      aria-hidden="false"
+    >
+      <p
+        class="mdc-typography--title text--center"
+        data-i18n-key="panelIntroductionHeadText"
+      >Welcome to IMAREX</p>
+      <p
+        class="mdc-typography--body1 text--center"
+        data-i18n-key="panelIntroductionDescriptionText"
+      >This is the INFOnline market research extension for Goggle Chrome</p>
+      <p
+        id="profile-buttons"
+        class="text--center"
+      ></p>
+      <p
+        class="mdc-typography--body1 text--center"
+        data-i18n-key="panelIntroductionAcknowledgmentText"
+      >Thanks for supporting us</p>
       <p class="mdc-typography--body2 text--center">
-        <a class="link--no-styles" href="https://www.infonline.de" target="_blank">
+        <a
+          class="link--no-styles"
+          href="https://www.infonline.de"
+          target="_blank"
+        >
           <strong>INFOnline GmbH</strong>
         </a>
       </p>
     </div>
-    <div class="panel" id="panel-profiles" role="tabpanel">
-      <div id="profile-list" class="profile-view"></div>
-      <div id="profile-form" class="profile-view profile-view--active">
+    <div
+      class="panel"
+      id="panel-profiles"
+      role="tabpanel"
+    >
+      <div
+        id="profile-list"
+        class="profile-view"
+      ></div>
+      <div
+        id="profile-form"
+        class="profile-view profile-view--active"
+      >
         <form class="form--fields flex-container flex-container--column">
           <div class="mdc-text-field mdc-text-field--box">
             <input
@@ -52,16 +101,19 @@
               minlength="3"
               aria-controls="email-text-field-helper-text"
             >
-            <label class="mdc-text-field__label form--fields-labels" for="email-text-field">E-Mail</label>
+            <label
+              class="mdc-text-field__label form--fields-labels"
+              for="email-text-field"
+              data-i18n-key="emailTextFieldLabelText"
+            >E-Mail</label>
             <div class="mdc-text-field__bottom-line"></div>
           </div>
           <p
             id="email-text-field-helper-text"
             class="mdc-text-field-helper-text"
             aria-hidden="true"
-          >
-            Your email address with at least 3 characters
-          </p>
+            data-i18n-key="emailTextFieldHelperText"
+          >Your email address with at least 3 characters</p>
           <div class="mdc-text-field mdc-text-field--box">
             <input
               type="number"
@@ -72,46 +124,91 @@
               max="100"
               aria-controls="age-text-field-helper-text"
             >
-            <label class="mdc-text-field__label form--fields-labels" for="age-text-field">Age</label>
+            <label
+              class="mdc-text-field__label form--fields-labels"
+              for="age-text-field"
+              data-i18n-key="ageTextFieldLabelText"
+            >Age</label>
             <div class="mdc-text-field__bottom-line"></div>
           </div>
           <p
             id="age-text-field-helper-text"
             class="mdc-text-field-helper-text"
-            aria-hidden="true">
-            Your age in range from 1 to 100
-          </p>
-          <div id="gender-select-field" class="mdc-select" role="listbox" tabindex="0">
-            <div class="mdc-select__surface" tabindex="0">
-              <div class="mdc-select__label">Gender*</div>
+            aria-hidden="true"
+            data-i18n-key="ageTextFieldHelperText"
+          >Your age between 1 and 100 years</p>
+          <div
+            id="gender-select-field"
+            class="mdc-select"
+            role="listbox"
+            tabindex="0"
+          >
+            <div
+              class="mdc-select__surface"
+              tabindex="0"
+            >
+              <div
+                class="mdc-select__label"
+                data-i18n-key="genderSelectFieldLabelText"
+              >Gender*
+              </div>
               <div class="mdc-select__selected-text"></div>
               <div class="mdc-select__bottom-line"></div>
             </div>
             <div class="mdc-simple-menu mdc-select__menu">
               <ul class="mdc-list mdc-simple-menu__items">
-                <li class="mdc-list-item" role="option" id="male" tabindex="0" data-value="male">Male</li>
-                <li class="mdc-list-item" role="option" id="female" tabindex="0" data-value="female">Female</li>
+                <li
+                  class="mdc-list-item"
+                  role="option" id="male"
+                  tabindex="0"
+                  data-value="male"
+                  data-i18n-key="genderSelectFieldOptionMaleText"
+                >Male
+                </li>
+                <li
+                  class="mdc-list-item"
+                  role="option"
+                  id="female"
+                  tabindex="0"
+                  data-value="female"
+                  data-i18n-key="genderSelectFieldOptionFemaleText"
+                >Female
+                </li>
               </ul>
             </div>
           </div>
         </form>
         <div class="form--actions flex-container flex-container--row">
-          <button id="cancel-profile-button" class="mdc-button">
-            cancel
+          <button
+            id="cancel-profile-button"
+            class="mdc-button"
+            data-i18n-key="cancelProfileButtonLabelText"
+          >cancel
           </button>
           <span class="spacer"></span>
-          <button id="save-profile-button" class="mdc-button mdc-button--raised mdc-theme--secondary-bg mdc-theme--text-primary-on-secondary">
-            save
+          <button
+            id="save-profile-button"
+            class="mdc-button mdc-button--raised mdc-theme--secondary-bg mdc-theme--text-primary-on-secondary"
+            data-i18n-key="saveProfileButtonLabelText"
+          >save
           </button>
         </div>
       </div>
-      <button id="add-profile-fab" class="mdc-fab mdc-fab--exited material-icons fab--absolute" aria-label="Add profile">
-        <span class="mdc-fab__icon">
-          add
-        </span>
+      <button
+        id="add-profile-fab"
+        class="mdc-fab mdc-fab--exited material-icons fab--absolute"
+        aria-label="Add profile"
+        data-i18n-key="addProfileFabAriaLabel"
+      >
+        <span class="mdc-fab__icon">add</span>
       </button>
     </div>
-    <div class="panel" id="panel-stats" role="tabpanel">
+    <div
+      class="panel"
+      id="panel-stats"
+      role="tabpanel"
+      data-i18n-key="tabStatistics"
+    >
       <p>Statistics</p>
     </div>
   </div>
@@ -122,18 +219,27 @@
   </div>
 </section>
 <template id="create-profile-button-template">
-  <button id="create-profile-button" class="mdc-button mdc-button--raised mdc-theme--secondary-bg mdc-theme--text-primary-on-secondary">
-    Create profile
+  <button
+    id="create-profile-button"
+    class="mdc-button mdc-button--raised mdc-theme--secondary-bg mdc-theme--text-primary-on-secondary"
+    data-i18n-key="createProfileButtonLabelText"
+  >Create profile
   </button>
 </template>
 <template id="select-profile-button-template">
-  <button id="select-profile-button" class="mdc-button mdc-button--raised mdc-theme--secondary-bg mdc-theme--text-primary-on-secondary">
-    Select profile
+  <button
+    id="select-profile-button"
+    class="mdc-button mdc-button--raised mdc-theme--secondary-bg mdc-theme--text-primary-on-secondary"
+    data-i18n-key="selectProfileButtonLabelText"
+  >Select profile
   </button>
 </template>
 <template id="switch-profile-button-template">
-  <button id="switch-profile-button" class="mdc-button mdc-button--raised mdc-theme--secondary-bg mdc-theme--text-primary-on-secondary">
-    Switch profile
+  <button
+    id="switch-profile-button"
+    class="mdc-button mdc-button--raised mdc-theme--secondary-bg mdc-theme--text-primary-on-secondary"
+    data-i18n-key="switchProfileButtonLabelText"
+  >Switch profile
   </button>
 </template>
 <script src="../scripts/popup.js"></script>
