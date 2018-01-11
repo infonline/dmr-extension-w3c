@@ -7,30 +7,27 @@
   <Identity
     Name="INSERT-YOUR-PACKAGE-IDENTITY-NAME-HERE"
     Publisher="CN=INSERT-YOUR-PACKAGE-IDENTITY-PUBLISHER-HERE"
-    Version="{version}" /><!-- UPDATE IDENTITY -->
-
+    Version="{Version}"
+  />
   <Properties>
     <DisplayName>{DisplayName}</DisplayName>
-    <PublisherDisplayName>INSERT-YOUR-PACKAGE-PROPERTIES-PUBLISHERDISPLAYNAME-HERE</PublisherDisplayName> <!-- UPDATE PUBLISHER DISPLAY NAME -->
-    <Logo>Assets\StoreLogo.png</Logo>
+    <PublisherDisplayName>INSERT-YOUR-PACKAGE-PROPERTIES-PUBLISHERDISPLAYNAME-HERE</PublisherDisplayName>
+    <Logo>Assets\io150.png</Logo>
   </Properties>
-
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.15063.0" MaxVersionTested="10.0.15063.0" />
   </Dependencies>
-
   <Resources>
     {Resources}
   </Resources>
-
   <Applications>
     <Application Id="App">
       <uap:VisualElements
         AppListEntry="none"
-        DisplayName="{displayName}"
-        Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="{description}"
+        DisplayName="{DisplayName}"
+        Square150x150Logo="Assets\io150.png"
+        Square44x44Logo="Assets\io44.png"
+        Description="{Description}"
         BackgroundColor="transparent">
       </uap:VisualElements>
       <Extensions>
@@ -39,10 +36,10 @@
             Name="com.microsoft.edge.extension"
             Id="EdgeExtension"
             PublicFolder="Extension"
-            DisplayName="{displayName}">
+            DisplayName="{DisplayName}">
             <uap3:Properties>
               <Capabilities>
-                {capabilities}
+                {Capabilities}
               </Capabilities>
             </uap3:Properties>
           </uap3:AppExtension>
