@@ -1,3 +1,20 @@
+<a name="0.6.0"></a>
+# [0.6.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.5.0...v0.6.0) (2018-01-15)
+
+
+### Features
+
+* **assets:** add 150x150 and 44x44 logos to the illustrator sources ([b318c0b](https://vgitbn003.infon/IAM/iam-web-extension/commits/b318c0b))
+* **shared:** add capitalize convenient method for capitalizing strings ([b8c40a0](https://vgitbn003.infon/IAM/iam-web-extension/commits/b8c40a0))
+* **shared:** add i18n attributes to browser action popup html and format code for better readability ([c9b414a](https://vgitbn003.infon/IAM/iam-web-extension/commits/c9b414a))
+* **shared:** add i18n support in browser action popup ([0dd8b7c](https://vgitbn003.infon/IAM/iam-web-extension/commits/0dd8b7c))
+* **shared:** add locales for german and english to extension ([de15a2f](https://vgitbn003.infon/IAM/iam-web-extension/commits/de15a2f))
+* **shared:** make onCommit handler working in edge browser ([2b68346](https://vgitbn003.infon/IAM/iam-web-extension/commits/2b68346))
+* **shared:** replace name and description of extension in manifest file with i18n placeholder ([ba94820](https://vgitbn003.infon/IAM/iam-web-extension/commits/ba94820))
+* **src:** move all web extension assets from shared folder to src folder ([0efcc7e](https://vgitbn003.infon/IAM/iam-web-extension/commits/0efcc7e))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.4.0...v0.5.0) (2018-01-03)
 
