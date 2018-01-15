@@ -206,8 +206,8 @@ const createWebpackPlugins = (options) => {
   // Zip all assets when pack option is true
   if (options.pack) {
     basePlugins.push(new ZipPlugin({
-      path: `packages/${options.vendor}`,
-      filename: `IMAREX-${options.vendor}-${options.version}.zip`,
+      path: `../../packages/${options.vendor}`,
+      filename: `IMAREX-${options.version}.zip`,
     }));
   }
   // Compress all assets when gzip is on
