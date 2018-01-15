@@ -18,32 +18,32 @@ or
 
 ### Usage
 
-**Note:** The default brower is chrome!
+**Note:** The default browser is chrome!
 
-Run ```$ gulp --watch``` and load the ```dist```-directory into chrome.
+Run ```$ node ./build/build.js --watch``` and load the ```dist```-directory into chrome.
 
-## Tasks
+## CLI
 
-### Build
+### Build CLI
 
-    $ gulp
+    $ node ./build/build.js
 
 
-| Option         | Description                                                                            |
-|----------------|----------------------------------------------------------------------------------------|
-| `--watch`      | Starts a browser sync server and watches all assets.                                   |
-| `--production` | Minifies all assets                                                                    |
-| `--verbose`    | Log additional data to the console.                                                    |
-| `--vendor`     | Compile the extension for different vendors (chrome, firefox, opera)  Default: chrome  |
-| `--script-uri` | Compile the extension with different INFOnline measurement script URI                  |
-| `--sourcemaps` | Force the creation of sourcemaps. Default: !production                                 |
+| Option         | Description                                                                                           |
+|----------------|-------------------------------------------------------------------------------------------------------|
+| `--env`        | Specifies the target environment (if production it will minify all source code) Default: 'development'|
+| `--watch`      | Watches all source code assets and will recycle the build process on file change                      |
+| `--vendor`     | Compile the extension for different vendors (chrome, firefox, opera)  Default: chrome                 |
+| `--script-uri` | Compile the extension with different INFOnline measurement script URI                                 |
+| `--sourcemaps` | Force the creation of sourcemaps. Default: `env ==!production`                                        |
+| `--pack`       | Will zip the built extension on the end and will copy it over the packaging directory                 |
 
 
 ### Packaging
 
-Zips your `dist` directory and saves it in the `packages` directory.
+Builds the extension for the firefox browser, zips the `dist` directory and saves it in the `packages` directory.
 
-    $ gulp pack --vendor=firefox
+    $ node./build/build.js --env production --pack --vendor firefox
 
 ### Versioning
 
@@ -52,45 +52,29 @@ commits the change to git and adds a git tag.
 
 **Hint:** Please stick to a semantic versioning! 
 
-    $ gulp patch      // => 0.0.X
+    $ yarn run bump:patch      // => 0.0.X
 
 or
 
-    $ gulp minor    // => 0.X.0
+    $  yarn run bump:minor    // => 0.X.0
 
 or
 
-    $ gulp major    // => X.0.
+    $ yarn run bump:major    // => X.0.
     
 Please refer to [Semver](https://semver.org/) for more details on semantic versioning
 
 ### Status
 
-|Browser|Status        |
-|-------|--------------|
-|Chrome |running       |
-|Edge   |running       |
-|Firefox|not running   |
-|Opera  |running       |
-|Safari |not tested yet|
-
-On Firefox there is a Bug in the web extension javascript api:
+|Browser|Status               |
+|-------|---------------------|
+|Chrome |running              |
+|Edge   |running              |
+|Firefox|not running*         |
+|Opera  |running              |
+|Safari |not supported yet**  |
 
 
-    browser.runtime.onMessage.addListener(function (response, sender) {
-      console.log(response, sender);
-      var tabId = sender.tab.id;
-      loadScript("https://script.ioam.de/iam.js", function (code) {
-        browser.tabs.executeScript(tabId, {code: code})
-          .then(function () {
-            browser.tabs.executeScript(tabId, {file: 'count.js'})
-          })
-          .catch(function (err) {
-            throw err;
-          });
-      });
-    });
+(*) Currently the firefox will emit an error when injecting the iam.js via extension runtime into a running tab. A detailed error report and a possible fix are mentioned [here](/docs/FIREFOX.md).
 
-The injection of the iam.js triggers an error:
-
-    Error: 'addEventListener' called on an object that does not implement interface EventTarget.
+(**) Apple are not participant in the [browser extension community group](https://www.w3.org/community/browserext/participants) for the web extension standard by the w3c. They have it's own API which is currently fully incompatible to mozilla's draft. There are no information about further plans from Apple to support mozilla's draft in the future. 
