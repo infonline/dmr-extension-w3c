@@ -1,3 +1,6 @@
+@import "~roboto-fontface/css/roboto/roboto-fontface.css";
+@import "~material-design-icons/iconfont/material-icons.css";
+@import "~material-components-web/dist/material-components-web.css";
 :root {
   /* INFOnline theme*/
   --mdc-theme-primary: #004e7b;

@@ -1,29 +1,13 @@
+/* globals NAMESPACE, VENDOR, API_META_DATA */
 import polyfill from './polyfill';
-/**
- * The browser namespace. Will be injected on built. For
- * chrome and opera it's always 'chrome'. For other browsers
- * it's simple 'browser'
- *
- * @type {string}
- */
-const namespace = '<%=NAMESPACE%>';
-/**
- * The browser vendor. Will be injected on built.
- *
- * @type {string}
- */
-const vendor = '<%=VENDOR%>';
-/**
- * The api meta data to polyfill. Will be injected on built.
- *
- * @type {any}
- */
-// eslint-disable-next-line quotes
-const apiMetaData = JSON.parse(`<%=API_META_DATA%>`);
+
+const namespace = NAMESPACE;
+const vendor = VENDOR;
+const apiMetaData = JSON.parse(API_META_DATA);
 /**
  * The browser driver.
  *
- * For chrome and opera the namespace is always chrome and gets polyfilled because
+ * For chrome and opera the NAMESPACE is always chrome and gets polyfilled because
  * they rely on the same engine. For edge and firefox it's the global browser object.
  * But only edge get's polyfilled because it relies on chrome callbacks.
  *

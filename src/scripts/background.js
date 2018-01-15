@@ -1,4 +1,5 @@
 /* eslint-env browser */
+/* global IAM_SCRIPT_URL */
 // Import web extension driver
 /**
  * Web extension driver
@@ -11,13 +12,6 @@ import {
   fetch,
   getSelectedProfile,
 } from './utils';
-
-/**
- * The URI of the INFOnline measurement script. Will be injected in the script while building
- * the web extension.
- * @type {String}
- */
-const IAM_SCRIPT_URL = '<%=IAM_SCRIPT_URL%>';
 /**
  * The default URL filter for navigation events
  *
@@ -261,6 +255,7 @@ const committed = async (sender) => {
 };
 
 // Event binding.
-driver.runtime.onInstalled.addListener(init);
 driver.webNavigation.onCommitted.addListener(committed);
 driver.runtime.onMessage.addListener(onMessage);
+
+Promise.resolve(init());

@@ -1,11 +1,3 @@
-### Sources
+### Shared directory
 
-#### Browser
-
-Includes the basic web extension sources for these browser:
-
-- Chrome
-- Edge
-- Firefox
-- Opera
-- Safari
+This directory includes shareable functionality for all extensions

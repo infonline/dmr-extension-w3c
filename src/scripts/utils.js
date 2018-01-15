@@ -1,10 +1,6 @@
-/**
- * The ENV variable. Specifies the environment (production or development).
- * Will be injected in the script while building the web extension.
- *
- * @type {string}
- */
-const ENV = '<%=ENV%>';
+/* globals ENV */
+
+const env = ENV;
 /**
  * Logs messages to browser console if environment is development
  *
@@ -12,7 +8,7 @@ const ENV = '<%=ENV%>';
  * @param {Array.<*> | String} args - Log arguments like messages.
  */
 export const log = (type, ...args) => {
-  if (ENV === 'development') {
+  if (env === 'development') {
     // eslint-disable-next-line no-console
     console[type](...args);
   }

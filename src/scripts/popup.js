@@ -1,4 +1,5 @@
 /* eslint-env browser */
+/* globals VENDOR_FULL_NAME */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { MDCTabBar } from '@material/tabs';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -18,6 +19,8 @@ import {
   log,
 } from './utils';
 
+import '../styles/popup.css';
+
 // Query the components
 const dynamicTabBar = new MDCTabBar(document.querySelector('#toolbar'));
 const dots = document.querySelector('.dots');
@@ -29,13 +32,6 @@ const genderSelect = document.getElementById('gender-select-field');
 const genderSelectComponent = new MDCSelect(genderSelect);
 
 let profileCheckBoxes = [];
-/**
- * The full name of the vendor (e. g. Google Chrome). Will be filled
- * automatically on build.
- *
- * @type {string}
- */
-const VENDOR_FULL_NAME = '<%= VENDOR_FULL_NAME %>';
 
 // Attach ripple effect to all buttons
 [].slice.call(document.querySelectorAll('.mdc-button')).forEach(node => MDCRipple.attachTo(node));
@@ -653,7 +649,6 @@ const fillI18nNodes = () => {
           // eslint-disable-next-line no-await-in-loop
           message = driver.i18n.getMessage(i18nKey);
         }
-        log('info', message);
         if (message) {
           // Some i18n nodes have aria labels defined.
           // So we have to set the aria label when key contains aria key word.
