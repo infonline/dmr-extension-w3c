@@ -17,11 +17,11 @@ This error occurred because of the implementation below (Line 603 - 608) in the 
     }
 
 
-A analysis of the issue shows that the references to the built-in method addEventListener gets lost when the browser tries to interpret the code when injected into a tab. This issues is a very isolated problem and only occurs in this particular context. But to realize a functional IMAREX extension for firefox this issue have to be solved.
+A analysis of the issue shows that the references to the built-in method addEventListener gets lost when the browser tries to interpret the code when injected into a tab. A possible cause lies in the weak reference of the EventTarget class in firefox. When a reference is created the garbage collector kicks in and removes the weak references from the listener attach methods. This issues is a very isolated problem and only occurs in this particular context. But to realize a functional IMAREX extension for firefox this issue have to be solved.
 
 **Solution:**
 
-A possible solution ist to replace the code in the iam.js from line 597 to 626 with following code:
+A possible solution is to replace the code in the iam.js from line 597 to 626 with following code:
 
     if (typeof window.postMessage !== 'undefined'
       && typeof JSON === 'object'
