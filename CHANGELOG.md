@@ -1,3 +1,13 @@
+<a name="0.7.0"></a>
+# [0.7.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.6.0...v0.7.0) (2018-01-16)
+
+
+### Features
+
+* **src:** switch from css to scss for browser actions ([ce6da0b](https://vgitbn003.infon/IAM/iam-web-extension/commits/ce6da0b))
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.5.0...v0.6.0) (2018-01-15)
 
