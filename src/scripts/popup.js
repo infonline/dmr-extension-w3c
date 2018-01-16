@@ -211,7 +211,7 @@ const editProfile = async (event) => {
     // eslint-disable-next-line no-underscore-dangle
     textField.input_.value = profile[key];
     // eslint-disable-next-line no-underscore-dangle
-    textField.label_.classList.add('mdc-text-field__label--float-above');
+    textField.label_.root_.classList.add('mdc-text-field__label--float-above');
   }
   genderSelectComponent.selectedIndex = genderSelectComponent.options
     .findIndex(node => node.getAttribute('data-value') === profile.gender);
@@ -265,11 +265,11 @@ const validateProfileForm = () => {
   if (results.filter(item => item === false).length > 0) {
     // Deactivate save button because of invalid form
     saveProfileButton.setAttribute('disabled', 'disabled');
-    saveProfileButton.classList.remove('mdc-theme--secondary-bg', 'mdc-theme--text-primary-on-secondary');
+    saveProfileButton.classList.remove('mdc-theme--secondary-bg');
   } else {
     // Activate save button because of valid form
     saveProfileButton.removeAttribute('disabled');
-    saveProfileButton.classList.add('mdc-theme--secondary-bg', 'mdc-theme--text-primary-on-secondary');
+    saveProfileButton.classList.add('mdc-theme--secondary-bg');
   }
 };
 
@@ -361,7 +361,7 @@ const clearProfileForm = () => {
     // eslint-disable-next-line no-underscore-dangle
     textField.input_.value = '';
     // eslint-disable-next-line no-underscore-dangle
-    textField.label_.classList.remove('mdc-text-field__label--float-above');
+    textField.label_.root_.classList.remove('mdc-text-field__label--float-above');
   }
   genderSelectComponent.selectedIndex = -1;
   // eslint-disable-next-line no-underscore-dangle
@@ -475,13 +475,13 @@ const createProfileList = (profiles, container) => {
     listItem.classList.add('mdc-list-item', 'list-item--left-padding-fix', 'clickable');
     listItem.setAttribute('data-value', item.email);
     // Avatar css classes
-    avatar.classList.add('mdc-list-item__start-detail');
+    avatar.classList.add('mdc-list-item__graphic');
     // Primary node css classes
     primary.classList.add('mdc-list-item__text');
     // Secondary node css classes
     secondary.classList.add('mdc-list-item__secondary-text');
     // Action css classes and attributes
-    actions.classList.add('mdc-list-item__end-detail');
+    actions.classList.add('mdc-list-item__meta');
     // Set classes and attributes for remove action
     removeAction.classList.add('material-icons');
     removeAction.setAttribute('aria-label', 'Remove profile');
@@ -563,7 +563,7 @@ const updateProfileList = async () => {
         checkbox.listen('change', selectProfile);
       }
       const removeActions = [].slice
-        .call(document.querySelectorAll('.mdc-list-item__end-detail > i:last-child'));
+        .call(document.querySelectorAll('.mdc-list-item__meta > i:last-child'));
       // Add ripple effect to all list items
       [].slice.call(document.querySelectorAll('.mdc-list-item'))
         .map(node => new MDCRipple(node));
