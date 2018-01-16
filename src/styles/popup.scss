@@ -1,7 +1,6 @@
 $mdc-theme-primary: #004e7b;
 $mdc-theme-secondary: #c8d724;
 $mdc-theme-background: #fff;
-$mdc-theme--text-primary-on-secondary-light: #004e7b;
 $io-turquoise: #2db8c5;
 
 @import "~roboto-fontface/css/roboto/roboto-fontface.css";
@@ -123,6 +122,12 @@ body {
     /*Fix for tab indicator*/
     position: unset;
     margin: 0;
+  }
+  .mdc-tab {
+    background-color: $mdc-theme-primary !important;
+    &::after {
+      background-color: $mdc-theme-primary !important;
+    }
   }
 }
 
