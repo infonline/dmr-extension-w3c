@@ -19,7 +19,7 @@ import {
   log,
 } from './utils';
 
-import '../styles/popup.css';
+import '../styles/popup.scss';
 
 // Query the components
 const dynamicTabBar = new MDCTabBar(document.querySelector('#toolbar'));

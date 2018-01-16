@@ -1,0 +1,193 @@
+$mdc-theme-primary: #004e7b;
+$mdc-theme-secondary: #c8d724;
+$mdc-theme-background: #fff;
+$mdc-theme--text-primary-on-secondary-light: #004e7b;
+$io-turquoise: #2db8c5;
+
+@import "~roboto-fontface/css/roboto/roboto-fontface.css";
+@import "~material-design-icons/iconfont/material-icons.css";
+@import "~material-components-web/material-components-web";
+@import "~@material/fab/_mixins.scss";
+@import "~@material/button/_mixins.scss";
+@import "~@material/checkbox/_mixins.scss";
+@import "~@material/ripple/_mixins.scss";
+
+a:-webkit-any-link {
+  text-decoration: none !important;
+}
+
+body {
+  /* Remove margin from popup body*/
+  margin: 0;
+  padding: 0;
+}
+// Overwrite ink color for all mdc-buttons
+.mdc-button {
+  @include mdc-button-ink-color($mdc-theme-primary);
+}
+// Overwrite container marked fill color and ripple effect color for all mdc-checkboxes
+.mdc-checkbox {
+  @include mdc-checkbox-container-colors($marked-fill-color: $io-turquoise);
+  @include mdc-states-base-color($io-turquoise);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  padding-bottom: 16px;
+  .dot {
+    margin: 0 4px;
+    border-radius: 50%;
+    border: 1px solid #004e7b;
+    width: 10px;
+    height: 10px;
+  }
+  .dot:last-child {
+    margin-right: 0;
+  }
+  .dot.active {
+    background-color: #004e7b;
+    border-color: #004e7b;
+  }
+}
+
+.fab--absolute {
+  position: fixed !important;
+  bottom: 3rem;
+  right: 1rem;
+  @include mdc-fab-ink-color($mdc-theme-primary);
+}
+
+.form--fields {
+  .form--fields-inputs {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.75rem;
+    text-decoration: inherit;
+    text-transform: inherit;
+  }
+  .form--fields-labels {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.75rem;
+    text-decoration: inherit;
+    text-transform: inherit;
+  }
+}
+
+.form--actions {
+  margin-top: 16px;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-container--column {
+  flex-direction: column;
+}
+
+.flex-container--row {
+  flex-direction: row;
+}
+
+.link--no-styles {
+  text-decoration: none;
+  color: inherit;
+}
+
+.list-item--left-padding-fix {
+  padding-left: 16px;
+}
+
+.logo {
+  margin: 8px;
+}
+
+.margin--x-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modified-toolbar-section {
+  .mdc-tab-bar {
+    /*Fix for tab indicator*/
+    position: unset;
+    margin: 0;
+  }
+}
+
+.profile-list {
+  .mdc-list-item__end-detail {
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+.profile-list {
+  .mdc-list-item__end-detail {
+    i {
+      cursor: pointer;
+    }
+  }
+  .clickable {
+    cursor: pointer;
+  }
+}
+
+.mdc-text-field--box {
+  .mdc-text-field__label {
+    bottom: 8px !important;
+  }
+}
+.panels {
+  padding: 8px;
+  width: 400px;
+  height: 400px;
+}
+.panel {
+  display: none;
+}
+.panel.active {
+  display: block;
+}
+
+#profile-form {
+  padding: 16px;
+}
+
+.profile-view {
+  display: none;
+}
+
+.profile-view--active {
+  display: block;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.text--center {
+  text-align: center;
+}
+
+.visible {
+  display: inherit;
+}
+
+.not-visible {
+  display: none;
+}
