@@ -1,3 +1,14 @@
+<a name="0.7.1"></a>
+## [0.7.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.7.0...v0.7.1) (2018-01-16)
+
+
+### Bug Fixes
+
+* **scripts:** fix regressions coming with mdc component update 0.28.0 ([cbcfca9](https://vgitbn003.infon/IAM/iam-web-extension/commits/cbcfca9))
+* **styles:** overwrite background color for mdc tabs for edge browsers ([5fbd6f5](https://vgitbn003.infon/IAM/iam-web-extension/commits/5fbd6f5))
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.6.0...v0.7.0) (2018-01-16)
 
