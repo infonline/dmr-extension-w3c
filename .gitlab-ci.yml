@@ -1,4 +1,4 @@
-image: node:7.9.0-alpine
+image: node:8
 
 stages:
   - install
