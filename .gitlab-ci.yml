@@ -1,0 +1,33 @@
+image: node:7.9.0-alpine
+
+stages:
+  - install
+  - build
+
+install:
+  stage: install
+  only:
+    - master
+  script:
+    - 'yarn install'
+  artifacts:
+    paths:
+      - 'node_modules/'
+    expire_in: 1 day
+
+build:
+  stage: build
+  only:
+    - master
+  dependencies:
+    - install
+  script:
+    - 'node ./build/build.js --vendor chrome --env production --pack'
+    - 'node ./build/build.js --vendor edge --env production --pack'
+    - 'node ./build/build.js --vendor firefox --env production --pack'
+    - 'node ./build/build.js --vendor opera --env production --pack'
+  artifacts:
+    paths:
+      - 'dist/'
+      - 'packages/'
+    expire_in: 1 week
