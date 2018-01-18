@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+const args = require('../lib/args');
 const config = require('../config');
 const utils = require('../lib/utils');
 const esLintFriendlyFormatter = require('eslint-friendly-formatter');
@@ -53,4 +54,5 @@ module.exports = {
       loader: 'html-loader',
     }],
   },
+  stats: args.verbose ? 'normal' : 'none',
 };

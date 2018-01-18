@@ -2,6 +2,7 @@
 /**
  * This module contains all build related shared functions and logic
  */
+const args = require('./args');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
@@ -17,7 +18,6 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 const utils = require('../lib/utils');
 const webpack = require('webpack');
-const ZipPlugin = require('zip-webpack-plugin');
 
 const VENDOR_BROWSER_FULL_NAMES = {
   chrome: 'Google Chrome',
@@ -149,7 +149,10 @@ const transformEdgeAssets = (content, contentPath) => {
 const createWebpackPlugins = (options) => {
   let basePlugins = [
     // clean the build folder
-    new CleanWebpackPlugin(utils.extensionPath(), { allowExternal: true }),
+    new CleanWebpackPlugin(utils.extensionPath(), {
+      allowExternal: true,
+      verbose: args.verbose,
+    }),
     new webpack.DefinePlugin({
       API_META_DATA: options.apiMetaData,
       ENV: JSON.stringify(config.env),
@@ -213,13 +216,6 @@ const createWebpackPlugins = (options) => {
       to: `${config.extensionRoot}/Resources/[folder]/resources.resjson`,
       transform: transformEdgeAssets,
     }]));
-  }
-  // Zip all assets when pack option is true
-  if (options.pack) {
-    basePlugins.push(new ZipPlugin({
-      path: `../../packages/${options.vendor}`,
-      filename: `IMAREX-${options.version}.zip`,
-    }));
   }
   // Compress all assets when gzip is on
   if (config.gzip) {
