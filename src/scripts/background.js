@@ -153,7 +153,7 @@ const onLoaded = async (sender) => {
             cn: 'de',
             st: 'imarexdata',
             cp: 'profile',
-            url: url.origin,
+            u4: url.href,
             usr: store.userId,
             tab: tabId,
             soz: JSON.stringify(profile),
