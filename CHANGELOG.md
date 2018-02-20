@@ -1,3 +1,18 @@
+<a name="0.8.0"></a>
+# [0.8.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.7.1...v0.8.0) (2018-02-20)
+
+
+### Bug Fixes
+
+* **scripts:** change url property to u4 and transmit full href of the current website ([373880a](https://vgitbn003.infon/IAM/iam-web-extension/commits/373880a))
+
+
+### Features
+
+* **src:** make extension incognito and submit full url to the INFOnline backend ([99fcff9](https://vgitbn003.infon/IAM/iam-web-extension/commits/99fcff9)), closes [#2](https://vgitbn003.infon/IAM/iam-web-extension/issues/2) [#1](https://vgitbn003.infon/IAM/iam-web-extension/issues/1)
+
+
+
 <a name="0.7.1"></a>
 ## [0.7.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.7.0...v0.7.1) (2018-01-16)
 
