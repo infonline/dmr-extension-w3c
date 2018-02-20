@@ -1,4 +1,5 @@
 /* eslint-env browser */
+/* global iom */
 // Import web extension driver
 /**
  * Web extension driver
@@ -19,7 +20,7 @@ const count = (data) => {
     // Include the document referrer
     result.ref = document.referrer;
     // Count
-    window.iom.c(result, 1);
+    iom.c(result, 1);
   } catch (err) {
     // Error handling
     throw err;
@@ -55,7 +56,7 @@ const onMessage = async (message) => {
   } catch (err) {
     // In case of error log it and signalize the failure to background
     // script
-    log('err', err);
+    log('error', err);
     throw err;
   }
 };
