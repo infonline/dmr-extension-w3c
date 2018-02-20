@@ -12,7 +12,6 @@ const edge = require('./edge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const glob = require('glob');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MinifyJSPlugin = require('babel-minify-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
@@ -176,13 +175,6 @@ const createWebpackPlugins = (options) => {
       from: 'src/images',
       to: 'images',
     }]),
-    // Process popup html
-    new HtmlWebpackPlugin({
-      template: 'src/pages/popup.html',
-      env: config.env,
-      filename: 'pages/popup.html',
-      chunks: ['popup', 'manifest'],
-    }),
     new FriendlyErrorsWebpackPlugin(),
   ];
   // Extend base plugins with production build relevant
