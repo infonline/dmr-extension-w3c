@@ -11,8 +11,8 @@ const esLintFriendlyFormatter = require('eslint-friendly-formatter');
  */
 module.exports = {
   entry: {
-    background: './src/scripts/background.js',
-    content: './src/scripts/content.js',
+    background: './src/w3c/scripts/background.js',
+    content: './src/w3c/scripts/content.js',
   },
   output: {
     path: config.output,

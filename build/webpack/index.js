@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const config = require('../config');
 const merge = require('webpack-merge');
-const baseWebpackConfig = require('./base');
+const baseWebpackConfig = require('./w3c');
 const utils = require('../lib/utils');
 const pkg = require('../../package.json');
 

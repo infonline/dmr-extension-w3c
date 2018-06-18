@@ -167,12 +167,23 @@ const createWebpackPlugins = (options) => {
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([{
-      from: 'src/manifest.json',
+      from: 'src/w3c/manifest.json',
+      transform: (content) => {
+        // The edge browser the persistent property in the background configuration is mandatory
+        // for the other browser it's not. So we have to transform the manifest.json in the copy
+        // process.
+        if (options.vendor === 'edge') {
+          const manifest = JSON.parse(content.toString());
+          manifest.background.persistent = true;
+          return JSON.stringify(manifest);
+        }
+        return content.toString();
+      },
     }, {
-      from: 'src/_locales',
+      from: 'src/w3c/_locales',
       to: '_locales',
     }, {
-      from: 'src/images',
+      from: 'src/w3c/images',
       to: 'images',
     }]),
     new FriendlyErrorsWebpackPlugin(),
@@ -204,7 +215,7 @@ const createWebpackPlugins = (options) => {
     // Push a copy plugin instance to the base plugins for transforming all locale messages in the
     // _locales folder to resources.resjson files
     basePlugins.push(new CopyWebpackPlugin([{
-      from: 'src/_locales/**/messages.json',
+      from: 'src/w3c/_locales/**/messages.json',
       to: `${config.extensionRoot}/Resources/[folder]/resources.resjson`,
       transform: transformEdgeAssets,
     }]));

@@ -28,7 +28,7 @@ const SUPPORTED_I18N_CODES = JSON.parse(fs.readFileSync(path
  * @returns {Object}
  */
 const getExtensionManifest = () => JSON.parse(fs.readFileSync(path
-  .resolve(__dirname, '../../src/manifest.json')).toString());
+  .resolve(__dirname, '../../src/w3c/manifest.json')).toString());
 /**
  * Extracts the permissions from the manifest file and will map them to the edge capabilities (XML).
  *
@@ -71,13 +71,13 @@ const extractCapabilities = (manifest) => {
  */
 const getExtensionLocalesList = () => {
   // Resolve _locales directory
-  const localesPath = path.resolve(__dirname, '../../', 'src/_locales');
+  const localesPath = path.resolve(__dirname, '../../', 'src/w3c/_locales');
   // Return a collection of i18n keys which are a image of the folder structure hosted under
   // _locales in the source folder. Because we cannot guarantee that all objects are directories we
   // have to check this and filter them out
   return fs.readdirSync(localesPath)
     .filter(folder => fs.statSync(path
-      .resolve(__dirname, '../../', 'src/_locales', folder)).isDirectory());
+      .resolve(__dirname, '../../', 'src/w3c/_locales', folder)).isDirectory());
 };
 /**
  * Extracts the version from web extension manifest and will pad it with 0's on the left if it
@@ -220,7 +220,7 @@ const replaceEdgeManifestValues = (file) => {
       return Buffer.from(replacedContent);
     }
     throw new Error(`Cannot locate manifest.json in ${path
-      .resolve(__dirname, '../../src/manifest.json')}!`);
+      .resolve(__dirname, '../../src/w3c/manifest.json')}!`);
   } catch (err) {
     throw err;
   }
