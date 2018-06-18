@@ -141,7 +141,7 @@ const onLoaded = async (sender) => {
           // This is the actual information sent to INFOnline
           result: {
             cn: 'de',
-            st: 'imarexdata',
+            st: 'imarex',
             cp: 'profile',
             u4: url.href,
             usr: store.userId,
