@@ -1,3 +1,13 @@
+<a name="0.9.1"></a>
+## [0.9.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.9.0...v0.9.1) (2018-06-19)
+
+
+### Bug Fixes
+
+* **build:** switch back to babel plugins and remove sass preprocessor from dependencies ([9cfae65](https://vgitbn003.infon/IAM/iam-web-extension/commits/9cfae65))
+
+
+
 <a name="0.9.0"></a>
 # [0.9.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.8.0...v0.9.0) (2018-06-18)
 
