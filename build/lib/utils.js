@@ -11,7 +11,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const edge = require('./edge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const glob = require('glob');
 const MinifyJSPlugin = require('babel-minify-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
@@ -24,11 +23,6 @@ const VENDOR_BROWSER_FULL_NAMES = {
   firefox: 'Firefox',
   opera: 'Opera',
 };
-
-const includedMDCSassPaths = ['../../node_modules', '../../node_modules/@material/*']
-  .map(d => path.join(__dirname, d))
-  .map(g => glob.sync(g))
-  .reduce((a, c) => a.concat(c), []);
 
 /**
  * Convenient method for resolving absolute paths relative to CWD
@@ -85,13 +79,6 @@ const createLoaders = (options) => {
   return {
     css: generateLoaders(),
     less: generateLoaders('less'),
-    sass: generateLoaders('sass', {
-      indentedSyntax: true,
-      includePaths: includedMDCSassPaths,
-    }),
-    scss: generateLoaders('sass', {
-      includePaths: includedMDCSassPaths,
-    }),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus'),
   };

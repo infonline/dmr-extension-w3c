@@ -5,11 +5,7 @@
     }]
   ],
   "plugins": [
-    "transform-runtime",
-    ["transform-builtin-extend", {
-      "globals": [
-        "WeakMap"
-      ]
-    }]
+    "@babel/transform-runtime",
+    "@babel/transform-classes"
   ]
 }
