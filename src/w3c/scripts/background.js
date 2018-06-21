@@ -1,5 +1,5 @@
 /* eslint-env browser */
-/* global IAM_SCRIPT_URL */
+/* global IAM_SCRIPT_URL, IAM_PANEL_EXCHANGE_URL */
 // Import web extension driver
 /**
  * Web extension driver
@@ -10,7 +10,7 @@ import {
   log,
   uuidv4,
   fetch,
-
+  getQueryParameterByName,
 } from './utils';
 /**
  * The default URL filter for navigation events
@@ -42,6 +42,7 @@ const configureStore = async () => {
     if (!results.userId) {
       results.userId = uuidv4();
     }
+    // Define keys for panel ID and vendor
     if (!results.stats) {
       results.stats = {
         host: {},
@@ -144,8 +145,10 @@ const onLoaded = async (sender) => {
             st: 'imarex',
             cp: 'profile',
             u4: url.href,
-            usr: store.userId,
-            tab: tabId,
+            uid: store.userId,
+            pid: store.panelId || '',
+            pvr: store.panelVendor || '',
+            tid: tabId,
           },
         };
         // Send count message to current tab
@@ -185,7 +188,8 @@ const committed = async (sender) => {
       const {
         tabId,
         transitionType,
-      } = 'sender';
+        url,
+      } = sender;
       let {
         transitionQualifiers,
       } = sender;
@@ -211,7 +215,22 @@ const committed = async (sender) => {
         results.stats.type[transitionType] = results.stats.type[transitionType] || 0;
         results.stats.type[transitionType] += 1;
       }
-      // Persist the updated stats.
+      // Check for iam panel exchange url and exchange panel id and vendor transmitted via query
+      // parameters with imarex. The extension will persistent panel id and vendor via local storage
+      if (url) {
+        if (url.includes(IAM_PANEL_EXCHANGE_URL)) {
+          // We are on the IAM <-> Panel Vendor exchange page and have to extract parameters from
+          // the URL query part
+          const panelId = getQueryParameterByName('pid');
+          const panelVendor = getQueryParameterByName('pvr');
+          // Save panel id and vendor in local storage
+          if (panelId && panelVendor) {
+            results.panelId = panelId;
+            results.panelVendor = panelVendor;
+          }
+        }
+      }
+      // Persist the updated stats and imarex settings
       await driver.storage.local.set(results);
     }
   } catch (err) {

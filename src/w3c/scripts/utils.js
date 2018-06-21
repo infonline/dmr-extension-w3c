@@ -45,3 +45,18 @@ export const fetch = (url, options = { method: 'get' }) => new Promise((resolve,
   request.open(options.method, url, true);
   request.send();
 });
+/**
+ * Extracts a query parameter from a given url and returns the decoded value from it
+ *
+ * @param {String} name - Name of the query parameter
+ * @param {String} [url] - URI of current browsed page
+ * @returns {*}
+ */
+export const getQueryParameterByName = (name, url = window.location.href) => {
+  const localName = name.replace(/[[]]/g, '\\$&');
+  const regex = new RegExp(`[?&]${localName}(=([^&#]*)|&|#|$)`);
+  const results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+};
