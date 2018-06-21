@@ -62,7 +62,7 @@
 
 /* Begin PBXFileReference section */
 		5DB357F420DB7B89000CA7F4 /* imarex.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = imarex.js; sourceTree = "<group>"; };
-		5DB357F820DB7E1B000CA7F4 /* script.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
+		5DB357F820DB7E1B000CA7F4 /* script.js */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.javascript; lineEnding = 0; path = script.js; sourceTree = "<group>"; tabWidth = 2; };
 		5DB357FC20DB8EBB000CA7F4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5DF05F8D20D9360B0036FFD5 /* IAM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IAM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF05F9020D9360B0036FFD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 		5DF05FB020D9360B0036FFD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DF05FC020D936210036FFD5 /* IMAREX.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IMAREX.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF05FC220D936210036FFD5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		5DF05FC520D936210036FFD5 /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
+		5DF05FC520D936210036FFD5 /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SafariExtensionHandler.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5DF05FCA20D936210036FFD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
 		5DF05FCC20D936210036FFD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DF05FD120D936210036FFD5 /* IMAREX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IMAREX.entitlements; sourceTree = "<group>"; };
@@ -657,6 +657,7 @@
 				DEVELOPMENT_TEAM = 5FA5B56AXE;
 				INFOPLIST_FILE = IMAREX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = INFOnline.IAM.IMAREX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -674,6 +675,7 @@
 				DEVELOPMENT_TEAM = 5FA5B56AXE;
 				INFOPLIST_FILE = IMAREX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = INFOnline.IAM.IMAREX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
