@@ -29,14 +29,15 @@ Run ```$ node ./build/build.js --watch``` and load the ```dist```-directory into
     $ node ./build/build.js
 
 
-| Option         | Description                                                                                           |
-|----------------|-------------------------------------------------------------------------------------------------------|
-| `--env`        | Specifies the target environment (if production it will minify all source code) Default: 'development'|
-| `--watch`      | Watches all source code assets and will recycle the build process on file change                      |
-| `--vendor`     | Compile the extension for different vendors (chrome, firefox, opera)  Default: chrome                 |
-| `--script-uri` | Compile the extension with different INFOnline measurement script URI                                 |
-| `--sourcemaps` | Force the creation of sourcemaps. Default: `env ==!production`                                        |
-| `--pack`       | Will zip the built extension on the end and will copy it over the packaging directory                 |
+| Option                  | Description                                                                                           |
+|-------------------------|-------------------------------------------------------------------------------------------------------|
+| `--env`                 | Specifies the target environment (if production it will minify all source code) Default: 'development'|
+| `--watch`               | Watches all source code assets and will recycle the build process on file change                      |
+| `--vendor`              | Compile the extension for different vendors (chrome, firefox, opera)  Default: chrome                 |
+| `--script-uri`          | Compile the extension with different INFOnline measurement script URI                                 |
+| `--panel-exchange-uri`  | Compile the extension with a different IAM panel exchange URI                                         |
+| `--sourcemaps`          | Force the creation of sourcemaps. Default: `env ==!production`                                        |
+| `--pack`                | Will zip the built extension on the end and will copy it over the packaging directory                 |
 
 
 ### Packaging
