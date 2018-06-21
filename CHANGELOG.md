@@ -1,3 +1,15 @@
+<a name="0.10.0"></a>
+# [0.10.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.9.1...v0.10.0) (2018-06-21)
+
+
+### Features
+
+* **src:** add first version of safari app extension ([addc857](https://vgitbn003.infon/IAM/iam-web-extension/commits/addc857))
+* **src:** implement IAM panel exchange process via URL query parameters ([fb65c24](https://vgitbn003.infon/IAM/iam-web-extension/commits/fb65c24))
+* **src:** implement IAM panel exchange process via URL query parameters for the safari app extension ([34ac75d](https://vgitbn003.infon/IAM/iam-web-extension/commits/34ac75d))
+
+
+
 <a name="0.9.1"></a>
 ## [0.9.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.9.0...v0.9.1) (2018-06-19)
 
