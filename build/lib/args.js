@@ -29,6 +29,11 @@ const args = yargs
     default: 'https://script.ioam.de/iam.js',
     describe: 'Compile the extension with different INFOnline measurement script URI',
   })
+  .option('panel-exchange-uri', {
+    string: true,
+    default: 'https://www.infonline.de/imarex/exchange',
+    describe: 'Compile the extension with different IAM panel exchange url',
+  })
   .option('sourcemaps', {
     describe: 'Force the creation of source maps',
   })

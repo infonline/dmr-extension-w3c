@@ -10,6 +10,7 @@ const pkg = require('../../package.json');
 
 const apiMetaData = JSON.stringify(fs.readFileSync(path.join(__dirname, '../assets/shared/apiMetaData.json'), 'utf8'));
 const iamScriptUrl = args.scriptUri;
+const iamPanelExchangeUrl = args.panelExchangeUri;
 const namespace = args.vendor === 'chrome' || args.vendor === 'opera' ? 'chrome' : 'browser';
 const { vendor, pack } = args;
 const vendorFullName = utils.multiVendorBrowserFull(args.vendor);
@@ -23,6 +24,7 @@ module.exports = merge(baseWebpackConfig, {
   plugins: utils.createWebpackPlugins({
     apiMetaData,
     iamScriptUrl,
+    iamPanelExchangeUrl,
     namespace,
     pack,
     vendor,

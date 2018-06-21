@@ -143,6 +143,7 @@ const createWebpackPlugins = (options) => {
       API_META_DATA: options.apiMetaData,
       ENV: JSON.stringify(config.env),
       IAM_SCRIPT_URL: JSON.stringify(options.iamScriptUrl),
+      IAM_PANEL_EXCHANGE_URL: JSON.stringify(options.iamPanelExchangeUrl),
       NAMESPACE: JSON.stringify(options.namespace),
       VENDOR: JSON.stringify(options.vendor),
       VENDOR_FULL_NAME: JSON.stringify(options.vendorFullName),
