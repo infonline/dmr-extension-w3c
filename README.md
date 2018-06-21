@@ -70,9 +70,9 @@ Please refer to [Semver](https://semver.org/) for more details on semantic versi
 |-------|---------------------|
 |Chrome |running              |
 |Edge   |running              |
-|Firefox|not running*         |
+|Firefox|running              |
 |Opera  |running              |
-|Safari |not supported yet**  |
+|Safari |running              |
 
 
 (*) Currently the firefox will emit an error when injecting the iam.js via extension runtime into a running tab. A detailed error report and a possible fix are mentioned [here](/docs/FIREFOX.md).
