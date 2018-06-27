@@ -1,5 +1,5 @@
 /* eslint-env browser */
-/* global safari, iom */
+/* global safari, iom, ENV, IAM_PANEL_EXCHANGE_URL, IAM_SCRIPT_URL */
 /**
  * Utils factory. We will separate the utility code from the content script to stay clean
  * and modular
@@ -30,11 +30,7 @@ const utilities = (function utils(document, window) {
  */
 (function init(document, window, safari, utils) {
   // Local environment (ENV='development' allows logging to console)
-  const ENV = 'development';
-  // Local IAM script url
-  const IAM_SCRIPT_URL = 'https://script.ioam.de/iam.js';
-  // The IAM <-> Panel Vendor exchange callback URL
-  const IAM_PANEL_EXCHANGE_URL = 'https://www.infonline.de/imarex/exchange';
+  const env = ENV;
   // Define a mutable variable for the interval
   let scriptLoaded;
   /**
@@ -69,12 +65,12 @@ const utilities = (function utils(document, window) {
         // we need (user id, panel id and vendor)
         count(event);
       } else if (event.name === 'configure') {
-        if (ENV === 'development') {
+        if (env === 'development') {
           console.info('Panel id and panel vendor successfully saved to app extension');
         }
       }
     } else if (event.message.state === 'error') {
-      if (ENV === 'development') {
+      if (env === 'development') {
         console.error(event.message.error);
       }
     }
@@ -127,5 +123,5 @@ const utilities = (function utils(document, window) {
    */
   safari.self.addEventListener('message', handler);
   // Load iam.js
-  // loadScript();
+  loadScript();
 }(document, window, safari, utilities));

@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5DB357F620DB7B89000CA7F4 /* imarex.js in Resources */ = {isa = PBXBuildFile; fileRef = 5DB357F420DB7B89000CA7F4 /* imarex.js */; };
-		5DB357F920DB7E1B000CA7F4 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 5DB357F820DB7E1B000CA7F4 /* script.js */; };
 		5DB357FD20DB8EBB000CA7F4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DB357FC20DB8EBB000CA7F4 /* Images.xcassets */; };
 		5DF05F9120D9360B0036FFD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF05F9020D9360B0036FFD5 /* AppDelegate.swift */; };
 		5DF05F9320D9360B0036FFD5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF05F9220D9360B0036FFD5 /* ViewController.swift */; };
@@ -20,6 +18,7 @@
 		5DF05FC620D936210036FFD5 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF05FC520D936210036FFD5 /* SafariExtensionHandler.swift */; };
 		5DF05FCB20D936210036FFD5 /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DF05FC920D936210036FFD5 /* SafariExtensionViewController.xib */; };
 		5DF05FD420D936210036FFD5 /* IMAREX.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5DF05FC020D936210036FFD5 /* IMAREX.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5DF122F420E39F620058DBEB /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 5DF122F320E39F620058DBEB /* content.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,8 +60,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5DB357F420DB7B89000CA7F4 /* imarex.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = imarex.js; sourceTree = "<group>"; };
-		5DB357F820DB7E1B000CA7F4 /* script.js */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.javascript; lineEnding = 0; path = script.js; sourceTree = "<group>"; tabWidth = 2; };
 		5DB357FC20DB8EBB000CA7F4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5DF05F8D20D9360B0036FFD5 /* IAM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IAM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF05F9020D9360B0036FFD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +80,7 @@
 		5DF05FCA20D936210036FFD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
 		5DF05FCC20D936210036FFD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DF05FD120D936210036FFD5 /* IMAREX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IMAREX.entitlements; sourceTree = "<group>"; };
+		5DF122F320E39F620058DBEB /* content.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = content.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,8 +181,7 @@
 		5DF05FC420D936210036FFD5 /* IMAREX */ = {
 			isa = PBXGroup;
 			children = (
-				5DB357F420DB7B89000CA7F4 /* imarex.js */,
-				5DB357F820DB7E1B000CA7F4 /* script.js */,
+				5DF122F320E39F620058DBEB /* content.js */,
 				5DF05FC520D936210036FFD5 /* SafariExtensionHandler.swift */,
 				5DF05FC920D936210036FFD5 /* SafariExtensionViewController.xib */,
 				5DF05FCC20D936210036FFD5 /* Info.plist */,
@@ -358,9 +355,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DB357F920DB7E1B000CA7F4 /* script.js in Resources */,
+				5DF122F420E39F620058DBEB /* content.js in Resources */,
 				5DB357FD20DB8EBB000CA7F4 /* Images.xcassets in Resources */,
-				5DB357F620DB7B89000CA7F4 /* imarex.js in Resources */,
 				5DF05FCB20D936210036FFD5 /* SafariExtensionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

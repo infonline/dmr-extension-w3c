@@ -38,11 +38,7 @@
 		<array>
 			<dict>
 				<key>Script</key>
-				<string>imarex.js</string>
-			</dict>
-			<dict>
-				<key>Script</key>
-				<string>script.js</string>
+				<string>content.js</string>
 			</dict>
 		</array>
 		<key>SFSafariWebsiteAccess</key>
