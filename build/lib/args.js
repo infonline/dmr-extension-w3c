@@ -22,7 +22,7 @@ const args = yargs
     string: true,
     default: 'chrome',
     describe: 'Compile the extension for different vendors',
-    choices: ['chrome', 'edge', 'firefox', 'opera'],
+    choices: ['chrome', 'edge', 'firefox', 'opera', 'safari'],
   })
   .option('script-uri', {
     string: true,

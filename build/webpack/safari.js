@@ -3,6 +3,22 @@ const args = require('../lib/args');
 const config = require('../config');
 const utils = require('../lib/utils');
 const esLintFriendlyFormatter = require('eslint-friendly-formatter');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const MinifyJSPlugin = require('babel-minify-webpack-plugin');
+const webpack = require('webpack');
+
+const basePlugins = [
+  new webpack.DefinePlugin({
+    ENV: JSON.stringify(config.env),
+    IAM_SCRIPT_URL: JSON.stringify(args.scriptUri),
+    IAM_PANEL_EXCHANGE_URL: JSON.stringify(args.panelExchangeUri),
+  }),
+  new FriendlyErrorsWebpackPlugin(),
+];
+
+if (config.env === 'production') {
+  basePlugins.push(new MinifyJSPlugin());
+}
 
 /**
  * Webpack base configuration
@@ -11,12 +27,11 @@ const esLintFriendlyFormatter = require('eslint-friendly-formatter');
  */
 module.exports = {
   entry: {
-    background: './src/safari/scripts/background.js',
-    content: './src/safari/scripts/content.js',
+    content: './.temp/safari/IAM/IMAREX/content.js',
   },
   output: {
     path: config.output,
-    filename: 'scripts/[name].js',
+    filename: '[name].js',
     publicPath: config.assetsPublicPath,
   },
   module: {
@@ -54,4 +69,5 @@ module.exports = {
     }],
   },
   stats: args.verbose ? 'normal' : 'none',
+  plugins: basePlugins,
 };

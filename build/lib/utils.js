@@ -10,6 +10,7 @@ const config = require('../config');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const edge = require('./edge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const fsPromise = require('fs').promises;
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const MinifyJSPlugin = require('babel-minify-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
@@ -247,6 +248,66 @@ const getSourcemapType = () => {
   return false;
 };
 
+/**
+ * Copies files async from target to source
+ *
+ * @param {String} source - Source path
+ * @param {String} target - Target path
+ * @returns {Promise<void | * | undefined>}
+ */
+const copyFiles = async (source, target) => {
+  try {
+    let targetFile = target;
+    try {
+      await fsPromise.lstat(target);
+    } catch (err) {
+      await fsPromise.mkdir(target);
+    }
+    const stats = await fsPromise.lstat(target);
+    if (stats && stats.isDirectory()) {
+      targetFile = path.join(target, path.basename(source));
+    }
+    const sourceFile = await fsPromise.readFile(source);
+    return fsPromise.writeFile(targetFile, sourceFile);
+  } catch (err) {
+    throw err;
+  }
+};
+/**
+ * Copies folder and their content async and recursively from a given target to a given source
+ *
+ * @param {String} source - Source path
+ * @param {String} target - Target path
+ * @returns {Promise<*>}
+ */
+const copyFolderRecursive = async (source, target) => {
+  try {
+    const targetFolder = path.join(target, path.basename(source));
+    // Check if target folder exists. When not create target folder
+    try {
+      await fsPromise.lstat(target);
+    } catch (err) {
+      await fsPromise.mkdir(target);
+    }
+    // Try to copy
+    const sourceStats = await fsPromise.lstat(source);
+    if (sourceStats && sourceStats.isDirectory()) {
+      const files = await fsPromise.readdir(source);
+      return files.forEach(async (file) => {
+        const currentSource = path.join(source, file);
+        const currentSourceStats = await fsPromise.lstat(currentSource);
+        if (currentSourceStats && currentSourceStats.isDirectory()) {
+          return copyFolderRecursive(currentSource, targetFolder);
+        }
+        return copyFiles(currentSource, targetFolder);
+      });
+    }
+    throw new Error(`Source ${source} does not exits`);
+  } catch (err) {
+    throw err;
+  }
+};
+
 // Public export
 exports.createStyleLoaders = createStyleLoaders;
 exports.extensionPath = extensionPath;
@@ -255,3 +316,5 @@ exports.createWebpackPlugins = createWebpackPlugins;
 exports.multiVendorBrowserFull = multiVendorBrowserFull;
 exports.getSourcemapType = getSourcemapType;
 exports.transformEdgeAssets = transformEdgeAssets;
+exports.copyFolderRecursive = copyFolderRecursive;
+exports.copyFiles = copyFiles;

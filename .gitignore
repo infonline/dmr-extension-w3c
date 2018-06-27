@@ -7,3 +7,4 @@ dist/
 packages/
 *.swp
 /src/safari/IAM/IAM.xcodeproj/xcuserdata/joswald.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+.tmp/
