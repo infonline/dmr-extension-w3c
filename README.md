@@ -22,6 +22,17 @@ or
 
 Run ```$ node ./build/build.js --watch``` and load the ```dist```-directory into chrome.
 
+### Requirements
+
+* nodejs >= 8.0.0
+* npm >= 5.0.0
+* yarn >= 1.0.0
+
+**For safari extension:**
+
+* xcode >= 9.0.0
+* swift >= 4.0.0
+
 ## CLI
 
 ### Build CLI
@@ -39,6 +50,8 @@ Run ```$ node ./build/build.js --watch``` and load the ```dist```-directory into
 | `--sourcemaps`          | Force the creation of sourcemaps. Default: `env ==!production`                                        |
 | `--pack`                | Will zip the built extension on the end and will copy it over the packaging directory                 |
 
+
+**Notice:** It's currently not possible to build the safari extension via CI. The extension can be build locally with an Mac computer and install xcode build tools.
 
 ### Packaging
 
