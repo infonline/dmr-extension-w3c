@@ -1,3 +1,13 @@
+<a name="0.10.2"></a>
+## [0.10.2](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.10.1...v0.10.2) (2018-07-17)
+
+
+### Features
+
+* **logo:** add new logo to all assets ([d2b42f5](https://vgitbn003.infon/IAM/iam-web-extension/commits/d2b42f5))
+
+
+
 <a name="0.10.1"></a>
 ## [0.10.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.9.1...v0.10.1) (2018-06-27)
 
