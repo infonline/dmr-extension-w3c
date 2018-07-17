@@ -12,7 +12,7 @@
   <Properties>
     <DisplayName>{DisplayName}</DisplayName>
     <PublisherDisplayName>INSERT-YOUR-PACKAGE-PROPERTIES-PUBLISHERDISPLAYNAME-HERE</PublisherDisplayName>
-    <Logo>Assets\io150.png</Logo>
+    <Logo>Assets\imarex150.png</Logo>
   </Properties>
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.15063.0" MaxVersionTested="10.0.15063.0" />
@@ -25,8 +25,8 @@
       <uap:VisualElements
         AppListEntry="none"
         DisplayName="{DisplayName}"
-        Square150x150Logo="Assets\io150.png"
-        Square44x44Logo="Assets\io44.png"
+        Square150x150Logo="Assets\imarex150.png"
+        Square44x44Logo="Assets\imarex44.png"
         Description="{Description}"
         BackgroundColor="transparent">
       </uap:VisualElements>
