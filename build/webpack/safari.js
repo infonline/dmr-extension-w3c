@@ -27,7 +27,7 @@ if (config.env === 'production') {
  */
 module.exports = {
   entry: {
-    content: './.temp/safari/IAM/IMAREX/content.js',
+    content: './.temp/safari/IMAREX/content.js',
   },
   output: {
     path: config.output,
