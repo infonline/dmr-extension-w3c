@@ -1,3 +1,13 @@
+<a name="0.11.1"></a>
+## [0.11.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.11.0...v0.11.1) (2018-09-06)
+
+
+### Bug Fixes
+
+* **build:** add safe parser to css optimization because the old option is deprecated ([44935f2](https://vgitbn003.infon/IAM/iam-web-extension/commits/44935f2))
+
+
+
 <a name="0.11.0"></a>
 # [0.11.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.10.2...v0.11.0) (2018-09-06)
 
