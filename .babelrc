@@ -5,6 +5,7 @@
     }]
   ],
   "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
     "@babel/transform-runtime",
     "@babel/transform-classes"
   ]
