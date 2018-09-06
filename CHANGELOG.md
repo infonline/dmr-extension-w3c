@@ -1,3 +1,13 @@
+<a name="0.11.0"></a>
+# [0.11.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.10.2...v0.11.0) (2018-09-06)
+
+
+### Features
+
+* **src:** add multiple features to the w3c compliant web extension ([17e350a](https://vgitbn003.infon/IAM/iam-web-extension/commits/17e350a))
+
+
+
 <a name="0.10.2"></a>
 ## [0.10.2](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.10.1...v0.10.2) (2018-07-17)
 
