@@ -9,4 +9,6 @@ module.exports = {
   sourcemaps: true,
   gzip: false,
   report: args.report,
+  showEslintErrorsInOverlay: true,
+  cacheBusting: true,
 };

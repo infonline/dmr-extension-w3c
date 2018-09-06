@@ -2,7 +2,8 @@
 const args = require('../lib/args');
 const config = require('../config');
 const utils = require('../lib/utils');
-const esLintFriendlyFormatter = require('eslint-friendly-formatter');
+const vueLoaderConfig = require('./vue');
+
 
 /**
  * Webpack base configuration
@@ -10,48 +11,52 @@ const esLintFriendlyFormatter = require('eslint-friendly-formatter');
  * @type {Object}
  */
 module.exports = {
+  mode: args.env,
   entry: {
     background: './src/w3c/scripts/background.js',
     content: './src/w3c/scripts/content.js',
+    popup: './src/w3c/popup/popup.js',
   },
   output: {
     path: config.output,
     filename: 'scripts/[name].js',
+    chunkFilename: 'scripts/popup.chunk.[id].js',
     publicPath: config.assetsPublicPath,
   },
+  resolve: {
+    extensions: ['.js', '.vue'],
+  },
   module: {
-    rules: [{
-      test: /\.js$/,
-      loader: 'eslint-loader',
-      enforce: 'pre',
-      include: [utils.resolve('src'), utils.resolve('test')],
-      options: {
-        formatter: esLintFriendlyFormatter,
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: vueLoaderConfig,
       },
-    }, {
-      test: /\.js$/,
-      loader: 'babel-loader',
-      include: [utils.resolve('src'), utils.resolve('test')],
-    }, {
-      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      loader: 'url-loader',
-      exclude: [/fonts/],
-      options: {
-        limit: 10000,
-        name: 'images/[name].[ext]',
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [utils.resolve('src'), utils.resolve('test'), utils.resolve('node_modules/webpack-dev-server/client')],
       },
-    }, {
-      test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/,
-      loader: 'url-loader',
-      exclude: [/images/],
-      options: {
-        limit: 10000,
-        name: 'fonts/[name].[ext]',
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        exclude: [/fonts/],
+        options: {
+          limit: 10000,
+          name: 'images/[name].[ext]',
+        },
       },
-    }, {
-      test: /\.html$/,
-      loader: 'html-loader',
-    }],
+      {
+        test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        exclude: [/images/],
+        options: {
+          limit: 10000,
+          name: 'fonts/[name].[ext]',
+        },
+      },
+    ],
   },
   stats: args.verbose ? 'normal' : 'none',
 };

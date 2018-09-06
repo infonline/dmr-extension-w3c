@@ -2,21 +2,21 @@
 /**
  * This module contains all build related shared functions and logic
  */
-const args = require('./args');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
-const config = require('../config');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const edge = require('./edge');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fsPromise = require('fs').promises;
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const MinifyJSPlugin = require('babel-minify-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
-const utils = require('../lib/utils');
+const { VueLoaderPlugin } = require('vue-loader');
 const webpack = require('webpack');
+const args = require('./args');
+const edge = require('./edge');
+const config = require('../config');
 
 const VENDOR_BROWSER_FULL_NAMES = {
   chrome: 'Google Chrome',
@@ -71,10 +71,7 @@ const createLoaders = (options) => {
         }),
       });
     }
-    return ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: loaders,
-    });
+    return [MiniCssExtractPlugin.loader, ...loaders];
   }
 
   return {
@@ -136,7 +133,7 @@ const transformEdgeAssets = (content, contentPath) => {
 const createWebpackPlugins = (options) => {
   let basePlugins = [
     // clean the build folder
-    new CleanWebpackPlugin(utils.extensionPath(), {
+    new CleanWebpackPlugin(extensionPath(), {
       allowExternal: true,
       verbose: args.verbose,
     }),
@@ -148,11 +145,13 @@ const createWebpackPlugins = (options) => {
       NAMESPACE: JSON.stringify(options.namespace),
       VENDOR: JSON.stringify(options.vendor),
       VENDOR_FULL_NAME: JSON.stringify(options.vendorFullName),
+      IMAREX_VERSION: JSON.stringify(options.version),
+      IMAREX_LICENSES: options.licenses,
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     // extract css into its own file
-    new ExtractTextPlugin({
-      filename: 'styles/[name].css',
+    new MiniCssExtractPlugin({
+      filename: args.env === 'development' ? 'styles/popup.css' : 'styles/popup.[hash].css',
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([{
@@ -174,8 +173,12 @@ const createWebpackPlugins = (options) => {
     }, {
       from: 'src/w3c/images',
       to: 'images',
+    }, {
+      from: 'src/w3c/popup/popup.html',
+      to: 'popup',
     }]),
     new FriendlyErrorsWebpackPlugin(),
+    new VueLoaderPlugin(),
   ];
   // Extend base plugins with production build relevant
   // plugins
