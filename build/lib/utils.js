@@ -10,6 +10,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fsPromise = require('fs').promises;
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const MinifyJSPlugin = require('babel-minify-webpack-plugin');
+const safeParser = require('postcss-safe-parser');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
@@ -190,7 +191,10 @@ const createWebpackPlugins = (options) => {
       // duplicated CSS from different components can be deduped.
       new OptimizeCSSPlugin({
         cssProcessorOptions: {
-          safe: true,
+          parser: safeParser,
+          discardComments: {
+            removeAll: true,
+          },
         },
       }),
     ]);
