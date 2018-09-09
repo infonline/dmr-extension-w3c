@@ -152,7 +152,7 @@ const createWebpackPlugins = (options) => {
     new webpack.NoEmitOnErrorsPlugin(),
     // extract css into its own file
     new MiniCssExtractPlugin({
-      filename: args.env === 'development' ? 'styles/popup.css' : 'styles/popup.[hash].css',
+      filename: args.env === 'development' ? 'styles/popup.css' : 'styles/popup.css',
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([{
