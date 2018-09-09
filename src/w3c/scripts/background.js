@@ -170,10 +170,9 @@ const onMessage = async (request, sender) => {
       log('error', `Installation ID ${registration.installationId} failed to transmit to tab ${tab.id}`);
     }
   } else if (request.from === 'IMAREX_REGISTRATION_SITE'
-    && request.message.action === 'SET_PANEL') {
+    && request.message.action === 'SET_PANEL_ID') {
     const registration = store.getters['registration/getRegistration'];
     registration.panelId = request.message.panelId;
-    registration.vendor = request.message.vendor;
     store.dispatch('registration/save', registration);
     // Send panel Id back to content script
     const message = {
@@ -188,9 +187,31 @@ const onMessage = async (request, sender) => {
     const response = await driver.tabs.sendMessage(tab.id, message);
     // Log success or failure
     if (response) {
-      log('info', `Panel ID ${registration.installationId} successfully transmitted from tab ${tab.id}`);
+      log('info', `Panel ID ${registration.panelId} successfully transmitted from tab ${tab.id}`);
     } else if (!response) {
-      log('error', `Panel ID ${registration.installationId} failed to transmit to tab ${tab.id}`);
+      log('error', `Panel ID ${registration.panelId} failed to transmit to tab ${tab.id}`);
+    }
+  } else if (request.from === 'IMAREX_REGISTRATION_SITE'
+    && request.message.action === 'SET_VENDOR') {
+    const registration = store.getters['registration/getRegistration'];
+    registration.vendor = request.message.vendor;
+    store.dispatch('registration/save', registration);
+    // Send vendor back to content script
+    const message = {
+      from: request.to,
+      to: request.from,
+      message: {
+        ...request.message,
+        registration,
+      },
+    };
+    // Send installation Id back to content script
+    const response = await driver.tabs.sendMessage(tab.id, message);
+    // Log success or failure
+    if (response) {
+      log('info', `Vendor ${registration.vendor} successfully transmitted from tab ${tab.id}`);
+    } else if (!response) {
+      log('error', `Vendor ${registration.vendor} failed to transmit to tab ${tab.id}`);
     }
   } else if (request.from === 'IMAREX_WEB_EXTENSION'
     && request.message.action === 'UPDATE_SETTINGS') {
