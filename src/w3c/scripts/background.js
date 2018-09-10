@@ -164,10 +164,9 @@ const onMessage = async (request, sender) => {
     const response = await driver.tabs.sendMessage(tab.id, message);
     // Log success or failure
     if (response) {
-      log('info', `Installation ID ${registration.installationId} successfully transmitted to `
-        + `tab ${tab.id}`);
+      log('info', `Registration details successfully transmitted to tab ${tab.id}`);
     } else if (!response) {
-      log('error', `Installation ID ${registration.installationId} failed to transmit to tab ${tab.id}`);
+      log('error', `Registration details successfully transmitted to tab ${tab.id}`);
     }
   } else if (request.from === 'IMAREX_REGISTRATION_SITE'
     && request.message.action === 'SET_PANEL_ID') {
