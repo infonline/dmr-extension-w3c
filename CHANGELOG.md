@@ -1,3 +1,19 @@
+<a name="0.12.0"></a>
+# [0.12.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.11.1...v0.12.0) (2018-09-10)
+
+
+### Bug Fixes
+
+* **build:** remove hash from popup.css in production builds ([2a9b78f](https://vgitbn003.infon/IAM/iam-web-extension/commits/2a9b78f))
+* **src:** log other message when registration details are requested ([8eaed20](https://vgitbn003.infon/IAM/iam-web-extension/commits/8eaed20))
+
+
+### Features
+
+* **src:** add process step for the vendor name to central message handler in background script ([4fe5275](https://vgitbn003.infon/IAM/iam-web-extension/commits/4fe5275))
+
+
+
 <a name="0.11.1"></a>
 ## [0.11.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.11.0...v0.11.1) (2018-09-06)
 
