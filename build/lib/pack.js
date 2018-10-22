@@ -18,9 +18,9 @@ const ARCHIVE_OPTIONS = {
  * a specified output path.
  *
  * @param {Object} options
- * @returns {Promise<Error, Boolean>}
+ * @returns {Promise<any>}
  */
-const pack = options => new Promise((reject, resolve) => {
+const pack = options => new Promise((resolve, reject) => {
   try {
     // Create a output path
     const outputPath = path.join(__dirname, '../../packages', options.vendor);
@@ -33,7 +33,7 @@ const pack = options => new Promise((reject, resolve) => {
     // Create a writable stream to the output path
     const outputStream = fs.createWriteStream(path.join(outputPath, options.filename));
     // Resolve promise when output stream is ended
-    outputStream.on('finish', () => resolve());
+    outputStream.on('finish', resolve);
     // Create archive instance
     const archive = archiver(options.format, ARCHIVE_OPTIONS);
     // It's a good practice to catch warning for stat failures and another non blocking errors so we
