@@ -77,4 +77,5 @@ deploy:
     - 'packages/'
     expire_in: 1 week
   script:
+    - 'ssh imarex@vwebbn002.rzbn.infon "mkdir -p /var/www/html/imarex.infonline.de/extensions"'
     - 'scp -P22 -r packages/* imarex@vwebbn002.rzbn.infon:/var/www/html/imarex.infonline.de/extensions'
