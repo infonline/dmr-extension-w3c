@@ -1,12 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies,no-console */
-const args = require('./lib/args');
 const chalk = require('chalk');
 const { execFile } = require('child_process');
 const fse = require('fs-extra');
-const pack = require('./lib/pack');
 const path = require('path');
-const pkg = require('../package.json');
 const webpack = require('webpack');
+const pack = require('./lib/pack');
+const pkg = require('../package.json');
+const args = require('./lib/args');
 const webpackConfig = require('./webpack');
 const safariWebpackConfig = require('./webpack/safari');
 
@@ -99,6 +99,10 @@ if (args.vendor === 'safari') {
       if (args.pack) {
         log(chalk.white.bgBlue(' INFO '), chalk.blue(`Start packaging extension for ${args.vendor}.`));
         pack(PACKAGE_CONFIG)
+          .then(() => {
+            return fse.copy(path.join(__dirname, '../packages', args.vendor, PACKAGE_CONFIG.filename),
+              path.join(__dirname, '../packages', args.vendor, 'IMAREX-latest.zip'));
+          })
           .then(() => {
             log(chalk.black.bgGreen(' DONE '), chalk.green(`Packaging extension for ${args.vendor} successful.`));
           })
