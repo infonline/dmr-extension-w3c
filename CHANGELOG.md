@@ -1,3 +1,13 @@
+<a name="0.12.2"></a>
+## [0.12.2](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.1...v0.12.2) (2018-10-22)
+
+
+### Bug Fixes
+
+* **ci:** create extensions directory on deployment target when not available before copying the files over to it ([19f1e9a](https://vgitbn003.infon/IAM/iam-web-extension/commits/19f1e9a))
+
+
+
 <a name="0.12.1"></a>
 ## [0.12.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.0...v0.12.1) (2018-10-22)
 
