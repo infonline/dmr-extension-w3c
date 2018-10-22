@@ -9,7 +9,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fsPromise = require('fs').promises;
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const MinifyJSPlugin = require('babel-minify-webpack-plugin');
 const safeParser = require('postcss-safe-parser');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
@@ -185,8 +184,6 @@ const createWebpackPlugins = (options) => {
   // plugins
   if (config.env === 'production') {
     basePlugins = basePlugins.concat([
-      // Compress js assets
-      new MinifyJSPlugin(),
       // Compress extracted CSS. We are using this plugin so that possible
       // duplicated CSS from different components can be deduped.
       new OptimizeCSSPlugin({
@@ -248,9 +245,9 @@ const multiVendorBrowserFull = vendor => VENDOR_BROWSER_FULL_NAMES[vendor];
 const getSourcemapType = () => {
   if (config.sourcemaps) {
     if (config.env === 'production') {
-      return '#source-map';
+      return 'source-map';
     }
-    return '#inline-source-map';
+    return 'inline-source-map';
   }
   return false;
 };

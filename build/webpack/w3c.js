@@ -58,5 +58,8 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimize: args.env === 'production',
+  },
   stats: args.verbose ? 'normal' : 'none',
 };

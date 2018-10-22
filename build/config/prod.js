@@ -2,7 +2,7 @@ const args = require('../lib/args');
 
 module.exports = {
   env: 'production',
-  sourceMap: false,
+  sourcemaps: args.sourcemaps,
   gzip: false,
   report: args.report,
   showEslintErrorsInOverlay: false,
