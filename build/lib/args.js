@@ -31,7 +31,7 @@ const args = yargs
   })
   .option('panel-exchange-uri', {
     string: true,
-    default: 'https://imarex.infonline.de/',
+    default: 'https://imarex.infonline.de',
     describe: 'Compile the extension with different IAM panel exchange url',
   })
   .option('sourcemaps', {
