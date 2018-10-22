@@ -1,3 +1,18 @@
+<a name="0.12.1"></a>
+## [0.12.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.0...v0.12.1) (2018-10-22)
+
+
+### Bug Fixes
+
+* **build:** fix wrong promise declaration in pack function ([fd4a999](https://vgitbn003.infon/IAM/iam-web-extension/commits/fd4a999))
+
+
+### Features
+
+* **build:** duplicate created zip file with "latest" declaration after packaging ([77fa915](https://vgitbn003.infon/IAM/iam-web-extension/commits/77fa915))
+
+
+
 <a name="0.12.0"></a>
 # [0.12.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.11.1...v0.12.0) (2018-09-10)
 
