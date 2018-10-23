@@ -1,11 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
+const esLintFriendlyFormatter = require('eslint-friendly-formatter');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const webpack = require('webpack');
 const args = require('../lib/args');
 const config = require('../config');
 const utils = require('../lib/utils');
-const esLintFriendlyFormatter = require('eslint-friendly-formatter');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const MinifyJSPlugin = require('babel-minify-webpack-plugin');
-const webpack = require('webpack');
 
 const basePlugins = [
   new webpack.DefinePlugin({
@@ -15,10 +14,6 @@ const basePlugins = [
   }),
   new FriendlyErrorsWebpackPlugin(),
 ];
-
-if (config.env === 'production') {
-  basePlugins.push(new MinifyJSPlugin());
-}
 
 /**
  * Webpack base configuration
@@ -67,6 +62,9 @@ module.exports = {
       test: /\.html$/,
       loader: 'html-loader',
     }],
+  },
+  optimization: {
+    minimize: args.env === 'production',
   },
   stats: args.verbose ? 'normal' : 'none',
   plugins: basePlugins,
