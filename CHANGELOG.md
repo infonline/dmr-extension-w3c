@@ -1,3 +1,13 @@
+<a name="0.12.4"></a>
+## [0.12.4](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.3...v0.12.4) (2018-10-23)
+
+
+### Bug Fixes
+
+* **build:** remove incompatible minifier in safari build pipeline ([a7927cb](https://vgitbn003.infon/IAM/iam-web-extension/commits/a7927cb))
+
+
+
 <a name="0.12.3"></a>
 ## [0.12.3](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.2...v0.12.3) (2018-10-22)
 
