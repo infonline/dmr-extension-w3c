@@ -212,6 +212,26 @@ const onMessage = async (request, sender) => {
     } else if (!response) {
       log('error', `Vendor ${registration.vendor} failed to transmit to tab ${tab.id}`);
     }
+  } else if (request.from === 'IMAREX_REGISTRATION_SITE'
+    && request.message.action === 'REMOVE_REGISTRATION') {
+    await store.dispatch('registration/remove');
+    const registration = store.getters['registration/getRegistration'];
+    const message = {
+      from: request.to,
+      to: request.from,
+      message: {
+        ...request.message,
+        registration,
+      },
+    };
+    // Send installation Id back to content script
+    const response = await driver.tabs.sendMessage(tab.id, message);
+    // Log success or failure
+    if (response) {
+      log('info', `Removal of registration successfully transmitted to tab ${tab.id}`);
+    } else if (!response) {
+      log('error', `Removal of registration failed to transmit to tab ${tab.id}`);
+    }
   } else if (request.from === 'IMAREX_WEB_EXTENSION'
     && request.message.action === 'UPDATE_SETTINGS') {
     store.dispatch('settings/init');

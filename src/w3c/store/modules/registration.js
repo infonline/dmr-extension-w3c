@@ -74,8 +74,6 @@ const actions = {
       registration,
     };
     await driver.storage.local.set(newState);
-    // Query tabs where URL equals the IMAREX exchange site
-    const tabs = await driver.tabs.query
     commit(SAVE, registration);
   },
 };
