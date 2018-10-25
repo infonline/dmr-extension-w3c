@@ -1,3 +1,13 @@
+<a name="0.13.0"></a>
+# [0.13.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.4...v0.13.0) (2018-10-25)
+
+
+### Features
+
+* **src:** add ability to remove a registration from the extension via messaging channel ([7cc6ecc](https://vgitbn003.infon/IAM/iam-web-extension/commits/7cc6ecc))
+
+
+
 <a name="0.12.4"></a>
 ## [0.12.4](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.3...v0.12.4) (2018-10-23)
 
