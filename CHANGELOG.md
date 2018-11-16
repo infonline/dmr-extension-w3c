@@ -1,10 +1,11 @@
-<a name="0.13.0"></a>
-# [0.13.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.4...v0.13.0) (2018-10-25)
+<a name="0.13.1"></a>
+## [0.13.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.4...v0.13.1) (2018-11-16)
 
 
 ### Features
 
 * **src:** add ability to remove a registration from the extension via messaging channel ([7cc6ecc](https://vgitbn003.infon/IAM/iam-web-extension/commits/7cc6ecc))
+* **src:** add new url for creating the registration tab after installation ([1c8c0e2](https://vgitbn003.infon/IAM/iam-web-extension/commits/1c8c0e2))
 
 
 
@@ -106,18 +107,6 @@
 ### Bug Fixes
 
 * **src:** rename script.js to content.js and remove local copy of iam.js (imarex.js) ([e3ada10](https://vgitbn003.infon/IAM/iam-web-extension/commits/e3ada10))
-
-
-### Features
-
-* **src:** add first version of safari app extension ([addc857](https://vgitbn003.infon/IAM/iam-web-extension/commits/addc857))
-* **src:** implement IAM panel exchange process via URL query parameters ([fb65c24](https://vgitbn003.infon/IAM/iam-web-extension/commits/fb65c24))
-* **src:** implement IAM panel exchange process via URL query parameters for the safari app extension ([34ac75d](https://vgitbn003.infon/IAM/iam-web-extension/commits/34ac75d))
-
-
-
-<a name="0.10.0"></a>
-# [0.10.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.9.1...v0.10.0) (2018-06-21)
 
 
 ### Features
