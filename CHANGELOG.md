@@ -1,3 +1,19 @@
+<a name="0.13.2"></a>
+## [0.13.2](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.4...v0.13.2) (2018-11-22)
+
+
+### Bug Fixes
+
+* **src:** add correct registration uri part for redirecting the user after installing the extension ([2be69e4](https://vgitbn003.infon/IAM/iam-web-extension/commits/2be69e4))
+
+
+### Features
+
+* **src:** add ability to remove a registration from the extension via messaging channel ([7cc6ecc](https://vgitbn003.infon/IAM/iam-web-extension/commits/7cc6ecc))
+* **src:** add new url for creating the registration tab after installation ([1c8c0e2](https://vgitbn003.infon/IAM/iam-web-extension/commits/1c8c0e2))
+
+
+
 <a name="0.13.1"></a>
 ## [0.13.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.4...v0.13.1) (2018-11-16)
 
