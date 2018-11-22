@@ -42,7 +42,7 @@ const actions = {
       await driver.storage.local.set(newState);
       // Create a new tab with the IMAREX registration site url
       driver.tabs.create({
-        url: `${IAM_PANEL_EXCHANGE_URL}/user/registration`,
+        url: `${IAM_PANEL_EXCHANGE_URL}/home/registration`,
       });
     }
     // Commit state mutation
