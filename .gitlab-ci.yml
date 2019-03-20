@@ -39,6 +39,8 @@ before_script:
   - chmod 644 ~/.ssh/known_hosts
 
 install:
+  tags:
+    - docker
   stage: install
   only:
     - master
@@ -50,6 +52,8 @@ install:
     expire_in: 1 day
 
 build:
+  tags:
+    - docker
   stage: build
   only:
     - master
@@ -67,6 +71,8 @@ build:
     expire_in: 1 week
 
 deploy:
+  tags:
+    - docker
   stage: deploy
   only:
     - master
