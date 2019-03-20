@@ -76,6 +76,7 @@
             <v-btn
               color="error"
               dark
+              @click="deregister()"
             >Remove</v-btn>
           </v-card-actions>
         </v-card>
