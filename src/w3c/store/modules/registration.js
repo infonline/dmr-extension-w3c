@@ -66,7 +66,11 @@ const actions = {
   async remove({ commit }) {
     const state = await driver.storage.local.get();
     const { registration } = state;
+    // Create new user id
+    registration.userId = uuidv4();
+    // Wipe panel identifier
     registration.panelId = undefined;
+    // Wipe vendor name
     registration.vendor = undefined;
     registration.updatedAt = new Date().toJSON();
     const newState = {
