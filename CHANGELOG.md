@@ -1,3 +1,13 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://vgitbn003.infon/IAM/iam-web-extension/compare/1.0.0...1.0.1) (2019-03-20)
+
+
+### Features
+
+* **popup:** add click event to remove button ([a71759a](https://vgitbn003.infon/IAM/iam-web-extension/commits/a71759a))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.13.2...v1.0.0) (2019-03-20)
 
