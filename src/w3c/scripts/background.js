@@ -1,6 +1,9 @@
 /* eslint-env browser */
 /* global IAM_SCRIPT_URL */
 // Import web extension driver
+// Todo: URI shortening
+// Todo: Measurement by default deactivated
+// Todo: Check if on remove listener exists
 /**
  * Web extension driver
  * @type {Proxy|Object}
@@ -224,7 +227,7 @@ const onMessage = async (request, sender) => {
         registration,
       },
     };
-    // Send installation Id back to content script
+    // Send installation and new user identifier back to content script
     const response = await driver.tabs.sendMessage(tab.id, message);
     // Log success or failure
     if (response) {
