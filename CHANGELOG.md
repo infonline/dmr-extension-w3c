@@ -1,3 +1,13 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.13.2...v1.0.0) (2019-03-20)
+
+
+### Features
+
+* **store:** create new user identifier when registration is removed ([c2d4136](https://vgitbn003.infon/IAM/iam-web-extension/commits/c2d4136))
+
+
+
 <a name="0.13.2"></a>
 ## [0.13.2](https://vgitbn003.infon/IAM/iam-web-extension/compare/v0.12.4...v0.13.2) (2018-11-22)
 
