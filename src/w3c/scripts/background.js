@@ -110,10 +110,10 @@ const onLoaded = async (sender) => {
             message: {
               action: 'COUNT',
               data: {
-                cn: 'de',
+                cn: 'imarex',
                 st: 'imarex',
                 cp: 'profile',
-                u4: url.href,
+                u4: url.origin,
                 uid: registration.userId,
                 pid: registration.panelId || '',
                 pvr: registration.vendor || '',
