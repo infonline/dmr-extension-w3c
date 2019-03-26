@@ -1,9 +1,6 @@
 /* eslint-env browser */
 /* global IAM_SCRIPT_URL */
 // Import web extension driver
-// Todo: URI shortening
-// Todo: Measurement by default deactivated
-// Todo: Check if on remove listener exists
 /**
  * Web extension driver
  * @type {Proxy|Object}
