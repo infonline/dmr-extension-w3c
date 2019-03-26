@@ -40,6 +40,8 @@ const actions = {
       };
       // Persistent state
       await driver.storage.local.set(newState);
+      // Set the uninstall url which should be opened when the extension is uninstalled
+      driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
       // Create a new tab with the IMAREX registration site url
       driver.tabs.create({
         url: `${IAM_PANEL_EXCHANGE_URL}/home/registration`,
@@ -48,6 +50,13 @@ const actions = {
     // Commit state mutation
     commit(SAVE, registration);
   },
+  /**
+   * Saves the current registration state persistent
+   *
+   * @param {Function} commit - Commits mutations to the state triggered by the action
+   * @param {Object} data - Registration data
+   * @return {Promise<void>} Void
+   */
   async save({ commit }, data) {
     const state = await driver.storage.local.get();
     let { registration } = state;
@@ -73,6 +82,8 @@ const actions = {
     // Wipe vendor name
     registration.vendor = undefined;
     registration.updatedAt = new Date().toJSON();
+    // Set a new uninstall url which should be opened when the extension is uninstalled
+    driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
     const newState = {
       ...state,
       registration,
