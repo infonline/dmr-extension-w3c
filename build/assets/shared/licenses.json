@@ -11,25 +11,25 @@
         "licenseUrl": "https://github.com/faisalman/ua-parser-js",
         "parents": "imarex"
     },
-    "vue-router@3.0.1": {
+    "vue-router@3.0.2": {
         "licenses": "MIT",
         "repository": "https://github.com/vuejs/vue-router",
         "licenseUrl": "https://github.com/vuejs/vue-router/raw/master/LICENSE",
         "parents": "imarex"
     },
-    "vue@2.5.17": {
+    "vue@2.6.10": {
         "licenses": "MIT",
         "repository": "https://github.com/vuejs/vue",
         "licenseUrl": "https://github.com/vuejs/vue/raw/master/LICENSE",
         "parents": "imarex"
     },
-    "vuetify@1.2.1": {
+    "vuetify@1.5.7": {
         "licenses": "MIT",
         "repository": "https://github.com/vuetifyjs/vuetify",
-        "licenseUrl": "https://github.com/vuetifyjs/vuetify/raw/master/LICENSE",
+        "licenseUrl": "https://github.com/vuetifyjs/vuetify/raw/master/LICENSE.md",
         "parents": "imarex"
     },
-    "vuex@3.0.1": {
+    "vuex@3.1.0": {
         "licenses": "MIT",
         "repository": "https://github.com/vuejs/vuex",
         "licenseUrl": "https://github.com/vuejs/vuex/raw/master/LICENSE",
