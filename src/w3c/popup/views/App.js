@@ -9,7 +9,6 @@ export default {
         {
           name: 'home',
           icon: 'home',
-          label: 'Home',
           path: {
             type: 'internal',
             href: '/',
@@ -18,7 +17,6 @@ export default {
         {
           name: 'registration',
           icon: 'assignment_turned_in',
-          label: 'Registration',
           path: {
             type: 'internal',
             href: '/registration',
@@ -27,7 +25,6 @@ export default {
         {
           name: 'settings',
           icon: 'settings',
-          label: 'Settings',
           path: {
             type: 'internal',
             href: '/settings',
@@ -36,7 +33,6 @@ export default {
         {
           name: 'privacy',
           icon: 'security',
-          label: 'Privacy',
           path: {
             type: 'external',
             href: `${IAM_PANEL_EXCHANGE_URL}/privacy`,
@@ -45,7 +41,6 @@ export default {
         {
           name: 'help',
           icon: 'help',
-          label: 'Help',
           path: {
             type: 'internal',
             href: '/help',
@@ -54,13 +49,22 @@ export default {
         {
           name: 'about',
           icon: 'info',
-          label: 'About',
           path: {
             type: 'internal',
             href: '/about',
           },
         },
       ];
+    },
+  },
+  i18n: {
+    messages: {
+      de: {
+        menuItems: ['Start', 'Registrierung', 'Einstellungen', 'Datenschutz', 'Hilfe', 'Impressum'],
+      },
+      en: {
+        menuItems: ['Home', 'Registration', 'Settings', 'Privacy', 'Help', 'About'],
+      },
     },
   },
   methods: {

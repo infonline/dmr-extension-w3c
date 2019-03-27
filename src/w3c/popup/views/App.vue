@@ -31,7 +31,7 @@
               <v-icon>{{item.icon}}</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title>{{item.label}}</v-list-tile-title>
+              <v-list-tile-title>{{$t(`menuItems[${index}]`)}}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
