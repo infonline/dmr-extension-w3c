@@ -9,6 +9,36 @@ export default {
     }),
     ...mapGetters('registration', ['isRegistered']),
   },
+  i18n: {
+    messages: {
+      de: {
+        heading: 'Registrierung',
+        listItems: {
+          userId: 'INFOnline Nutzer-ID',
+          vendor: 'Panelanbieter',
+          createdAt: 'Erstellt',
+          updatedAt: 'Aktualisiert',
+        },
+        buttons: {
+          back: 'Zurück',
+          remove: 'Entfernen',
+        },
+      },
+      en: {
+        heading: 'Registration',
+        listItems: {
+          userId: 'INFOnline User-ID',
+          vendor: 'Panel provider',
+          createdAt: 'Created',
+          updatedAt: 'Updated',
+        },
+        buttons: {
+          back: 'Back',
+          remove: 'Remove',
+        },
+      },
+    },
+  },
   methods: {
     deregister() {
       // Create a new tab with the IMAREX registration site url
