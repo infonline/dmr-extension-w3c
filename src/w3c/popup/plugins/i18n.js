@@ -10,7 +10,7 @@ Vue.use(VueI18n);
  * @return {Object} Language options
  */
 const getLocale = () => {
-  let lang = driver.i18n.LanguageCode;
+  let lang = driver.i18n.getUILanguage();
   if (lang.includes('-')) {
     [lang] = lang.split('-');
   }
