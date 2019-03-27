@@ -65,6 +65,7 @@ const mutations = {
 
 const getters = {
   getSettings: state => state.settings,
+  isActivated: state => state.settings.tracking,
 };
 
 export default {
