@@ -9,6 +9,36 @@ export default {
       return 'Settings';
     },
   },
+  i18n: {
+    messages: {
+      de: {
+        buttons: {
+          cancel: 'Abbrechen',
+          save: 'Speichern',
+        },
+        headline: 'Einstellungen',
+        listItems: {
+          tracking: {
+            label: 'Tracking',
+            text: 'INFOnline Tracking deaktivieren | INFOnline Tracking aktivieren',
+          },
+        },
+      },
+      en: {
+        buttons: {
+          cancel: 'Cancel',
+          save: 'Save',
+        },
+        headline: 'Settings',
+        listItems: {
+          tracking: {
+            label: 'Tracking',
+            text: 'Disable INFOnline tracking | Enable INFOnline tracking',
+          },
+        },
+      },
+    },
+  },
   methods: {
     ...mapActions('settings', {
       saveSettings: 'save',

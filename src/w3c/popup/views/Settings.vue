@@ -19,7 +19,7 @@
               light
               class="pl-3"
             >settings</v-icon>
-            <span class="subheading pl-3">Settings</span>
+            <span class="subheading pl-3">{{ $t('headline') }}</span>
           </v-layout>
           <v-divider></v-divider>
           <v-responsive height="381">
@@ -29,8 +29,8 @@
                   <v-icon>visibility</v-icon>
                 </v-list-tile-avatar>
                 <v-list-tile-content>
-                  <v-list-tile-title>Tracking</v-list-tile-title>
-                  <v-list-tile-sub-title>INFOnline tracking</v-list-tile-sub-title>
+                  <v-list-tile-title>{{ $t('listItems.tracking.label') }}</v-list-tile-title>
+                  <v-list-tile-sub-title>{{ $tc('listItems.tracking.text', settings.tracking ? 1 : 2) }}</v-list-tile-sub-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-switch
@@ -47,13 +47,13 @@
               flat
               color="primary"
               to="/"
-            >Cancel</v-btn>
+            >{{ $t('buttons.cancel') }}</v-btn>
             <v-spacer></v-spacer>
             <v-btn
               color="secondary"
               class="primary--text"
               @click="() => save(settings)"
-            >Save</v-btn>
+            >{{ $t('buttons.save') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>

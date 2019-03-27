@@ -20,28 +20,26 @@
               class="pl-3"
             >info
             </v-icon>
-            <span class="subheading pl-3">About</span>
+            <span class="subheading pl-3">{{ $t('headline') }}</span>
           </v-layout>
           <v-divider></v-divider>
           <v-responsive height="381">
             <v-list two-line>
               <v-list-tile>
                 <v-list-tile-content>
-                  <v-list-tile-title>Name</v-list-tile-title>
+                  <v-list-tile-title>{{ $t('listItems.name.label') }}</v-list-tile-title>
                   <v-list-tile-sub-title>IMAREX</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
               <v-list-tile>
                 <v-list-tile-content>
-                  <v-list-tile-title>Description</v-list-tile-title>
-                  <v-list-tile-sub-title>
-                    INFOnline Market Research Extension for {{browser.name}}
-                  </v-list-tile-sub-title>
+                  <v-list-tile-title>{{ $t('listItems.description.label') }}</v-list-tile-title>
+                  <v-list-tile-sub-title>{{ $t('listItems.description.text', { browser: browser.name }) }}</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
               <v-list-tile>
                 <v-list-tile-content>
-                  <v-list-tile-title>Version</v-list-tile-title>
+                  <v-list-tile-title>{{ $t('listItems.version.label') }}</v-list-tile-title>
                   <v-list-tile-sub-title>{{version}}</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
@@ -56,7 +54,7 @@
                   <v-icon>assignment</v-icon>
                 </v-list-tile-avatar>
                 <v-list-tile-content>
-                  <v-list-tile-title>Licences</v-list-tile-title>
+                  <v-list-tile-title>{{ $t('listItems.licenses.label') }}</v-list-tile-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-icon>arrow_forward</v-icon>
@@ -70,7 +68,7 @@
                   <v-icon>security</v-icon>
                 </v-list-tile-avatar>
                 <v-list-tile-content>
-                  <v-list-tile-title>Privacy</v-list-tile-title>
+                  <v-list-tile-title>{{ $t('listItems.privacy.label') }}</v-list-tile-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-icon>arrow_forward</v-icon>
@@ -84,7 +82,7 @@
                   <v-icon>bug_report</v-icon>
                 </v-list-tile-avatar>
                 <v-list-tile-content>
-                  <v-list-tile-title>Report a bug</v-list-tile-title>
+                  <v-list-tile-title>{{ $t('listItems.bugs.label') }}</v-list-tile-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-icon>arrow_forward</v-icon>
@@ -97,7 +95,7 @@
               flat
               color="primary"
               to="/"
-            >Back</v-btn>
+            >{{ $t('buttons.back') }}</v-btn>
             <v-spacer></v-spacer>
           </v-card-actions>
         </v-card>
