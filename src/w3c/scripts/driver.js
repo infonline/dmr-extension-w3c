@@ -24,7 +24,8 @@ const createDriver = () => {
   if (namespace === 'chrome') {
     // Promisify chrome api via polyfill
     return polyfill(global.chrome, apiMetaData);
-  } else if (namespace === 'browser' && vendor === 'edge') {
+  }
+  if (namespace === 'browser' && vendor === 'edge') {
     // Promisify edge api via polyfill
     return polyfill(global.browser, apiMetaData);
   }
