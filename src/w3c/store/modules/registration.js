@@ -42,7 +42,8 @@ const actions = {
       await driver.storage.local.set(newState);
       // Set the uninstall url which should be opened when the extension is uninstalled
       if (registration.userId && registration.vendor) {
-        driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
+        driver.runtime
+          .setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
       }
       // Create a new tab with the IMAREX registration site url
       driver.tabs.create({
@@ -73,11 +74,18 @@ const actions = {
     };
     // Set the uninstall url which should be opened when the extension is uninstalled
     if (registration.userId && registration.vendor) {
-      driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
+      driver.runtime
+        .setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
     }
     await driver.storage.local.set(newState);
     commit(SAVE, registration);
   },
+  /**
+   * Removes the registration details from the local store and state by wiping out all present information about it.
+   *
+   * @param commit
+   * @return {Promise<void>}
+   */
   async remove({ commit }) {
     const state = await driver.storage.local.get();
     const { registration } = state;
@@ -85,7 +93,8 @@ const actions = {
     registration.userId = uuidv4();
     // Set the uninstall url which should be opened when the extension is uninstalled
     if (registration.userId && registration.vendor) {
-      driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
+      driver.runtime
+        .setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
     }
     // Wipe panel identifier
     registration.panelId = undefined;
