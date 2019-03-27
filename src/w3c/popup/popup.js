@@ -4,6 +4,9 @@ import 'vuetify/dist/vuetify.min.css';
 import App from './views/App.vue';
 import router from './router';
 import store from '../store';
+import i18n from './plugins/i18n';
+
+Vue.config.productionTip = false;
 
 Vue.use(Vuetify, {
   theme: {
@@ -22,6 +25,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App),
   beforeCreate() {
     this.$store.dispatch('init');
