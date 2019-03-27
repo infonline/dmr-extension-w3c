@@ -23,8 +23,8 @@ const actions = {
    */
   async init({ commit, state }) {
     const localState = await driver.storage.local.get();
-    if (localState && Object.keys(localState).includes('createdAt')) {
-      state = localState;
+    if (localState.statistic && Object.keys(localState.statistic).includes('createdAt')) {
+      state.statistic = localState.statistic;
     }
     let { statistic } = state;
     if (!statistic) {
@@ -50,8 +50,8 @@ const actions = {
    */
   async update({ commit, state }, { type, key }) {
     const localState = await driver.storage.local.get();
-    if (localState && Object.keys(localState).includes('createdAt')) {
-      state = localState;
+    if (localState.statistic && Object.keys(localState.statistic).includes('createdAt')) {
+      state.statistic = localState.statistic;
     }
     const { statistic } = state;
     if (type === 'site') {
