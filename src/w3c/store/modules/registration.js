@@ -41,7 +41,9 @@ const actions = {
       // Persistent state
       await driver.storage.local.set(newState);
       // Set the uninstall url which should be opened when the extension is uninstalled
-      driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
+      if (registration.userId && registration.vendor) {
+        driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
+      }
       // Create a new tab with the IMAREX registration site url
       driver.tabs.create({
         url: `${IAM_PANEL_EXCHANGE_URL}/home/registration`,
@@ -69,6 +71,10 @@ const actions = {
       ...state,
       registration,
     };
+    // Set the uninstall url which should be opened when the extension is uninstalled
+    if (registration.userId && registration.vendor) {
+      driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
+    }
     await driver.storage.local.set(newState);
     commit(SAVE, registration);
   },
@@ -77,13 +83,15 @@ const actions = {
     const { registration } = state;
     // Create new user id
     registration.userId = uuidv4();
+    // Set the uninstall url which should be opened when the extension is uninstalled
+    if (registration.userId && registration.vendor) {
+      driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
+    }
     // Wipe panel identifier
     registration.panelId = undefined;
     // Wipe vendor name
     registration.vendor = undefined;
     registration.updatedAt = new Date().toJSON();
-    // Set a new uninstall url which should be opened when the extension is uninstalled
-    driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
     const newState = {
       ...state,
       registration,
