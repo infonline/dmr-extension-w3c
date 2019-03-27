@@ -4,24 +4,28 @@ import { driver } from '../../scripts/driver';
 
 const SAVE = 'SAVE';
 
-const defaultState = {
+const defaultState = () => ({
   statistic: {
     sites: {},
     types: {},
     createdAt: new Date().toJSON(),
     updatedAt: undefined,
   },
-};
+});
 
 const actions = {
   /**
    * Initializes the statistic module
    *
    * @param commit - Commits mutations to the state triggered by the action
+   * @param state - Current module state
    * @returns {Promise<void>} Void
    */
-  async init({ commit }) {
-    const state = await driver.storage.local.get();
+  async init({ commit, state }) {
+    const localState = await driver.storage.local.get();
+    if (localState && Object.keys(localState).includes('createdAt')) {
+      state = localState;
+    }
     let { statistic } = state;
     if (!statistic) {
       statistic = {
@@ -39,12 +43,16 @@ const actions = {
    * Updates the statistics dictionary
    *
    * @param {Function} commit  - Commits mutations to the state triggered by the action
+   * @param state - Current module state
    * @param {String} [type = 'type' | type = 'site'] - The dictionary type
    * @param {String} key - The key of the dictionary entry
    * @returns {Promise<void>} Void
    */
-  async update({ commit }, { type, key }) {
-    const state = await driver.storage.local.get();
+  async update({ commit, state }, { type, key }) {
+    const localState = await driver.storage.local.get();
+    if (localState && Object.keys(localState).includes('createdAt')) {
+      state = localState;
+    }
     const { statistic } = state;
     if (type === 'site') {
       const { sites } = statistic;
@@ -95,5 +103,5 @@ export default {
   getters,
   mutations,
   namespaced: true,
-  state: defaultState,
+  state: defaultState(),
 };
