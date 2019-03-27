@@ -43,6 +43,7 @@ export default {
       statistic: state => state.statistic.statistic,
     }),
     ...mapGetters('registration', ['isRegistered']),
+    ...mapGetters('settings', ['isActivated']),
     title() {
       return 'Home';
     },
@@ -54,10 +55,81 @@ export default {
       overallCount: 0,
     };
   },
+  i18n: {
+    messages: {
+      de: {
+        status: {
+          headline: 'Status',
+          buttons: {
+            details: 'Details',
+            register: 'Registrieren',
+            activate: 'Aktivieren',
+          },
+        },
+        site: {
+          headline: 'Webseite',
+          button: 'Details',
+        },
+        overall: {
+          headline: 'Gesamt',
+          button: 'Details',
+        },
+      },
+      en: {
+        status: {
+          headline: 'Status',
+          buttons: {
+            details: 'Details',
+            register: 'Register',
+            activate: 'Activate',
+          },
+        },
+        site: {
+          headline: 'Web site',
+          button: 'Details',
+        },
+        overall: {
+          headline: 'Overall',
+          button: 'Details',
+        },
+      },
+    },
+  },
   methods: {
+    /**
+     * Creates a new tab with registration site url
+     */
     register() {
       // Create a new tab with specified URI of external path
       driver.tabs.create({ url: `${IAM_PANEL_EXCHANGE_URL}/registration` });
+    },
+    /**
+     * Gets the color for the status panel defined by the current extension state
+     *
+     * @return {String} Color name
+     */
+    getColor() {
+      if (this.isRegistered && !this.isActivated) {
+        return 'orange';
+      }
+      if (!this.isRegistered && !this.isActivated) {
+        return 'red';
+      }
+      return 'green';
+    },
+    /**
+     * Gets the icon name for the status panel defined by the current enxtension state
+     *
+     * @return {String} Name the icon
+     */
+    getIcon() {
+      if (this.isRegistered && !this.isActivated) {
+        return 'warning';
+      }
+      if (!this.isRegistered && !this.isActivated) {
+        return 'cancel';
+      }
+      return 'check_circle';
     },
   },
   mounted() {

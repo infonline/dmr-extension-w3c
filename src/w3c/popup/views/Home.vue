@@ -10,7 +10,7 @@
       >
         <v-card
           height="250"
-          :color="isRegistered ? 'green': 'red'"
+          :color="getColor()"
         >
           <v-layout
             class="ma-0"
@@ -25,7 +25,7 @@
                 assignment_turned_in
               </v-icon>
               <span class="subheading white--text pl-3">
-                Status
+                {{ $t('status.headline') }}
               </span>
             </v-layout>
             <v-layout
@@ -38,25 +38,29 @@
               <v-avatar
                 size="96"
               >
-                <v-icon dark size="96">{{ isRegistered ? 'check_circle': 'cancel' }}</v-icon>
+                <v-icon dark size="96">{{ getIcon() }}</v-icon>
               </v-avatar>
             </v-layout>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
-                v-if="isRegistered"
+                v-if="isRegistered && isActivated"
                 dark
                 flat
                 to="/registration"
-              >Details</v-btn>
+              >{{ $t('status.buttons.details') }}</v-btn>
               <v-btn
                 v-if="!isRegistered"
                 dark
                 flat
                 @click="() => register()"
-              >
-                Register
-              </v-btn>
+              >{{ $t('status.buttons.register') }}</v-btn>
+              <v-btn
+                v-if="isRegistered && !isActivated"
+                dark
+                flat
+                to="/settings"
+              >{{ $t('status.buttons.activate') }}</v-btn>
             </v-card-actions>
           </v-layout>
         </v-card>
@@ -81,7 +85,7 @@
                 pageview
               </v-icon>
               <span class="subheading white--text pl-3">
-                Site
+                {{ $t('site.headline') }}
               </span>
             </v-layout>
             <v-layout
@@ -91,7 +95,7 @@
               class="ma-0"
             >
               <div class="display-3 white--text">
-                {{siteCount}}
+                {{ siteCount }}
               </div>
             </v-layout>
             <v-card-actions>
@@ -99,7 +103,7 @@
               <v-btn
                 dark
                 flat
-              >Details</v-btn>
+              >{{ $t('site.button') }}</v-btn>
             </v-card-actions>
           </v-layout>
         </v-card>
@@ -124,7 +128,7 @@
                 timeline
               </v-icon>
               <span class="subheading white--text pl-3">
-                Overall
+                {{ $t('overall.headline') }}
               </span>
             </v-layout>
             <v-layout
@@ -134,7 +138,7 @@
               class="ma-0"
             >
               <div class="display-3 white--text">
-                {{overallCount}}
+                {{ overallCount }}
               </div>
             </v-layout>
             <v-card-actions>
@@ -142,7 +146,7 @@
               <v-btn
                 dark
                 flat
-              >Details</v-btn>
+              >{{ $t('overall.button') }}</v-btn>
             </v-card-actions>
           </v-layout>
         </v-card>
