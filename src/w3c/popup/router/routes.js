@@ -8,10 +8,6 @@ export default [
     component: () => import('../views/About.vue'),
   },
   {
-    path: '/help',
-    component: () => import('../views/Help.vue'),
-  },
-  {
     path: '/licenses',
     component: () => import('../views/Licenses.vue'),
   },

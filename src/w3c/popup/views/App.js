@@ -39,14 +39,6 @@ export default {
           },
         },
         {
-          name: 'help',
-          icon: 'help',
-          path: {
-            type: 'internal',
-            href: '/help',
-          },
-        },
-        {
           name: 'about',
           icon: 'info',
           path: {
@@ -60,10 +52,10 @@ export default {
   i18n: {
     messages: {
       de: {
-        menuItems: ['Start', 'Registrierung', 'Einstellungen', 'Datenschutz', 'Hilfe', 'Impressum'],
+        menuItems: ['Start', 'Registrierung', 'Einstellungen', 'Datenschutz', 'Impressum'],
       },
       en: {
-        menuItems: ['Home', 'Registration', 'Settings', 'Privacy', 'Help', 'About'],
+        menuItems: ['Home', 'Registration', 'Settings', 'Privacy', 'About'],
       },
     },
   },
