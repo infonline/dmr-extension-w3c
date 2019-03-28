@@ -22,6 +22,38 @@ export default {
       });
     },
   },
+  i18n: {
+    messages: {
+      de: {
+        headline: 'Lizenzen',
+        listItems: {
+          module: 'Modul',
+          version: 'Version',
+          type: 'Typ',
+          url: 'Url',
+          repository: 'Quelle',
+        },
+        link: 'Klick',
+        buttons: {
+          back: 'Zurück',
+        },
+      },
+      en: {
+        headline: 'Licenses',
+        listItems: {
+          module: 'Module',
+          version: 'Version',
+          type: 'Typ',
+          url: 'Url',
+          repository: 'Repository',
+        },
+        link: 'click',
+        buttons: {
+          back: 'back',
+        },
+      },
+    },
+  },
   methods: {
     createTab(url) {
       driver.tabs.create({

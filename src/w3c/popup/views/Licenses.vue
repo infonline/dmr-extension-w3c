@@ -19,7 +19,7 @@
               light
               class="pl-3"
             >assignment</v-icon>
-            <span class="subheading pl-3">Licenses</span>
+            <span class="subheading pl-3">{{ $t('headline') }}</span>
           </v-layout>
           <v-divider></v-divider>
           <v-responsive max-height="381" style="overflow-y: scroll">
@@ -27,30 +27,30 @@
               <div v-for="(license, index) in licenses" :key="index">
                 <v-list dense>
                   <v-list-tile>
-                    <v-list-tile-content>Module:</v-list-tile-content>
+                    <v-list-tile-content>{{ $t('listItems.module') }}:</v-list-tile-content>
                     <v-list-tile-content class="align-end">{{ license.module }}</v-list-tile-content>
                   </v-list-tile>
                   <v-list-tile>
-                    <v-list-tile-content>Version:</v-list-tile-content>
+                    <v-list-tile-content>{{ $t('listItems.version') }}:</v-list-tile-content>
                     <v-list-tile-content class="align-end">{{ license.version }}</v-list-tile-content>
                   </v-list-tile>
                   <v-list-tile>
-                    <v-list-tile-content>Type:</v-list-tile-content>
+                    <v-list-tile-content>{{ $t('listItems.type') }}:</v-list-tile-content>
                     <v-list-tile-content class="align-end">{{ license.license }}</v-list-tile-content>
                   </v-list-tile>
                   <v-list-tile>
-                    <v-list-tile-content>Url:</v-list-tile-content>
+                    <v-list-tile-content>{{ $t('listItems.url') }}:</v-list-tile-content>
                     <v-list-tile-content class="align-end">
                       <a @click="() => createTab(license.licenseUrl)">
-                        <span>click</span>
+                        <span>{{ $t('link') }}</span>
                       </a>
                     </v-list-tile-content>
                   </v-list-tile>
                   <v-list-tile>
-                    <v-list-tile-content>Repository:</v-list-tile-content>
+                    <v-list-tile-content>{{ $t('listItems.repository') }}:</v-list-tile-content>
                     <v-list-tile-content class="align-end">
                       <a @click="() => createTab(license.repository)">
-                        <span>click</span>
+                        <span>{{ $t('link') }}</span>
                       </a>
                     </v-list-tile-content>
                   </v-list-tile>
@@ -65,7 +65,7 @@
               flat
               color="primary"
               to="/"
-            >Back</v-btn>
+            >{{ $t('buttons.back') }}</v-btn>
             <v-spacer></v-spacer>
           </v-card-actions>
         </v-card>
