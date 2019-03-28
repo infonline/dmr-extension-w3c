@@ -21,9 +21,10 @@ const actions = {
    * Initializes the registration module
    *
    * @param {Function} commit - Commits mutations to the state triggered by the action
-   * @returns {Promise<void>}
+   * @param {Function} dispatch - Dispatches local actions or actions from other modules
+   * @returns {Promise<void>} Void
    */
-  async init({ commit }) {
+  async init({ commit, dispatch }) {
     const state = await driver.storage.local.get();
     let { registration } = state;
     // Create installation ID and user ID when not defined in local extension storage
@@ -40,15 +41,16 @@ const actions = {
       };
       // Persistent state
       await driver.storage.local.set(newState);
-      // Set the uninstall url which should be opened when the extension is uninstalled
-      if (registration.userId && registration.vendor) {
-        driver.runtime
-          .setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
-      }
+      dispatch('settings/save', { tracking: false }, { root: true });
       // Create a new tab with the IMAREX registration site url
       driver.tabs.create({
         url: `${IAM_PANEL_EXCHANGE_URL}/home/registration`,
       });
+    }
+    // Set the uninstall url which should be opened when the extension is uninstalled
+    if (registration.userId && registration.vendor) {
+      driver.runtime
+        .setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
     }
     // Commit state mutation
     commit(SAVE, registration);
@@ -57,10 +59,11 @@ const actions = {
    * Saves the current registration state persistent
    *
    * @param {Function} commit - Commits mutations to the state triggered by the action
+   * @param {Function} dispatch - Dispatches local actions or actions from other modules
    * @param {Object} data - Registration data
    * @return {Promise<void>} Void
    */
-  async save({ commit }, data) {
+  async save({ commit, dispatch }, data) {
     const state = await driver.storage.local.get();
     let { registration } = state;
     registration = {
@@ -77,16 +80,21 @@ const actions = {
       driver.runtime
         .setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove&userId=${registration.userId}&vendor=${registration.vendor}`);
     }
+    // Activate tracking when panel and vendor identifier are set
+    if (registration.panelId && registration.vendor) {
+      dispatch('settings/save', { tracking: true }, { root: true });
+    }
     await driver.storage.local.set(newState);
     commit(SAVE, registration);
   },
   /**
    * Removes the registration details from the local store and state by wiping out all present information about it.
    *
-   * @param commit
-   * @return {Promise<void>}
+   * @param {Function} commit - State commit function
+   * @param {Function} dispatch - Action dispatcher
+   * @return {Promise<void>} Void
    */
-  async remove({ commit }) {
+  async remove({ commit, dispatch }) {
     const state = await driver.storage.local.get();
     const { registration } = state;
     // Create new user id
@@ -106,6 +114,8 @@ const actions = {
       registration,
     };
     await driver.storage.local.set(newState);
+    // Deactivate tracking when panel and vendor identifier are set
+    dispatch('settings/save', { tracking: false }, { root: true });
     commit(SAVE, registration);
   },
 };
