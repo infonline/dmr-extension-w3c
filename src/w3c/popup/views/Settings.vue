@@ -34,6 +34,7 @@
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-switch
+                    :disabled="!isRegistered"
                     color="accent"
                     v-model="settings.tracking"
                   ></v-switch>
