@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 import App from './views/App.vue';
-import router from './router';
+import router, { sync } from './router';
 import store from '../store';
 import i18n from './plugins/i18n';
 
@@ -20,6 +20,8 @@ Vue.use(Vuetify, {
   },
 });
 
+const unsync = sync(store, router);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -27,7 +29,14 @@ new Vue({
   store,
   i18n,
   render: h => h(App),
-  beforeCreate() {
-    this.$store.dispatch('init');
+  async beforeCreate() {
+    // Load last route from local store
+    await this.$store.dispatch('route/load', this.$router);
+    // Initialize other modules
+    await this.$store.dispatch('init');
+  },
+  beforeDestroy() {
+    // Remove router <-> vuex store synchronisation
+    unsync();
   },
 });

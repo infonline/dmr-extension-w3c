@@ -4,6 +4,7 @@ import routes from './routes';
 
 Vue.use(VueRouter);
 
+export { default as sync } from './store';
 export default new VueRouter({
   routes,
 });
