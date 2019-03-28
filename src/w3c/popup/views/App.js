@@ -35,7 +35,7 @@ export default {
           icon: 'security',
           path: {
             type: 'external',
-            href: `${IAM_PANEL_EXCHANGE_URL}/privacy`,
+            href: `${IAM_PANEL_EXCHANGE_URL}/home/privacy`,
           },
         },
         {
