@@ -101,7 +101,7 @@ if (args.vendor === 'safari') {
         pack(PACKAGE_CONFIG)
           .then(() => {
             return fse.copy(path.join(__dirname, '../packages', args.vendor, PACKAGE_CONFIG.filename),
-              path.join(__dirname, '../packages', args.vendor, 'IMAREX-latest.zip'));
+              path.join(__dirname, '../packages', args.vendor, 'DMR-latest.zip'));
           })
           .then(() => {
             log(chalk.black.bgGreen(' DONE '), chalk.green(`Packaging extension for ${args.vendor} successful.`));
