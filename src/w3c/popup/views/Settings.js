@@ -1,11 +1,11 @@
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   computed: {
     ...mapState({
       settings: state => state.settings.settings,
+      registration: state => state.registration.registration,
     }),
-    ...mapGetters('registration', ['isRegistered']),
   },
   i18n: {
     messages: {
@@ -38,12 +38,10 @@ export default {
     },
   },
   methods: {
-    ...mapActions('settings', {
-      saveSettings: 'save',
-    }),
-    save(settings) {
-      this.saveSettings(settings);
-      this.$router.push('/');
+    ...mapActions('settings', ['save']),
+    handleClick(settings) {
+      this.save(settings);
+      setTimeout(() => this.$router.push('/'), 150);
     },
   },
   name: 'Settings',

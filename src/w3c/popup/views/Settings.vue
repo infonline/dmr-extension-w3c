@@ -34,7 +34,7 @@
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-switch
-                    :disabled="!isRegistered"
+                    :disabled="!registration.panelId && !registration.vendor"
                     color="accent"
                     v-model="settings.tracking"
                   ></v-switch>
@@ -53,7 +53,7 @@
             <v-btn
               color="secondary"
               class="primary--text"
-              @click="() => save(settings)"
+              @click="handleClick(settings)"
             >{{ $t('buttons.save') }}</v-btn>
           </v-card-actions>
         </v-card>
