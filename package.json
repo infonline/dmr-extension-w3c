@@ -1,9 +1,9 @@
 {
-  "name": "imarex",
+  "name": "dmr-extension-w3c",
   "version": "1.0.1",
-  "description": "INFOnline GmbH: Market Research Extension for Chrome, Edge, Firefox, Safari",
+  "description": "Digital Market Research by INFOnline W3C extension",
   "main": "index.js",
-  "repository": "git@vgitbn003.infon:IAM/iam-web-extension.git",
+  "repository": "git@vgitbn003.infon:IAM/dmr-extension-w3c.git",
   "author": "Jens Oswald <joswald@infonline.de>",
   "license": "UNLICENSED",
   "private": true,

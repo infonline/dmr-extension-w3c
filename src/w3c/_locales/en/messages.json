@@ -1,10 +1,10 @@
 {
   "extensionName": {
-    "message": "IMAREX",
+    "message": "Digital Market Research by INFOnline",
     "description": "Name of the extension"
   },
   "extensionDescription": {
-    "message": "Browser extension for the INFOnline market research",
+    "message": "Browser extension Digital Market Research by INFOnline",
     "description": "Description of the extension"
   },
   "tabIntroduction": {
@@ -20,11 +20,11 @@
     "description": "Label of statistics tab"
   },
   "panelIntroductionHeadText": {
-    "message": "Welcome to IMAREX",
+    "message": "Welcome to Digital Market Research by INFOnline",
     "description": "Header text on the panel introduction view"
   },
   "panelIntroductionDescriptionText": {
-    "message": "This is an INFOnline browser extension for market research for $vendorFullName$",
+    "message": "This is an browser extension for digital market research by INFOnline for $vendorFullName$",
     "description": "Description text on the panel introduction view",
     "placeholders": {
       "vendorFullName" : {
