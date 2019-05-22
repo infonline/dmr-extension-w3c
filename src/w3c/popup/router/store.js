@@ -36,7 +36,8 @@ const actions = {
   async load(...args) {
     const [, router] = args;
     const localStore = await driver.storage.local.get();
-    if (router.currentRoute.path !== localStore.lastRoute.path) {
+    if (router.currentRoute && router.currentRoute.path && localStore.lastRoute && localStore.lastRoute.path
+      && router.currentRoute.path !== localStore.lastRoute.path) {
       router.push(localStore.lastRoute.path);
     }
   },
