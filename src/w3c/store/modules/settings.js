@@ -3,13 +3,14 @@ import { driver } from '../../scripts/driver';
 
 const SAVE = 'SAVE';
 
-const defaultState = {
+const defaultState = () => ({
   settings: {
-    tracking: true,
+    id: driver.runtime.id,
+    tracking: false,
     createdAt: new Date().toJSON(),
     updatedAt: undefined,
   },
-};
+});
 
 const actions = {
   /**
@@ -24,25 +25,14 @@ const actions = {
     if (!settings) {
       await driver.storage.local.set({
         ...state,
-        settings: defaultState.settings,
+        settings: defaultState().settings,
       });
-      commit(SAVE, defaultState.settings);
+      commit(SAVE, defaultState().settings);
     } else {
       commit(SAVE, settings);
     }
   },
-  async save({ commit }, data) {
-    const state = await driver.storage.local.get();
-    let { settings } = state;
-    settings = {
-      ...settings,
-      ...data,
-      updatedAt: new Date().toJSON(),
-    };
-    await driver.storage.local.set({
-      ...state,
-      settings,
-    });
+  save({ commit }, settings) {
     // We have to inform the background script over the updated settings. The background script will
     // then update the state of it's own store instance. This is necessary because of different
     // store instances between background script and popup.
@@ -51,6 +41,7 @@ const actions = {
       to: 'IMAREX_WEB_EXTENSION',
       message: {
         action: 'UPDATE_SETTINGS',
+        settings,
       },
     });
     commit(SAVE, settings);
@@ -73,5 +64,5 @@ export default {
   getters,
   mutations,
   namespaced: true,
-  state: defaultState,
+  state: defaultState(),
 };
