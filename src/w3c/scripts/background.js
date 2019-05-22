@@ -1,4 +1,5 @@
 /* eslint-env browser */
+/* globals IAM_PANEL_EXCHANGE_URL */
 /* global IAM_SCRIPT_URL */
 // Import web extension driver
 /**
@@ -9,7 +10,7 @@ import { driver } from './driver';
 import store from '../store';
 import {
   log,
-  fetch,
+  fetch, uuidv4,
 } from './utils';
 /**
  * The default URL filter for navigation events
@@ -55,8 +56,8 @@ const loadIamScript = async () => {
 };
 
 /**
- * Listener for history change and dom content loaded events. Will execute the INFOnline
- * measurement script and will instruct the content script to count.
+ * Listener for history change and dom content loaded events. Will execute the
+ * INFOnline measurement script and will instruct the content script to count.
  *
  * @param {Object} sender - The message sender object.
  */
@@ -68,8 +69,9 @@ const onLoaded = async (sender) => {
         timeStamp,
         tabId,
       } = sender;
-      const settings = store.getters['settings/getSettings'];
-      if (settings.tracking) {
+      const { settings } = await driver.storage.local.get();
+      const { tracking } = settings;
+      if (tracking === true) {
         // Get transition qualifier from transition qualifier map
         const transitionQualifiers = transitionQualifiersMap.get(tabId) || '';
         // Get local timestamp from local time stamp map
@@ -113,7 +115,7 @@ const onLoaded = async (sender) => {
                 u4: url.origin,
                 uid: registration.userId,
                 pid: registration.panelId || '',
-                pvr: registration.vendor || '',
+                pvr: registration.provider || '',
                 tid: tabId,
               },
             },
@@ -124,7 +126,7 @@ const onLoaded = async (sender) => {
           if (response) {
             log('info', `Count of ${url.origin} succeeded on tab ${tabId}`);
             // Update site statistic
-            store.dispatch('statistic/update', { type: 'site', key: url.hostname });
+            store.dispatch('statistic/update', { type: 'count', event: 'count', site: url.hostname });
           } else if (!response) {
             log('error', `Count of ${url.origin} failed on tab ${tabId}`);
           }
@@ -137,106 +139,252 @@ const onLoaded = async (sender) => {
     log('error', err);
   }
 };
+const informTabs = async (tabs, message) => {
+  try {
+    // Send installation Id back to content script
+    const promises = tabs.map(item => driver.tabs.sendMessage(item.id, message));
+    const responses = await Promise.all(promises);
+    return responses.length === promises.length;
+  } catch (error) {
+    throw error;
+  }
+};
+
 /**
  * Central messaging listener for
  *
  * @param request
- * @param sender
  * @returns {Promise<*>}
  */
-const onMessage = async (request, sender) => {
-  log('info', request, sender);
-  const {
-    tab,
-  } = sender;
-  if (request.from === 'IMAREX_REGISTRATION_SITE'
-    && request.message.action === 'GET_REGISTRATION') {
-    const registration = store.getters['registration/getRegistration'];
-    const message = {
-      from: request.to,
-      to: request.from,
-      message: {
-        ...request.message,
-        registration,
-      },
-    };
-    // Send installation Id back to content script
-    const response = await driver.tabs.sendMessage(tab.id, message);
-    // Log success or failure
-    if (response) {
-      log('info', `Registration details successfully transmitted to tab ${tab.id}`);
-    } else if (!response) {
-      log('error', `Registration details successfully transmitted to tab ${tab.id}`);
+const onMessage = async (request) => {
+  try {
+    const tabs = await driver.tabs.query({ url: `${IAM_PANEL_EXCHANGE_URL}/*` });
+    const tabIds = tabs.map(item => item.id);
+    const data = await driver.storage.local.get();
+    if (request.from === 'IMAREX_REGISTRATION_SITE'
+      && request.message.action === 'GET_REGISTRATION') {
+      const { registration } = data;
+      const message = {
+        from: request.to,
+        to: request.from,
+        message: {
+          ...request.message,
+          registration,
+        },
+      };
+      if (await informTabs(tabs, message)) {
+        log('info', `Registration details successfully transmitted to tabs ${tabIds.join(', ')}`);
+      } else {
+        log('error', `Registration details successfully transmitted to tab ${tabIds.join(', ')}`);
+      }
+    } else if (request.from === 'IMAREX_REGISTRATION_SITE'
+      && request.message.action === 'SET_PANEL_ID') {
+      const { registration } = data;
+      registration.panelId = request.message.panelId;
+      registration.updatedAt = new Date().toJSON();
+      await driver.storage.local.set({ ...data, registration });
+      // Send panel Id back to content script
+      const message = {
+        from: request.to,
+        to: request.from,
+        message: {
+          ...request.message,
+          registration,
+        },
+      };
+      if (await informTabs(tabs, message)) {
+        log('info', `Panel identifier successfully transmitted to tabs ${tabIds.join(', ')}`);
+      } else {
+        log('error', `Panel identifier details successfully transmitted to tab ${tabIds.join(', ')}`);
+      }
+    } else if (request.from === 'IMAREX_REGISTRATION_SITE' && request.message.action === 'SET_PROVIDER') {
+      const { registration } = data;
+      registration.provider = request.message.provider;
+      registration.updatedAt = new Date().toJSON();
+      await driver.storage.local.set({ ...data, registration });
+      // Send provider back to content script
+      const message = {
+        from: request.to,
+        to: request.from,
+        message: {
+          ...request.message,
+          registration,
+        },
+      };
+      if (await informTabs(tabs, message)) {
+        log('info', `Provider details successfully transmitted to tabs ${tabIds.join(', ')}`);
+      } else {
+        log('error', `Provider details successfully transmitted to tab ${tabIds.join(', ')}`);
+      }
+    } else if (request.from === 'IMAREX_REGISTRATION_SITE' && request.message.action === 'REMOVE_PROVIDER') {
+      const { registration } = data;
+      registration.provider = undefined;
+      registration.updatedAt = new Date().toJSON();
+      await driver.storage.local.set({ ...data, registration });
+      // Send provider back to content script
+      const message = {
+        from: request.to,
+        to: request.from,
+        message: {
+          ...request.message,
+          registration,
+        },
+      };
+      if (await informTabs(tabs, message)) {
+        log('info', `Removal of provider details successfully transmitted to tabs ${tabIds.join(', ')}`);
+      } else {
+        log('error', `Removal of provider details details successfully transmitted to tab ${tabIds.join(', ')}`);
+      }
+    } else if (request.from === 'IMAREX_REGISTRATION_SITE' && request.message.action === 'TOGGLE_AGREEMENT') {
+      const { registration, settings } = data;
+      registration.agreed = request.message.agreed;
+      // Toggle tracking state according to the agreement state
+      settings.tracking = request.message.agreed;
+      settings.updatedAt = new Date().toJSON();
+      registration.updatedAt = new Date().toJSON();
+      // Persistent state
+      await driver.storage.local.set({ ...data, registration, settings });
+      // Send provider back to content script
+      const message = {
+        from: request.to,
+        to: request.from,
+        message: {
+          ...request.message,
+          registration,
+        },
+      };
+      if (await informTabs(tabs, message)) {
+        log('info', `Removal of provider details successfully transmitted to tabs ${tabIds.join(', ')}`);
+      } else {
+        log('error', `Removal of provider details details successfully transmitted to tab ${tabIds.join(', ')}`);
+      }
+    } else if (request.from === 'IMAREX_REGISTRATION_SITE' && request.message.action === 'REMOVE_REGISTRATION') {
+      const { registration } = data;
+      // Create new user id
+      registration.userId = uuidv4();
+      registration.agreed = false;
+      registration.completed = false;
+      // Set the uninstall url which should be opened when the extension is uninstalled
+      if (registration.userId && registration.provider) {
+        driver.runtime
+          .setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/home/registration?action=revoke&userId=
+            ${registration.userId}&provider=${registration.provider.name}`);
+      }
+      // Wipe panel identifier
+      registration.panelId = undefined;
+      // Wipe provider name
+      registration.provider = undefined;
+      registration.updatedAt = new Date().toJSON();
+      // Persistent state
+      await driver.storage.local.set({ ...data, registration });
+      const message = {
+        from: request.to,
+        to: request.from,
+        message: {
+          ...request.message,
+          registration,
+        },
+      };
+      if (await informTabs(tabs, message)) {
+        log('info', `Removal of registration successfully transmitted to tabs ${tabIds.join(', ')}`);
+      } else {
+        log('error', `Removal of registration failed to transmit to tabs ${tabIds.join(', ')}`);
+      }
+    } else if (request.from === 'IMAREX_WEB_EXTENSION' && request.message.action === 'UPDATE_SETTINGS') {
+      const { settings } = request.message;
+      await driver.storage.local.set({ ...data, settings });
+      const message = {
+        from: request.to,
+        to: 'IMAREX_REGISTRATION_SITE',
+        message: {
+          action: settings.tracking ? 'ACTIVATE_TRACKING' : 'DEACTIVATE_TRACKING',
+          tracking: settings.tracking,
+        },
+      };
+      if (await informTabs(tabs, message)) {
+        log('info', `Extension settings successfully transmitted to tabs ${tabIds.join(', ')}`);
+      } else {
+        log('error', `Extension settings failed to transmit to tab tabs ${tabIds.join(', ')}`);
+      }
+    } else if (request.from === 'IMAREX_REGISTRATION_SITE' && request.message.action === 'GET_EXTENSION_STATS') {
+      const { version } = driver.runtime.getManifest();
+      const { id } = driver.runtime;
+      const { registration, statistic } = data;
+      const { createdAt: installedAt } = registration;
+      const message = {
+        from: request.to,
+        to: request.from,
+        message: {
+          ...request.message,
+          id,
+          version,
+          statistic,
+          installedAt,
+        },
+      };
+      if (await informTabs(tabs, message)) {
+        log('info', `Extension stats successfully transmitted to tabs ${tabIds.join(', ')}`);
+      } else {
+        log('error', `Extension stats failed to transmit to tab tabs ${tabIds.join(', ')}`);
+      }
+    } else if (request.from === 'IMAREX_REGISTRATION_SITE'
+      && (request.message.action === 'ACTIVATE_TRACKING'
+        || request.message.action === 'DEACTIVATE_TRACKING')) {
+      data.settings.tracking = request.message.action === 'ACTIVATE_TRACKING';
+      await driver.storage.local.set(data);
+      const message = {
+        from: request.to,
+        to: request.from,
+        message: {
+          ...request.message,
+          tracking: data.settings.tracking,
+        },
+      };
+      if (await informTabs(tabs, message)) {
+        log('info', `Extension settings successfully transmitted to tabs ${tabIds.join(', ')}`);
+      } else {
+        log('error', `Extension settings failed to transmit to tab tabs ${tabIds.join(', ')}`);
+      }
+    } else if (request.from === 'IMAREX_REGISTRATION_SITE' && request.message.action === 'GET_SETTINGS') {
+      const { settings } = data;
+      const message = {
+        from: request.to,
+        to: request.from,
+        message: {
+          ...request.message,
+          settings,
+        },
+      };
+      if (await informTabs(tabs, message)) {
+        log('info', `Extension settings successfully transmitted to tabs ${tabIds.join(', ')}`);
+      } else {
+        log('error', `Extension settings failed to transmit to tab tabs ${tabIds.join(', ')}`);
+      }
+    } else if (request.from === 'IMAREX_REGISTRATION_SITE' && request.message.action === 'COMPLETE_REGISTRATION') {
+      const { registration } = data;
+      registration.completed = true;
+      registration.updatedAt = new Date().toJSON();
+      // Persistent state
+      await driver.storage.local.set({ ...data, registration });
+      const message = {
+        from: request.to,
+        to: request.from,
+        message: {
+          ...request.message,
+          registration,
+        },
+      };
+      if (await informTabs(tabs, message)) {
+        log('info', `Completion of registration successfully transmitted to tabs ${tabIds.join(', ')}`);
+      } else {
+        log('error', `Completion of registration failed to transmit to tabs ${tabIds.join(', ')}`);
+      }
     }
-  } else if (request.from === 'IMAREX_REGISTRATION_SITE'
-    && request.message.action === 'SET_PANEL_ID') {
-    const registration = store.getters['registration/getRegistration'];
-    registration.panelId = request.message.panelId;
-    store.dispatch('registration/save', registration);
-    // Send panel Id back to content script
-    const message = {
-      from: request.to,
-      to: request.from,
-      message: {
-        ...request.message,
-        registration,
-      },
-    };
-    // Send installation Id back to content script
-    const response = await driver.tabs.sendMessage(tab.id, message);
-    // Log success or failure
-    if (response) {
-      log('info', `Panel ID ${registration.panelId} successfully transmitted from tab ${tab.id}`);
-    } else if (!response) {
-      log('error', `Panel ID ${registration.panelId} failed to transmit to tab ${tab.id}`);
-    }
-  } else if (request.from === 'IMAREX_REGISTRATION_SITE'
-    && request.message.action === 'SET_VENDOR') {
-    const registration = store.getters['registration/getRegistration'];
-    registration.vendor = request.message.vendor;
-    store.dispatch('registration/save', registration);
-    // Send vendor back to content script
-    const message = {
-      from: request.to,
-      to: request.from,
-      message: {
-        ...request.message,
-        registration,
-      },
-    };
-    // Send installation Id back to content script
-    const response = await driver.tabs.sendMessage(tab.id, message);
-    // Log success or failure
-    if (response) {
-      log('info', `Vendor ${registration.vendor} successfully transmitted from tab ${tab.id}`);
-    } else if (!response) {
-      log('error', `Vendor ${registration.vendor} failed to transmit to tab ${tab.id}`);
-    }
-  } else if (request.from === 'IMAREX_REGISTRATION_SITE'
-    && request.message.action === 'REMOVE_REGISTRATION') {
-    await store.dispatch('registration/remove');
-    const registration = store.getters['registration/getRegistration'];
-    const message = {
-      from: request.to,
-      to: request.from,
-      message: {
-        ...request.message,
-        registration,
-      },
-    };
-    // Send installation and new user identifier back to content script
-    const response = await driver.tabs.sendMessage(tab.id, message);
-    // Log success or failure
-    if (response) {
-      log('info', `Removal of registration successfully transmitted to tab ${tab.id}`);
-    } else if (!response) {
-      log('error', `Removal of registration failed to transmit to tab ${tab.id}`);
-    }
-  } else if (request.from === 'IMAREX_WEB_EXTENSION'
-    && request.message.action === 'UPDATE_SETTINGS') {
-    store.dispatch('settings/init');
+    return true;
+  } catch (error) {
+    log('error', error);
+    return false;
   }
-  return true;
 };
 
 /**
@@ -256,6 +404,7 @@ const committed = async (sender) => {
         tabId,
         transitionType,
       } = sender;
+      const url = new URL(sender.url);
       let {
         transitionQualifiers,
       } = sender;
@@ -277,7 +426,7 @@ const committed = async (sender) => {
         driver.webNavigation.onReferenceFragmentUpdated.addListener(onLoaded, URL_FILTER);
       }
       if (transitionType) {
-        store.dispatch('statistic/update', { type: 'type', key: transitionType });
+        store.dispatch('statistic/update', { type: 'navigation', event: transitionType, site: url.hostname });
       }
     }
   } catch (err) {
