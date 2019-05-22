@@ -38,8 +38,8 @@
                   <v-icon>monetization_on</v-icon>
                 </v-list-tile-avatar>
                 <v-list-tile-content>
-                  <v-list-tile-title>{{ $t('listItems.vendor') }}</v-list-tile-title>
-                  <v-list-tile-sub-title>{{registration.vendor || 'n. a.'}}</v-list-tile-sub-title>
+                  <v-list-tile-title>{{ $t('listItems.provider') }}</v-list-tile-title>
+                  <v-list-tile-sub-title>{{ registration.provider ? registration.provider.label : $t('unknown') }}</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
               <v-list-tile>
@@ -73,7 +73,7 @@
               color="error"
               dark
               @click="deregister()"
-            >{{ $t('buttons.remove') }}</v-btn>
+            >{{ $t('buttons.revoke') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>

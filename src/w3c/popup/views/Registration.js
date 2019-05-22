@@ -15,27 +15,29 @@ export default {
         heading: 'Registrierung',
         listItems: {
           userId: 'INFOnline Nutzer-ID',
-          vendor: 'Panelanbieter',
+          provider: 'Panelanbieter',
           createdAt: 'Erstellt',
           updatedAt: 'Aktualisiert',
         },
         buttons: {
           back: 'Zurück',
-          remove: 'Entfernen',
+          revoke: 'widerrufen',
         },
+        unknown: 'Nicht bekannt',
       },
       en: {
         heading: 'Registration',
         listItems: {
           userId: 'INFOnline User-ID',
-          vendor: 'Panel provider',
+          provider: 'Panel provider',
           createdAt: 'Created',
           updatedAt: 'Updated',
         },
         buttons: {
           back: 'Back',
-          remove: 'Remove',
+          revoke: 'revoke',
         },
+        unknown: 'unknown',
       },
     },
   },
@@ -43,7 +45,7 @@ export default {
     deregister() {
       // Create a new tab with the IMAREX registration site url
       driver.tabs.create({
-        url: `${IAM_PANEL_EXCHANGE_URL}/home/registration?action=remove`,
+        url: `${IAM_PANEL_EXCHANGE_URL}/registration?action=revoke`,
       });
     },
   },
