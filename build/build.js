@@ -17,7 +17,7 @@ const { version } = pkg;
 let compiler = webpack(webpackConfig);
 const PACKAGE_CONFIG = {
   vendor: args.vendor,
-  filename: `IMAREX-${version}.zip`,
+  filename: `DMR-${version}.zip`,
   format: 'zip',
 };
 
