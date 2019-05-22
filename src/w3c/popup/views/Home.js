@@ -42,7 +42,7 @@ export default {
       registration: state => state.registration.registration,
       statistic: state => state.statistic.statistic,
     }),
-    ...mapGetters('registration', ['isRegistered']),
+    ...mapGetters('registration', ['isRegistered', 'isConfirmed']),
     ...mapGetters('settings', ['isActivated']),
     title() {
       return 'Home';
@@ -109,10 +109,10 @@ export default {
      * @return {String} Color name
      */
     getColor() {
-      if (this.isRegistered && !this.isActivated) {
+      if (this.isConfirmed && !this.isActivated) {
         return 'orange';
       }
-      if (!this.isRegistered && !this.isActivated) {
+      if (!this.isConfirmed && !this.isActivated) {
         return 'red';
       }
       return 'green';
@@ -123,10 +123,10 @@ export default {
      * @return {String} Name the icon
      */
     getIcon() {
-      if (this.isRegistered && !this.isActivated) {
+      if (this.isConfirmed && !this.isActivated) {
         return 'warning';
       }
-      if (!this.isRegistered && !this.isActivated) {
+      if (!this.isConfirmed && !this.isActivated) {
         return 'cancel';
       }
       return 'check_circle';

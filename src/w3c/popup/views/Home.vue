@@ -44,19 +44,19 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
-                v-if="isRegistered && isActivated"
+                v-if="isConfirmed && isActivated"
                 dark
                 flat
                 to="/registration"
               >{{ $t('status.buttons.details') }}</v-btn>
               <v-btn
-                v-if="!isRegistered"
+                v-if="!isConfirmed"
                 dark
                 flat
                 @click="() => register()"
               >{{ $t('status.buttons.register') }}</v-btn>
               <v-btn
-                v-if="isRegistered && !isActivated"
+                v-if="isConfirmed && !isActivated"
                 dark
                 flat
                 to="/settings"
