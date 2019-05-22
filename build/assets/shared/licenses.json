@@ -40,5 +40,11 @@
         "repository": "https://github.com/vuejs/vuex",
         "licenseUrl": "https://github.com/vuejs/vuex/raw/master/LICENSE",
         "parents": "imarex"
+    },
+    "webextension-polyfill@0.4.0": {
+        "licenses": "MPL-2.0",
+        "repository": "https://github.com/mozilla/webextension-polyfill",
+        "licenseUrl": "https://github.com/mozilla/webextension-polyfill/raw/master/LICENSE",
+        "parents": "imarex"
     }
 }
