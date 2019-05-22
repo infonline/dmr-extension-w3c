@@ -7,7 +7,7 @@
       color="primary"
       dark
     >
-      <img alt="logo" src="../../images/imarex38.png">
+      <img alt="logo" src="../../images/dmr38.png">
       <v-toolbar-title class="white--text">Digital Market Research</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-menu

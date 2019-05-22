@@ -6,8 +6,8 @@
   "description": "__MSG_extensionDescription__",
   "default_locale": "en",
   "icons": {
-    "48": "images/imarex48.png",
-    "96": "images/imarex96.png"
+    "48": "images/dmr48.png",
+    "96": "images/dmr96.png"
   },
   "background": {
     "scripts": [
