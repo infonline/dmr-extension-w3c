@@ -7,8 +7,8 @@
       color="primary"
       dark
     >
-      <img src="../../images/imarex38.png">
-      <v-toolbar-title class="white--text">IMAREX</v-toolbar-title>
+      <img alt="logo" src="../../images/imarex38.png">
+      <v-toolbar-title class="white--text">Digital Market Research</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-menu
         bottom
@@ -19,7 +19,7 @@
           dark
           icon
         >
-          <v-icon>more_vert</v-icon>
+          <v-icon>menu</v-icon>
         </v-btn>
         <v-list>
           <v-list-tile
@@ -44,7 +44,10 @@
       class="footer"
     >
       <a href="https://www.infonline.de" target="_blank">
-        <span class="ml-3 body-1 grey--text darken-3">&copy INFOnline GmbH {{new Date().getFullYear()}}</span>
+        <span
+          class="ml-3 body-1 grey--text darken-3"
+          v-html="$t('copyright', { year: new Date().getFullYear() })"
+        ></span>
       </a>
     </v-footer>
   </v-app>

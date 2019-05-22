@@ -53,9 +53,11 @@ export default {
     messages: {
       de: {
         menuItems: ['Start', 'Registrierung', 'Einstellungen', 'Datenschutz', 'Impressum'],
+        copyright: '&copy {year} INFOnline GmbH - Alle Rechte vorbehalten',
       },
       en: {
         menuItems: ['Home', 'Registration', 'Settings', 'Privacy', 'About'],
+        copyright: '&copy {year} INFOnline GmbH - All rights reserved',
       },
     },
   },
