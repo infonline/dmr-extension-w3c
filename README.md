@@ -1,4 +1,4 @@
-## INFOnline web extension (imarex)
+## Digital Market Research by INFOnline - W3C compliant browser extension
 
 - [Documentation](docs/README.md)
 
