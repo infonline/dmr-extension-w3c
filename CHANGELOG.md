@@ -1,3 +1,49 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.0.1...1.1.1) (2019-05-28)
+
+
+### Bug Fixes
+
+* **build:** change change default panel url to dmr ([2e83718](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/2e83718))
+* **build:** change IMAREX to DMR ([c7e20a2](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/c7e20a2))
+* **popup:** add correct privacy url for menu item ([c1a0566](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/c1a0566))
+* **popup:** use correct language detection function in i18n plugin ([e90e8d6](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/e90e8d6))
+* **store:** fix statistic checkup at any mutation action ([d61fbec](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/d61fbec))
+* **store:** remove initialization error and convert default state to a pure function ([7829a22](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/7829a22))
+* **store:** set new uninstall url on every registration mutation ([3b8276d](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/3b8276d))
+
+
+### Features
+
+* **all:** rename extension specific textual content from imarex into dmr ([cf9fadf](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/cf9fadf))
+* **all:** rename resources with imarex as name into dmr ([f41f155](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/f41f155))
+* **build:** rename extension archive file name to drm ([725901a](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/725901a))
+* **popup:** add copyright translations and rename extension title in toolbar ([a046caf](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/a046caf))
+* **popup:** add i18mn support and translation tokens to registration view ([930e2ea](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/930e2ea))
+* **popup:** add i18n support and a new warning state to home view ([c01ab4c](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/c01ab4c))
+* **popup:** add i18n support and initialize popup with i18n plugin ([352d4e2](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/352d4e2))
+* **popup:** add i18n support and menu text translation tokens ([d2f5188](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/d2f5188))
+* **popup:** add i18n support for about and settings view ([2f233a3](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/2f233a3))
+* **popup:** add i18n support for license website ([604a0f2](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/604a0f2))
+* **popup:** change state ui change and improve the implementation ([bde4797](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/bde4797))
+* **popup:** disable tracking switch when extension is not registered ([e7c40b6](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/e7c40b6))
+* **popup:** disable tracking switch when registration is not yet completed and make route transition smoother ([bc9ab5f](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/bc9ab5f))
+* **popup:** make last viewed route persistent and open it when opening popup ([f75c862](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/f75c862))
+* **popup:** remove help view and route ([416dee3](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/416dee3))
+* **popup:** rename vendor to provider and change implementation to support an object ([5290e3a](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/5290e3a))
+* **router:** show the last viewed view when opening the popup ([7b885c9](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/7b885c9))
+* **script:** update w3c extension polyfill to latest version ([3f5afdd](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/3f5afdd))
+* **scripts:** add correct country flag and shorten the uri in the u4 property ([d8684b1](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/d8684b1))
+* **scripts:** refactor background script ([65761b0](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/65761b0))
+* **store:** add getter for the retrieving the actual enabled state of the tracking ([f31303a](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/f31303a))
+* **store:** deactivate and activate tracking on behalf of the registration state ([1ffa239](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/1ffa239))
+* **store:** inform background script when settings are saved to inform the frontend when active ([b3db329](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/b3db329))
+* **store:** refactor statistic module ([deeca4f](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/deeca4f))
+* **store:** remove save action and make default state compatible with latest requirements ([1d2eede](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/1d2eede))
+* **store:** set uninstall url on init and remove action ([a6337cd](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/a6337cd)), closes [#9](https://vgitbn003.infon/IAM/dmr-extension-w3c/issues/9)
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.0.1...1.1.0) (2019-05-22)
 
