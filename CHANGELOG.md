@@ -1,3 +1,8 @@
+<a name="1.2.2"></a>
+## [1.2.2](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.2.1...1.2.2) (2019-06-13)
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.2.0...1.2.1) (2019-06-13)
 
