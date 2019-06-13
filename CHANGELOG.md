@@ -1,3 +1,13 @@
+<a name="1.2.1"></a>
+## [1.2.1](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.2.0...1.2.1) (2019-06-13)
+
+
+### Bug Fixes
+
+* **scripts:** load registration details from local storage ([08439fe](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/08439fe))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.1.1...1.2.0) (2019-06-13)
 
