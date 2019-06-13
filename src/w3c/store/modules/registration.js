@@ -10,7 +10,11 @@ const defaultState = () => ({
     installationId: undefined,
     userId: undefined,
     panelId: undefined,
-    provider: undefined,
+    provider: {
+      id: undefined,
+      name: undefined,
+      label: undefined,
+    },
     agreed: false,
     completed: false,
     createdAt: new Date().toJSON(),
@@ -32,7 +36,7 @@ const actions = {
     // Create installation ID and user ID when not defined in local extension storage
     if (!registration) {
       registration = {
-        ...defaultState.registration,
+        ...defaultState().registration,
         userId: uuidv4(),
         installationId: uuidv4(),
         createdAt: new Date().toJSON(),
@@ -53,7 +57,7 @@ const actions = {
     if (registration.userId && registration.provider) {
       driver.runtime
         .setUninstallURL(
-          `${IAM_PANEL_EXCHANGE_URL}/registration/status?action=remove&userId=
+          `${IAM_PANEL_EXCHANGE_URL}/registration?action=revoke&userId=
           ${registration.userId}&provider=${registration.provider.name}`,
         );
     }
