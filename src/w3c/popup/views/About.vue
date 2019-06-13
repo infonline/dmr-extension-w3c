@@ -28,7 +28,7 @@
               <v-list-tile>
                 <v-list-tile-content>
                   <v-list-tile-title>{{ $t('listItems.name.label') }}</v-list-tile-title>
-                  <v-list-tile-sub-title>IMAREX</v-list-tile-sub-title>
+                  <v-list-tile-sub-title>Digital Market Research by INFOnline</v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
               <v-list-tile>
