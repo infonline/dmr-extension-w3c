@@ -1,8 +1,17 @@
 /* eslint-disable no-param-reassign */
 import { driver } from '../../scripts/driver';
-
+import { log } from '../../scripts/utils';
+import {
+  MESSAGE_ACTIONS,
+  MESSAGE_DIRECTIONS,
+} from '../../scripts/constants';
+// Mutation types
 const SAVE = 'SAVE';
-
+/**
+ * Default state factory
+ *
+ * @return {{settings: {createdAt: string, id: *, tracking: boolean, updatedAt: undefined}}}
+ */
 const defaultState = () => ({
   settings: {
     id: driver.runtime.id,
@@ -20,31 +29,43 @@ const actions = {
    * @returns {Promise<void>}
    */
   async init({ commit }) {
-    const state = await driver.storage.local.get();
-    const { settings } = state;
-    if (!settings) {
-      await driver.storage.local.set({
-        ...state,
-        settings: defaultState().settings,
-      });
-      commit(SAVE, defaultState().settings);
-    } else {
+    try {
+      const store = await driver.storage.local.get();
+      let { settings } = store;
+      if (!settings) {
+        // eslint-disable-next-line prefer-destructuring
+        settings = defaultState().settings;
+        await driver.storage.local.set({ settings });
+      }
       commit(SAVE, settings);
+    } catch (error) {
+      log('error', error);
     }
   },
-  save({ commit }, settings) {
-    // We have to inform the background script over the updated settings. The background script will
-    // then update the state of it's own store instance. This is necessary because of different
-    // store instances between background script and popup.
-    driver.runtime.sendMessage({
-      from: 'IMAREX_WEB_EXTENSION',
-      to: 'IMAREX_WEB_EXTENSION',
-      message: {
-        action: 'UPDATE_SETTINGS',
-        settings,
-      },
-    });
-    commit(SAVE, settings);
+  /**
+   * Saves the settings
+   *
+   * @param {Function} commit - Method for commit mutations of local module state
+   * @param {Object} settings - Updated extension settings
+   */
+  async save({ commit }, settings) {
+    try {
+      // Persistent settings
+      await driver.storage.local.set({ settings });
+      // Commit state mutation
+      commit(SAVE, settings);
+      // Inform the background script to inform tabs who have the dmr web application open
+      driver.runtime.sendMessage({
+        from: MESSAGE_DIRECTIONS.EXTENSION,
+        to: MESSAGE_DIRECTIONS.WEB_APP,
+        message: {
+          action: MESSAGE_ACTIONS.UPDATE_SETTINGS,
+          settings,
+        },
+      });
+    } catch (error) {
+      log('error', error);
+    }
   },
 };
 
