@@ -1,6 +1,6 @@
 /* env browser */
 // eslint-disable-next-line no-unused-vars
-let szmvars;
+let szmvars = '';
 const dummySite = 'dummy';
 const baseUrlDE = 'de.ioam.de/tx.io';
 const baseUrlLSO = 'de.ioam.de/aid.io';
