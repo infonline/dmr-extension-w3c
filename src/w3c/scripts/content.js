@@ -1,5 +1,5 @@
 /* eslint-env browser */
-/* global iom, IAM_PANEL_EXCHANGE_URL */
+/* global iom, ENV */
 // Import web extension driver
 /**
  * Web extension driver
@@ -8,6 +8,22 @@
 import { driver } from './driver';
 // Import log function
 import { log } from './utils';
+import {
+  DMR_WEB_APP_URIS,
+  MESSAGE_ACTIONS,
+  MESSAGE_DIRECTIONS,
+} from './constants';
+import iomFactory from './iom';
+
+const env = ENV;
+// Create new instance of INFOnline measurement library
+const iom = iomFactory();
+/**
+ * Local event origin cache. Will be overwritten on every post message event coming from the dmr web app
+ *
+ * @type {String}
+ */
+let origin;
 /**
  * Will create the iam measurement impulse and executes the count method
  * of the iam script.
@@ -26,7 +42,20 @@ const count = (data) => {
     throw err;
   }
 };
-
+/**
+ * Check if the provided event origin is valid
+ *
+ * @param {String} transmittedOrigin - The origin (uri) of a post message event
+ * @return {Boolean} Check result
+ */
+const checkOrigin = (transmittedOrigin) => {
+  if (env === 'development') {
+    // Check origin against development uri schema
+    return transmittedOrigin.includes('localhost:8080');
+  }
+  // Check origin again productive uri schema
+  return DMR_WEB_APP_URIS.map(uri => transmittedOrigin.includes(uri)).filter(item => item === true).length > 0;
+};
 /**
  * Central message handler for the content script
  *
@@ -42,44 +71,42 @@ const onMessage = async (event) => {
     log('info', 'Content script receives message from background script with action'
       + ` ${message.action} and destination ${to}`);
     // Handle normal internal messages
-    if (from === to) {
-      if (message.action === 'COUNT' && message.data) {
+    if (from === MESSAGE_DIRECTIONS.EXTENSION && to === MESSAGE_DIRECTIONS.EXTENSION) {
+      if (message.action === MESSAGE_ACTIONS.COUNT && message.data) {
         count(message.data);
       }
-    } else if (from !== to) {
-      // Send message to the IMAREX exchange site
+    } else if (from === MESSAGE_DIRECTIONS.EXTENSION && to === MESSAGE_DIRECTIONS.WEB_APP) {
+      // Send message to the DMR web app
       window.postMessage({
         from,
         to,
         message,
-      }, IAM_PANEL_EXCHANGE_URL);
+      }, origin);
     }
-    // Always response with the message to signalize the successful
-    // transmission.
+    // Always response with the message to signalize the successful transmission.
     return true;
   } catch (err) {
-    // In case of error log it and signalize the failure to background
-    // script
+    // In case of error log it and signalize the failure to background script
     log('error', err);
     throw err;
   }
 };
 // Add event message handler for message passing from a normal web page
 window.addEventListener('message', async (event) => {
-  // Process only events who source are the imarex exchange site
-  if (event.source === window && event.origin === IAM_PANEL_EXCHANGE_URL) {
-    if (event.data.from && event.data.from === 'IMAREX_REGISTRATION_SITE') {
-      log('info', `Content script received message with action ${event.data.message.action}`
-        + ` from ${event.data.from} site.`);
+  // Process only events who source are the dmr web app
+  if (event.source === window && checkOrigin(event.origin) === true) {
+    // eslint-disable-next-line prefer-destructuring
+    origin = event.origin;
+    if (event.data.from && event.data.from === MESSAGE_DIRECTIONS.WEB_APP) {
+      log('info', `Content script received message with action ${event.data.message.action} from ${event.data.from}.`);
       // Send message to background script
-      if (event.data.to && event.data.to === 'IMAREX_WEB_EXTENSION') {
+      if (event.data.to && event.data.to === MESSAGE_DIRECTIONS.EXTENSION) {
         // Send message to background script for processing
         const response = driver.runtime.sendMessage({
           ...event.data,
         });
         if (response) {
-          log('info', `Message from ${event.data.from} with action ${event.data.message.action}`
-            + ' successfully transmitted to background script');
+          log('info', `Message from ${event.data.from} with action ${event.data.message.action} successfully transmitted to background script`);
         }
       }
     }
