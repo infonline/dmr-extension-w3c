@@ -1,3 +1,26 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.1.1...1.2.0) (2019-06-13)
+
+
+### Bug Fixes
+
+* **popup:** correct wrong privacy url ([ef9d995](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/ef9d995))
+* **popup:** rename IMAREX text token to Digital Market Research by INFOnline ([7ebf1f6](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/7ebf1f6))
+* **scripts:** set szmvars to empty string ([5ce8ccf](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/5ce8ccf))
+* **store:** improve default state factory and correct wrong uninstall url ([8cc0000](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/8cc0000))
+
+
+### Features
+
+* **script:** improve content script ([4a752ab](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/4a752ab))
+* **scripts:** add none-central version of INFOnline tracking lib ([7b08eb5](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/7b08eb5))
+* **scripts:** improve background script ([6a81d3b](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/6a81d3b))
+* **scripts:** move any constant to a separate module ([12e0687](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/12e0687))
+* **store:** improve settings store module ([16e0aa4](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/16e0aa4))
+* **store:** improve statistic store module ([34cfa84](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/34cfa84))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.0.1...1.1.1) (2019-05-28)
 
