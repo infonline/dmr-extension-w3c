@@ -37,7 +37,7 @@ const onLoaded = async (sender) => {
         timeStamp,
         tabId,
       } = sender;
-      const { settings } = await driver.storage.local.get();
+      const { settings, registration } = await driver.storage.local.get();
       const { tracking } = settings;
       if (tracking === true) {
         // Get transition qualifier from transition qualifier map
@@ -62,8 +62,6 @@ const onLoaded = async (sender) => {
           localTimeStamp = timeStamp;
           // Update tab in tabs weak map
           localTimeStampsMap.set(tabId, localTimeStamp);
-          // Retrieve storage data.
-          const registration = store.getters['registration/getRegistration'];
           log('info', `Count of ${url.origin} initiated on tab ${tabId}`);
           // Create message object for instruct the content script to count
           const message = {
@@ -199,7 +197,7 @@ const onMessage = async (request) => {
         const { registration } = data;
         registration.panelId = request.message.panelId;
         registration.updatedAt = new Date().toJSON();
-        await driver.storage.local.set({ ...data, registration });
+        await driver.storage.local.set({ registration });
         // Create response with set panel id
         response = {
           from: request.to,
@@ -213,7 +211,7 @@ const onMessage = async (request) => {
         const { registration } = data;
         registration.provider = request.message.provider;
         registration.updatedAt = new Date().toJSON();
-        await driver.storage.local.set({ ...data, registration });
+        await driver.storage.local.set({ registration });
         // Create response with set provider
         response = {
           from: request.to,
@@ -231,7 +229,7 @@ const onMessage = async (request) => {
           label: undefined,
         };
         registration.updatedAt = new Date().toJSON();
-        await driver.storage.local.set({ ...data, registration });
+        await driver.storage.local.set({ registration });
         // Create response with emptied provider
         response = {
           from: request.to,
