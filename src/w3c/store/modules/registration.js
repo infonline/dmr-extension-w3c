@@ -22,6 +22,16 @@ const defaultState = () => ({
   },
 });
 
+/**
+ * Sets the uninstall URL for the current extension
+ *
+ * @param {String} userId - User identifier
+ * @param {String} provider - Name of the provider
+ */
+const setUninstallUrl = (userId, provider) => {
+  driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/remove?&userId=${encodeURIComponent(userId)}&provider=${encodeURIComponent(provider)}`);
+};
+
 const actions = {
   /**
    * Initializes the registration module
@@ -55,11 +65,7 @@ const actions = {
     }
     // Set the uninstall url which should be opened when the extension is uninstalled
     if (registration.userId && registration.provider) {
-      driver.runtime
-        .setUninstallURL(
-          `${IAM_PANEL_EXCHANGE_URL}/registration?action=revoke&userId=
-          ${registration.userId}&provider=${registration.provider.name}`,
-        );
+      setUninstallUrl(registration.userId, registration.provider.name);
     }
     // Commit state mutation
     commit(SAVE, registration);
