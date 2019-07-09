@@ -172,6 +172,16 @@ const openExtensionManagementTab = () => {
 };
 
 /**
+ * Sets the uninstall URL for the current extension
+ *
+ * @param {String} userId - User identifier
+ * @param {String} provider - Name of the provider
+ */
+const setUninstallUrl = (userId, provider) => {
+  driver.runtime.setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/remove?&userId=${encodeURIComponent(userId)}&provider=${encodeURIComponent(provider)}`);
+};
+
+/**
  * Central messaging handler for the extension
  *
  * @param {Object} request- The message request
@@ -212,6 +222,9 @@ const onMessage = async (request) => {
         registration.provider = request.message.provider;
         registration.updatedAt = new Date().toJSON();
         await driver.storage.local.set({ registration });
+        if (registration.provider.name) {
+          setUninstallUrl(registration.userId, registration.provider.name);
+        }
         // Create response with set provider
         response = {
           from: request.to,
@@ -265,9 +278,7 @@ const onMessage = async (request) => {
         registration.completed = false;
         // Set the uninstall url which should be opened when the extension is uninstalled
         if (registration.provider.name) {
-          driver.runtime
-            .setUninstallURL(`${IAM_PANEL_EXCHANGE_URL}/registration?action=revoke&userId=
-            ${registration.userId}&provider=${registration.provider.name}`);
+          setUninstallUrl(registration.userId, registration.provider.name);
         }
         // Wipe panel identifier
         registration.panelId = undefined;
@@ -332,6 +343,9 @@ const onMessage = async (request) => {
         registration.updatedAt = new Date().toJSON();
         // Persistent state
         await driver.storage.local.set({ ...data, registration });
+        if (registration.provider.name) {
+          setUninstallUrl(registration.userId, registration.provider.name);
+        }
         // Create response with completed registration
         response = {
           from: request.to,
@@ -347,12 +361,13 @@ const onMessage = async (request) => {
     } else if (request.from === MESSAGE_DIRECTIONS.EXTENSION && request.to === MESSAGE_DIRECTIONS.WEB_APP) {
       if (request.message.action === MESSAGE_ACTIONS.UPDATE_SETTINGS) {
         const { settings } = request.message;
+        await driver.storage.local.set({ ...data, settings });
         // Create response with updated settings
         response = {
           ...request,
           message: {
             action: MESSAGE_ACTIONS.UPDATE_SETTINGS,
-            tracking: settings.tracking,
+            settings,
           },
         };
       }
