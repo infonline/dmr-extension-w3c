@@ -6,20 +6,21 @@ import path from 'path';
 import pkg from '../package.json';
 
 const { version } = pkg;
+const ENV = process.env.NODE_ENV;
 
 const BROWSERS = [
   {
     name: 'chrome',
-    extension: 'crx',
+    extension: ENV === 'production' ? 'crx' : 'zip',
   }, {
     name: 'edge',
-    extension: 'crx',
+    extension: ENV === 'production' ? 'crx' : 'zip',
   }, {
     name: 'firefox',
     extension: 'zip',
   }, {
     name: 'opera',
-    extension: 'crx',
+    extension: ENV === 'production' ? 'crx' : 'zip',
   },
 ];
 /**
