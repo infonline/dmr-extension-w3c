@@ -64,7 +64,7 @@
     "create:licenses": "node_modules/.bin/npm-license-crawler --onlyDirectDependencies --json src/assets/licenses.json",
     "dev": "cross-env NODE_ENV=development rollup -c --watch ./rollup.config.js",
     "dev:staging": "cross-env NODE_ENV=staging rollup -c --watch ./rollup.config.js",
-    "pack": "node --experimental-modules --input-type=module"
+    "pack": "node --experimental-modules build/pack.mjs"
   },
   "version": "1.2.2"
 }
