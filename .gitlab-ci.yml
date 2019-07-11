@@ -1,42 +1,9 @@
-image: node:8
+image: node:latest
 
 stages:
   - install
   - build
   - deploy
-
-before_script:
-  ##
-  ## Install ssh-agent if not already installed, it is required by Docker.
-  ## (change apt-get to yum if you use an RPM-based image)
-  ##
-  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-
-  ##
-  ## Run ssh-agent (inside the build environment)
-  ##
-  - eval $(ssh-agent -s)
-
-  ##
-  ## Add the SSH key stored in $SSH_DEPLOY_PRIVATE_KEY variable to the agent store
-  ## We're using tr to fix line endings which makes ed25519 keys work
-  ## without extra base64 encoding.
-  ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
-  ##
-  - echo "$SSH_DEPLOY_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-
-  ##
-  ## Create the SSH directory and give it the right permissions
-  ##
-  - mkdir -p ~/.ssh
-  - chmod 700 ~/.ssh
-
-  ##
-  ## Assuming you created the SSH_DEPLOY_TARGET_HOST_KEY variable, uncomment the
-  ## following two lines.
-  ##
-  - echo "$SSH_DEPLOY_TARGET_HOST_KEY" > ~/.ssh/known_hosts
-  - chmod 644 ~/.ssh/known_hosts
 
 install:
   tags:
@@ -60,14 +27,10 @@ build:
   dependencies:
     - install
   script:
-    - 'node ./build/build.js --vendor chrome --env production --pack'
-    - 'node ./build/build.js --vendor edge --env production --pack'
-    - 'node ./build/build.js --vendor firefox --env production --pack'
-    - 'node ./build/build.js --vendor opera --env production --pack'
+    - 'yarn run build:staging'
   artifacts:
     paths:
       - 'dist/'
-      - 'packages/'
     expire_in: 1 week
 
 deploy:
@@ -82,7 +45,15 @@ deploy:
     paths:
     - 'packages/'
     expire_in: 1 week
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_DEPLOY_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_DEPLOY_TARGET_HOST_KEY" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
   script:
     - 'ssh imarex@vwebbn002.rzbn.infon "mkdir -p /var/www/html/dmr.infonline.de/extensions"'
     - 'ssh imarex@vwebbn002.rzbn.infon "rm -rf /var/www/html/dmr.infonline.de/extensions/*"'
-    - 'scp -P22 -r packages/* imarex@vwebbn002.rzbn.infon:/var/www/html/dmr.infonline.de/extensions'
+    - 'scp -P22 -r dist/packages/* imarex@vwebbn002.rzbn.infon:/var/www/html/dmr.infonline.de/extensions'
