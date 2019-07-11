@@ -43,7 +43,7 @@ deploy:
     - build
   artifacts:
     paths:
-    - 'packages/'
+    - 'dist/'
     expire_in: 1 week
   before_script:
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
