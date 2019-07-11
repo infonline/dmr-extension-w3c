@@ -1,3 +1,5 @@
-### Build directory
+### Build tools folder
 
-Includes all build related tools and scripts
+---
+
+This folder contains the build tools with packaging and publishing functionality.

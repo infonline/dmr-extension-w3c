@@ -1,6 +1,6 @@
 {
-  "parser": "babel-eslint",
   "parserOptions": {
+    "parser": "babel-eslint",
     "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
@@ -14,13 +14,18 @@
       "spread": true
     }
   },
+  "plugins": [
+    "vue"
+  ],
   "env": {
     "node": true,
     "es6": true,
     "browser": true
   },
   "extends": [
-    "airbnb-base"
+    "airbnb-base",
+    "plugin:vue/base",
+    "plugin:vue/recommended"
   ],
   "globals": {
     "exports": false,

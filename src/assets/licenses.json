@@ -1,0 +1,44 @@
+{
+    "ua-parser-js@0.7.20": {
+        "licenses": "MIT",
+        "repository": "https://github.com/faisalman/ua-parser-js",
+        "licenseUrl": "https://github.com/faisalman/ua-parser-js/raw/master/license.md",
+        "parents": "dmr-extension-w3c"
+    },
+    "vue-i18n@8.12.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/kazupon/vue-i18n",
+        "licenseUrl": "https://github.com/kazupon/vue-i18n/raw/master/LICENSE",
+        "parents": "dmr-extension-w3c"
+    },
+    "vue-router@3.0.7": {
+        "licenses": "MIT",
+        "repository": "https://github.com/vuejs/vue-router",
+        "licenseUrl": "https://github.com/vuejs/vue-router/raw/master/LICENSE",
+        "parents": "dmr-extension-w3c"
+    },
+    "vue@2.6.10": {
+        "licenses": "MIT",
+        "repository": "https://github.com/vuejs/vue",
+        "licenseUrl": "https://github.com/vuejs/vue/raw/master/LICENSE",
+        "parents": "dmr-extension-w3c"
+    },
+    "vuetify@1.5.16": {
+        "licenses": "MIT",
+        "repository": "https://github.com/vuetifyjs/vuetify",
+        "licenseUrl": "https://github.com/vuetifyjs/vuetify/raw/master/LICENSE.md",
+        "parents": "dmr-extension-w3c"
+    },
+    "vuex@3.1.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/vuejs/vuex",
+        "licenseUrl": "https://github.com/vuejs/vuex/raw/master/LICENSE",
+        "parents": "dmr-extension-w3c"
+    },
+    "webextension-polyfill@0.4.0": {
+        "licenses": "MPL-2.0",
+        "repository": "https://github.com/mozilla/webextension-polyfill",
+        "licenseUrl": "https://github.com/mozilla/webextension-polyfill/raw/master/LICENSE",
+        "parents": "dmr-extension-w3c"
+    }
+}
