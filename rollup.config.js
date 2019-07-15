@@ -36,6 +36,8 @@ if (process.env.NODE_ENV === 'production') {
 } else if (process.env.NODE_ENV === 'staging') {
   dmrWebAppUrl = 'https://dmr.infonline.de';
 }
+// By default we support sourcemaps via inline comment
+const sourcemap = 'inline';
 // Copy options
 const COPYING_OPTIONS = [
   {
@@ -117,7 +119,7 @@ export default [
     output: {
       format: 'iife',
       file: distributions.content,
-      sourcemap: true,
+      sourcemap,
       banner: bannerText,
     },
     plugins: PLUGINS.STANDARD,
@@ -128,7 +130,7 @@ export default [
     output: {
       format: 'iife',
       file: distributions.background,
-      sourcemap: true,
+      sourcemap,
       banner: bannerText,
     },
     plugins: PLUGINS.STANDARD,
@@ -139,7 +141,7 @@ export default [
     output: {
       format: 'iife',
       dir: 'dist/bundle',
-      sourcemap: true,
+      sourcemap,
       banner: bannerText,
     },
     plugins: PLUGINS.VUE,
