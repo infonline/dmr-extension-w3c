@@ -16,71 +16,58 @@
           height="250"
           :color="getColor()"
         >
-          <v-layout
-            class="ma-0"
-            column
-            fill-height
+          <v-card-title>
+            <v-icon
+              dark
+            >
+              assignment_turned_in
+            </v-icon>
+            <span class="subheading white--text pl-2">
+              {{ $t('status.headline') }}
+            </span>
+          </v-card-title>
+          <v-card-text
+            class="text-xs-center"
+            style="height: 142px;"
           >
-            <v-layout
-              align-center
-              class="ma-0"
+            <v-avatar
+              size="96"
             >
               <v-icon
                 dark
-                class="pl-3"
-              >
-                assignment_turned_in
-              </v-icon>
-              <span class="subheading white--text pl-3">
-                {{ $t('status.headline') }}
-              </span>
-            </v-layout>
-            <v-layout
-              class="ma-0"
-              columm
-              fill-hight
-              align-center
-              justify-center
-            >
-              <v-avatar
                 size="96"
               >
-                <v-icon
-                  dark
-                  size="96"
-                >
-                  {{ getIcon() }}
-                </v-icon>
-              </v-avatar>
-            </v-layout>
-            <v-card-actions>
-              <v-spacer />
-              <v-btn
-                v-if="isConfirmed && isActivated"
-                dark
-                flat
-                to="/registration"
-              >
-                {{ $t('status.buttons.details') }}
-              </v-btn>
-              <v-btn
-                v-if="!isConfirmed"
-                dark
-                flat
-                @click="() => register()"
-              >
-                {{ $t('status.buttons.register') }}
-              </v-btn>
-              <v-btn
-                v-if="isConfirmed && !isActivated"
-                dark
-                flat
-                to="/settings"
-              >
-                {{ $t('status.buttons.activate') }}
-              </v-btn>
-            </v-card-actions>
-          </v-layout>
+                {{ getIcon() }}
+              </v-icon>
+            </v-avatar>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              v-if="isConfirmed && isActivated"
+              dark
+              flat
+              to="/registration"
+            >
+              {{ $t('status.buttons.details') }}
+            </v-btn>
+            <v-btn
+              v-if="!isConfirmed"
+              dark
+              flat
+              @click="() => register()"
+            >
+              {{ $t('status.buttons.register') }}
+            </v-btn>
+            <v-btn
+              v-if="isConfirmed && !isActivated"
+              dark
+              flat
+              to="/settings"
+            >
+              {{ $t('status.buttons.activate') }}
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
       <v-flex
@@ -90,45 +77,32 @@
           height="230"
           color="primary"
         >
-          <v-layout
-            column
-            fill-height
-            class="ma-0"
+          <v-card-title>
+            <v-icon
+              dark
+            >
+              pageview
+            </v-icon>
+            <span class="subheading white--text pl-2">
+              {{ $t('site.headline') }}
+            </span>
+          </v-card-title>
+          <v-card-text
+            class="display-3 white--text text-xs-center"
+            style="height: 122px;"
           >
-            <v-layout
-              align-center
-              class="ma-0"
+            {{ siteCount }}
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              dark
+              flat
+              to="/stats/site"
             >
-              <v-icon
-                dark
-                class="pl-3"
-              >
-                pageview
-              </v-icon>
-              <span class="subheading white--text pl-3">
-                {{ $t('site.headline') }}
-              </span>
-            </v-layout>
-            <v-layout
-              column
-              align-center
-              justify-center
-              class="ma-0"
-            >
-              <div class="display-3 white--text">
-                {{ siteCount }}
-              </div>
-            </v-layout>
-            <v-card-actions>
-              <v-spacer />
-              <v-btn
-                dark
-                flat
-              >
-                {{ $t('site.button') }}
-              </v-btn>
-            </v-card-actions>
-          </v-layout>
+              {{ $t('site.button') }}
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
       <v-flex
@@ -138,45 +112,32 @@
           height="230"
           color="accent"
         >
-          <v-layout
-            column
-            fill-height
-            class="ma-0"
+          <v-card-title>
+            <v-icon
+              dark
+            >
+              timeline
+            </v-icon>
+            <span class="subheading white--text pl-2">
+              {{ $t('overall.headline') }}
+            </span>
+          </v-card-title>
+          <v-card-text
+            class="display-3 white--text text-xs-center"
+            style="height: 122px;"
           >
-            <v-layout
-              align-center
-              class="ma-0"
+            {{ overallCount }}
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              dark
+              flat
+              to="/stats/overall"
             >
-              <v-icon
-                dark
-                class="pl-3"
-              >
-                timeline
-              </v-icon>
-              <span class="subheading white--text pl-3">
-                {{ $t('overall.headline') }}
-              </span>
-            </v-layout>
-            <v-layout
-              column
-              align-center
-              justify-center
-              class="ma-0"
-            >
-              <div class="display-3 white--text">
-                {{ overallCount }}
-              </div>
-            </v-layout>
-            <v-card-actions>
-              <v-spacer />
-              <v-btn
-                dark
-                flat
-              >
-                {{ $t('overall.button') }}
-              </v-btn>
-            </v-card-actions>
-          </v-layout>
+              {{ $t('overall.button') }}
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>

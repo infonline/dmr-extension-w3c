@@ -66,11 +66,11 @@ export default {
           },
         },
         site: {
-          headline: 'Webseite',
+          headline: 'Aktuelle Webseite',
           button: 'Details',
         },
         overall: {
-          headline: 'Gesamt',
+          headline: 'Gesamtnutzung',
           button: 'Details',
         },
       },
@@ -84,11 +84,11 @@ export default {
           },
         },
         site: {
-          headline: 'Web site',
+          headline: 'Actual web site',
           button: 'Details',
         },
         overall: {
-          headline: 'Overall',
+          headline: 'Overall usage',
           button: 'Details',
         },
       },
