@@ -68,7 +68,7 @@
 <style scoped type="text/stylus" lang="stylus">
   .app
     height: 600px
-    width: 400px
+    width: 432px
   .footer
     background-color: #fafafa
     a
