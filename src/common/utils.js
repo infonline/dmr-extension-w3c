@@ -39,12 +39,12 @@ export const setUninstallUrl = (userId, provider) => {
  *
  * @return {String} - Lower cased name of the browser
  */
-export const getCurrentVendor = () => {
+export const getCurrentVendor = async () => {
   let name = '';
   // Use default extension functionality when available
   if (typeof browser.runtime.getBrowserInfo === 'function') {
     // eslint-disable-next-line prefer-destructuring
-    name = browser.runtime.getBrowserInfo().name;
+    name = await browser.runtime.getBrowserInfo().name;
   } else {
     // Use user agent parser to determine browser name
     const parser = Bowser.getParser(window.navigator.userAgent);
