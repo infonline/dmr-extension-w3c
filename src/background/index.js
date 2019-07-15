@@ -15,7 +15,6 @@ import {
   URL_FILTER,
 } from '../constants';
 
-const VENDOR = getCurrentVendor();
 const localTimeStampsMap = new Map();
 const transitionQualifiersMap = new Map();
 
@@ -145,12 +144,13 @@ const informTabs = async (request) => {
 /**
  * Opens the VENDOR specific extension management page in a new tab
  */
-const openExtensionManagementTab = () => {
-  if (VENDOR === 'chrome' || VENDOR === 'opera') {
+const openExtensionManagementTab = async () => {
+  const vendor = await getCurrentVendor();
+  if (vendor === 'chrome' || vendor === 'opera') {
     browser.tabs.create({
       url: `chrome://extensions/?id=${browser.runtime.id}`,
     });
-  } else if (VENDOR === 'firefox') {
+  } else if (vendor === 'firefox') {
     if (ENVIRONMENT === 'development') {
       browser.tabs.create({
         url: 'about:debugging#addons',
@@ -160,7 +160,7 @@ const openExtensionManagementTab = () => {
         url: 'about:addons',
       });
     }
-  } else if (VENDOR === 'edge') {
+  } else if (vendor === 'edge') {
     browser.tabs.create({
       url: `edge://extensions/?id=${browser.runtime.id}`,
     });
@@ -342,7 +342,7 @@ const onMessage = async (request) => {
           },
         };
       } else if (request.message.action === MESSAGE_ACTIONS.OPEN_EXTENSION_TAB) {
-        openExtensionManagementTab();
+        await openExtensionManagementTab();
       }
     } else if (request.from === MESSAGE_DIRECTIONS.EXTENSION && request.to === MESSAGE_DIRECTIONS.WEB_APP) {
       if (request.message.action === MESSAGE_ACTIONS.UPDATE_SETTINGS) {
