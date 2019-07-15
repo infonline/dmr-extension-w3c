@@ -4,7 +4,11 @@
     fluid
     grid-list-md
   >
-    <v-layout fluid row wrap>
+    <v-layout
+      fluid
+      row
+      wrap
+    >
       <v-flex
         xs12
       >
@@ -21,7 +25,10 @@
               align-center
               class="ma-0"
             >
-              <v-icon dark class="pl-3">
+              <v-icon
+                dark
+                class="pl-3"
+              >
                 assignment_turned_in
               </v-icon>
               <span class="subheading white--text pl-3">
@@ -38,29 +45,40 @@
               <v-avatar
                 size="96"
               >
-                <v-icon dark size="96">{{ getIcon() }}</v-icon>
+                <v-icon
+                  dark
+                  size="96"
+                >
+                  {{ getIcon() }}
+                </v-icon>
               </v-avatar>
             </v-layout>
             <v-card-actions>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-btn
                 v-if="isConfirmed && isActivated"
                 dark
                 flat
                 to="/registration"
-              >{{ $t('status.buttons.details') }}</v-btn>
+              >
+                {{ $t('status.buttons.details') }}
+              </v-btn>
               <v-btn
                 v-if="!isConfirmed"
                 dark
                 flat
                 @click="() => register()"
-              >{{ $t('status.buttons.register') }}</v-btn>
+              >
+                {{ $t('status.buttons.register') }}
+              </v-btn>
               <v-btn
                 v-if="isConfirmed && !isActivated"
                 dark
                 flat
                 to="/settings"
-              >{{ $t('status.buttons.activate') }}</v-btn>
+              >
+                {{ $t('status.buttons.activate') }}
+              </v-btn>
             </v-card-actions>
           </v-layout>
         </v-card>
@@ -81,7 +99,10 @@
               align-center
               class="ma-0"
             >
-              <v-icon dark class="pl-3">
+              <v-icon
+                dark
+                class="pl-3"
+              >
                 pageview
               </v-icon>
               <span class="subheading white--text pl-3">
@@ -99,11 +120,13 @@
               </div>
             </v-layout>
             <v-card-actions>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-btn
                 dark
                 flat
-              >{{ $t('site.button') }}</v-btn>
+              >
+                {{ $t('site.button') }}
+              </v-btn>
             </v-card-actions>
           </v-layout>
         </v-card>
@@ -124,7 +147,10 @@
               align-center
               class="ma-0"
             >
-              <v-icon dark class="pl-3">
+              <v-icon
+                dark
+                class="pl-3"
+              >
                 timeline
               </v-icon>
               <span class="subheading white--text pl-3">
@@ -142,11 +168,13 @@
               </div>
             </v-layout>
             <v-card-actions>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-btn
                 dark
                 flat
-              >{{ $t('overall.button') }}</v-btn>
+              >
+                {{ $t('overall.button') }}
+              </v-btn>
             </v-card-actions>
           </v-layout>
         </v-card>

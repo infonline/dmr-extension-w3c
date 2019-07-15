@@ -7,9 +7,14 @@
       color="primary"
       dark
     >
-      <img alt="logo" src="../../images/dmr38.png">
-      <v-toolbar-title class="white--text">Digital Market Research</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <img
+        alt="logo"
+        src="../../images/dmr38.png"
+      >
+      <v-toolbar-title class="white--text">
+        Digital Market Research
+      </v-toolbar-title>
+      <v-spacer />
       <v-menu
         bottom
         left
@@ -28,26 +33,33 @@
             @click="() => navigateTo(item.path)"
           >
             <v-list-tile-avatar>
-              <v-icon>{{item.icon}}</v-icon>
+              <v-icon>
+                {{ item.icon }}
+              </v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title>{{$t(`menuItems[${index}]`)}}</v-list-tile-title>
+              <v-list-tile-title>
+                {{ $t(`menuItems[${index}]`) }}
+              </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
       </v-menu>
     </v-toolbar>
     <v-content>
-      <router-view></router-view>
+      <router-view />
     </v-content>
     <v-footer
       class="footer"
     >
-      <a href="https://www.infonline.de" target="_blank">
+      <a
+        href="https://www.infonline.de"
+        target="_blank"
+      >
         <span
           class="ml-3 body-1 grey--text darken-3"
           v-html="$t('copyright', { year: new Date().getFullYear() })"
-        ></span>
+        />
       </a>
     </v-footer>
   </v-app>

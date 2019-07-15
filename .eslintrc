@@ -37,6 +37,7 @@
   "rules": {
     // Deactivate rule for build, test and all javascript files in the root directory
     "import/no-extraneous-dependencies": ["error", {"devDependencies": ["build/**/*.js", "test/**/*.spec.js", "./*.js"]}],
-    "max-len": [2, 150, 2]
+    "max-len": [2, 150, 2],
+    "vue/no-v-html": 0
   }
 }

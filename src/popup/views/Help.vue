@@ -4,7 +4,11 @@
     fluid
     grid-list-md
   >
-    <v-layout fluid row wrap>
+    <v-layout
+      fluid
+      row
+      wrap
+    >
       <v-flex
         xs12
       >
@@ -18,11 +22,12 @@
             <v-icon
               light
               class="pl-3"
-            >help
+            >
+              help
             </v-icon>
             <span class="subheading pl-3">Help</span>
           </v-layout>
-          <v-divider></v-divider>
+          <v-divider />
           <v-responsive height="381">
             <v-layout class="ma-0 pa-2">
               <span class="body-1">
@@ -42,8 +47,10 @@
               flat
               color="primary"
               to="/"
-            >Back</v-btn>
-            <v-spacer></v-spacer>
+            >
+              Back
+            </v-btn>
+            <v-spacer />
           </v-card-actions>
         </v-card>
       </v-flex>

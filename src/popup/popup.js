@@ -28,7 +28,6 @@ new Vue({
   router,
   store,
   i18n,
-  render: h => h(App),
   async beforeCreate() {
     // Load last route from local store
     await this.$store.dispatch('route/load', this.$router);
@@ -39,4 +38,5 @@ new Vue({
     // Remove router <-> vuex store synchronisation
     unsync();
   },
+  render: h => h(App),
 });
