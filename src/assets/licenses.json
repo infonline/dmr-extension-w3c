@@ -1,8 +1,36 @@
 {
-    "ua-parser-js@0.7.20": {
+    "@mdi/font@3.8.95": {
+        "licenses": "OFL-1.1,MIT",
+        "repository": "https://github.com/Templarian/MaterialDesign-Webfont",
+        "licenseUrl": "http://scripts.sil.org/OFL,http://opensource.org/licenses/mit-license.html",
+        "parents": "dmr-extension-w3c"
+    },
+    "apexcharts@3.8.2": {
         "licenses": "MIT",
-        "repository": "https://github.com/faisalman/ua-parser-js",
-        "licenseUrl": "https://github.com/faisalman/ua-parser-js/raw/master/license.md",
+        "repository": "https://github.com/apexcharts/apexcharts.js",
+        "licenseUrl": "https://github.com/apexcharts/apexcharts.js/raw/master/LICENSE",
+        "parents": "dmr-extension-w3c"
+    },
+    "bowser@2.4.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/lancedikson/bowser",
+        "licenseUrl": "https://github.com/lancedikson/bowser/raw/master/LICENSE",
+        "parents": "dmr-extension-w3c"
+    },
+    "lodash-es@4.17.14": {
+        "licenses": "MIT",
+        "repository": "https://github.com/lodash/lodash",
+        "licenseUrl": "https://github.com/lodash/lodash/raw/master/LICENSE",
+        "parents": "dmr-extension-w3c"
+    },
+    "moment@2.24.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/moment/moment",
+        "licenseUrl": "https://github.com/moment/moment/raw/master/LICENSE",
+        "parents": "dmr-extension-w3c"
+    },
+    "vue-apexcharts@1.4.0": {
+        "licenses": "MIT",
         "parents": "dmr-extension-w3c"
     },
     "vue-i18n@8.12.0": {
@@ -23,7 +51,7 @@
         "licenseUrl": "https://github.com/vuejs/vue/raw/master/LICENSE",
         "parents": "dmr-extension-w3c"
     },
-    "vuetify@1.5.16": {
+    "vuetify@2.0.0-beta.8": {
         "licenses": "MIT",
         "repository": "https://github.com/vuetifyjs/vuetify",
         "licenseUrl": "https://github.com/vuetifyjs/vuetify/raw/master/LICENSE.md",
