@@ -61,11 +61,11 @@ export default {
   i18n: {
     messages: {
       de: {
-        menuItems: ['Start', 'Registrierung', 'Einstellungen', 'Datenschutz', 'Impressum'],
+        menuItems: ['Start', 'Registrierung', 'Einstellungen', 'Datenschutz', 'Info'],
         copyright: '&copy {year} INFOnline GmbH - Alle Rechte vorbehalten',
       },
       en: {
-        menuItems: ['Home', 'Registration', 'Settings', 'Privacy', 'About'],
+        menuItems: ['Home', 'Registration', 'Settings', 'Privacy', 'Info'],
         copyright: '&copy {year} INFOnline GmbH - All rights reserved',
       },
     },
