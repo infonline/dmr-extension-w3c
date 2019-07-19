@@ -45,7 +45,7 @@ const COPYING_OPTIONS = [
     dest: 'dist/bundle',
   },
   {
-    files: 'src/images/*.png',
+    files: 'src/images/*.{png,svg}',
     dest: 'dist/bundle/images',
   },
   {
@@ -57,8 +57,8 @@ const COPYING_OPTIONS = [
     dest: 'dist/bundle',
   },
   {
-    files: 'node_modules/webextension-polyfill/dist/browser-polyfill.js.map',
-    dest: 'dist/bundle',
+    files: 'node_modules/@mdi/font/fonts/*.*',
+    dest: 'dist/bundle/fonts',
   },
   {
     files: inputs.manifest,
@@ -101,8 +101,8 @@ const PLUGINS = {
     json(),
     eslint(),
     commonjs(),
-    vue(VUE_OPTIONS),
     css(CSS_OPTIONS),
+    vue(VUE_OPTIONS),
     replace(REPLACE_OPTIONS),
     resolve(),
     babel({
