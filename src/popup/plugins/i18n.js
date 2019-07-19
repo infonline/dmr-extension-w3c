@@ -8,7 +8,7 @@ Vue.use(VueI18n);
  *
  * @return {Object} Language options
  */
-const getLocale = () => {
+export const getLocale = () => {
   let lang = browser.i18n.getUILanguage();
   if (lang.includes('-')) {
     [lang] = lang.split('-');

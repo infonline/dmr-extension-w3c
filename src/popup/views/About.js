@@ -24,7 +24,7 @@ export default {
   i18n: {
     messages: {
       de: {
-        headline: 'Impressum',
+        headline: 'Informationen zur Browsererweiterung',
         listItems: {
           name: {
             label: 'Name',

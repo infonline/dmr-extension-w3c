@@ -21,76 +21,74 @@
           >
             <v-icon
               light
-              class="pl-3"
-            >
-              assignment_turned_in
-            </v-icon>
-            <span class="subheading pl-3">
+              class="pl-3 mdi mdi-account-badge"
+            />
+            <span class="subtitle-1 pl-3 grey--text text--darken-2">
               Registration
             </span>
           </v-layout>
           <v-divider />
           <v-responsive height="381">
-            <v-list two-line>
-              <v-list-tile>
-                <v-list-tile-avatar>
-                  <v-icon>account_circle</v-icon>
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+            <v-list
+              two-line
+            >
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-icon class="mdi mdi-account-key" />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ $t('listItems.userId') }}
-                  </v-list-tile-title>
-                  <v-list-tile-sub-title>
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
                     {{ registration.userId }}
-                  </v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-avatar>
-                  <v-icon>
-                    monetization_on
-                  </v-icon>
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-icon class="mdi mdi-briefcase-account" />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ $t('listItems.provider') }}
-                  </v-list-tile-title>
-                  <v-list-tile-sub-title>
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
                     {{ registration.provider ? registration.provider.label : $t('unknown') }}
-                  </v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-avatar>
-                  <v-icon>event</v-icon>
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-icon class="mdi mdi-calendar" />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ $t('listItems.createdAt') }}
-                  </v-list-tile-title>
-                  <v-list-tile-sub-title>
-                    {{ registration.createdAt }}
-                  </v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-avatar>
-                  <v-icon>event</v-icon>
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ $moment(registration.createdAt).fromNow() }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-icon class="mdi mdi-calendar" />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ $t('listItems.updatedAt') }}
-                  </v-list-tile-title>
-                  <v-list-tile-sub-title>
-                    { registration.updatedAt }}
-                  </v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ $moment(registration.updatedAt).fromNow() }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
           </v-responsive>
           <v-card-actions>
             <v-btn
-              flat
+              text
               color="primary"
               to="/"
             >

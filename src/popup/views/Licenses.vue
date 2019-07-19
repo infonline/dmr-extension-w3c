@@ -21,11 +21,10 @@
           >
             <v-icon
               light
-              class="pl-3"
+              class="pl-3 mdi mdi-script-text"
             >
-              assignment
             </v-icon>
-            <span class="subheading pl-3">
+            <span class="subtitle-1 pl-3">
               {{ $t('headline') }}
             </span>
           </v-layout>
@@ -43,50 +42,50 @@
                 :key="index"
               >
                 <v-list dense>
-                  <v-list-tile>
-                    <v-list-tile-content>
+                  <v-list-item>
+                    <v-list-item-content>
                       {{ $t('listItems.module') }}:
-                    </v-list-tile-content>
-                    <v-list-tile-content class="align-end">
+                    </v-list-item-content>
+                    <v-list-item-content class="align-end">
                       {{ license.module }}
-                    </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile>
-                    <v-list-tile-content>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-list-item-content>
                       {{ $t('listItems.version') }}:
-                    </v-list-tile-content>
-                    <v-list-tile-content class="align-end">
+                    </v-list-item-content>
+                    <v-list-item-content class="align-end">
                       {{ license.version }}
-                    </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile>
-                    <v-list-tile-content>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-list-item-content>
                       {{ $t('listItems.type') }}:
-                    </v-list-tile-content>
-                    <v-list-tile-content class="align-end">
+                    </v-list-item-content>
+                    <v-list-item-content class="align-end">
                       {{ license.license }}
-                    </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile>
-                    <v-list-tile-content>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-list-item-content>
                       {{ $t('listItems.url') }}:
-                    </v-list-tile-content>
-                    <v-list-tile-content class="align-end">
+                    </v-list-item-content>
+                    <v-list-item-content class="align-end">
                       <a @click="() => createTab(license.licenseUrl)">
                         <span>{{ $t('link') }}</span>
                       </a>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile>
-                    <v-list-tile-content>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-list-item-content>
                       {{ $t('listItems.repository') }}:
-                    </v-list-tile-content>
-                    <v-list-tile-content class="align-end">
+                    </v-list-item-content>
+                    <v-list-item-content class="align-end">
                       <a @click="() => createTab(license.repository)">
                         <span>{{ $t('link') }}</span>
                       </a>
-                    </v-list-tile-content>
-                  </v-list-tile>
+                    </v-list-item-content>
+                  </v-list-item>
                 </v-list>
                 <v-divider v-if="index < licenses.length - 1" />
               </div>
@@ -95,7 +94,7 @@
           <v-divider />
           <v-card-actions>
             <v-btn
-              flat
+              text
               color="primary"
               to="/"
             >

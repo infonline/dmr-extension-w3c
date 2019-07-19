@@ -123,12 +123,12 @@ export default {
      */
     getIcon() {
       if (this.isConfirmed && !this.isActivated) {
-        return 'warning';
+        return 'mdi-eye-off';
       }
       if (!this.isConfirmed && !this.isActivated) {
-        return 'cancel';
+        return 'mdi-account-badge-alert';
       }
-      return 'check_circle';
+      return 'mdi-check-circle';
     },
   },
   mounted() {

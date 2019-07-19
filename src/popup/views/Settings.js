@@ -17,8 +17,8 @@ export default {
         headline: 'Einstellungen',
         listItems: {
           tracking: {
-            label: 'Tracking',
-            text: 'INFOnline Tracking deaktivieren | INFOnline Tracking aktivieren',
+            label: 'Digital Market Research',
+            text: 'Messung aktiviert | Messung deaktiviert',
           },
         },
       },
@@ -30,8 +30,8 @@ export default {
         headline: 'Settings',
         listItems: {
           tracking: {
-            label: 'Tracking',
-            text: 'Disable INFOnline tracking | Enable INFOnline tracking',
+            label: 'Digital Market Research',
+            text: 'Measurement activated | Measurement deactivated',
           },
         },
       },

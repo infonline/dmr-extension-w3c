@@ -21,43 +21,48 @@
           >
             <v-icon
               light
-              class="pl-3"
-            >
-              settings
-            </v-icon>
-            <span class="subheading pl-3">
+              class="pl-3 mdi mdi-settings"
+            />
+            <span class="subtitle-1 pl-3">
               {{ $t('headline') }}
             </span>
           </v-layout>
           <v-divider />
           <v-responsive height="381">
             <v-list two-line>
-              <v-list-tile>
-                <v-list-tile-avatar>
-                  <v-icon>visibility</v-icon>
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-icon
+                    v-if="settings.tracking"
+                    class="mdi mdi-eye"
+                  />
+                  <v-icon
+                    v-else
+                    class="mdi mdi-eye-off"
+                  />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ $t('listItems.tracking.label') }}
-                  </v-list-tile-title>
-                  <v-list-tile-sub-title>
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
                     {{ $tc('listItems.tracking.text', settings.tracking ? 1 : 2) }}
-                  </v-list-tile-sub-title>
-                </v-list-tile-content>
-                <v-list-tile-action>
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-action>
                   <v-switch
                     v-model="settings.tracking"
                     :disabled="!registration.panelId && !registration.vendor"
                     color="accent"
                   />
-                </v-list-tile-action>
-              </v-list-tile>
+                </v-list-item-action>
+              </v-list-item>
             </v-list>
           </v-responsive>
           <v-spacer />
           <v-card-actions>
             <v-btn
-              flat
+              text
               color="primary"
               to="/"
             >

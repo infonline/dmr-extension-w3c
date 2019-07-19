@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-container
     class="pa-2"
     fluid
@@ -12,25 +12,22 @@
       <v-flex xs12>
         <v-card
           class="elevation-2"
-          height="250"
         >
-          <v-card-title>Site</v-card-title>
-        </v-card>
-      </v-flex>
-      <v-flex xs6>
-        <v-card
-          class="elevation-2"
-          height="230"
-        >
-          <v-card-title>Site</v-card-title>
-        </v-card>
-      </v-flex>
-      <v-flex xs6>
-        <v-card
-          class="elevation-2"
-          height="230"
-        >
-          <v-card-title>Site</v-card-title>
+          <v-chart-control
+            :value="timeRange"
+            :items="timeRanges"
+            :label="$t('timeRanges.label')"
+            @change="(range) => toggleRange(range)"
+            @reload="() => reload('overallUsage')"
+          />
+          <v-card-text>
+            <v-chart
+              type="bar"
+              height="390"
+              :options="siteUsage.options"
+              :series="siteUsage.series"
+            />
+          </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>

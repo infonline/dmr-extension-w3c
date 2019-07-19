@@ -21,101 +21,99 @@
           >
             <v-icon
               light
-              class="pl-3"
-            >
-              info
-            </v-icon>
-            <span class="subheading pl-3">{{ $t('headline') }}</span>
+              class="pl-3 mdi mdi-information"
+            />
+            <span class="subtitle-1 pl-3">{{ $t('headline') }}</span>
           </v-layout>
           <v-divider />
           <v-responsive height="381">
             <v-list two-line>
-              <v-list-tile>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ $t('listItems.name.label') }}
-                  </v-list-tile-title>
-                  <v-list-tile-sub-title>
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
                     Digital Market Research by INFOnline
-                  </v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ $t('listItems.description.label') }}
-                  </v-list-tile-title>
-                  <v-list-tile-sub-title>
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
                     {{ $t('listItems.description.text', { browser: browser.name }) }}
-                  </v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ $t('listItems.version.label') }}
-                  </v-list-tile-title>
-                  <v-list-tile-sub-title>
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
                     {{ version }}
-                  </v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
             <v-divider />
             <v-list>
-              <v-list-tile
+              <v-list-item
                 ripple
                 to="/licenses"
               >
-                <v-list-tile-avatar>
-                  <v-icon>assignment</v-icon>
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+                <v-list-item-avatar>
+                  <v-icon class="mdi mdi-script-text" />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ $t('listItems.licenses.label') }}
-                  </v-list-tile-title>
-                </v-list-tile-content>
-                <v-list-tile-action>
-                  <v-icon>arrow_forward</v-icon>
-                </v-list-tile-action>
-              </v-list-tile>
-              <v-list-tile
+                  </v-list-item-title>
+                </v-list-item-content>
+                <v-list-item-action>
+                  <v-icon class="mdi mdi-arrow-right" />
+                </v-list-item-action>
+              </v-list-item>
+              <v-list-item
                 ripple
                 @click="() => createTab(links.privacy)"
               >
-                <v-list-tile-avatar>
-                  <v-icon>security</v-icon>
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+                <v-list-item-avatar>
+                  <v-icon class="mdi mdi-security" />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ $t('listItems.privacy.label') }}
-                  </v-list-tile-title>
-                </v-list-tile-content>
-                <v-list-tile-action>
-                  <v-icon>arrow_forward</v-icon>
-                </v-list-tile-action>
-              </v-list-tile>
-              <v-list-tile
+                  </v-list-item-title>
+                </v-list-item-content>
+                <v-list-item-action>
+                  <v-icon class="mdi mdi-arrow-right" />
+                </v-list-item-action>
+              </v-list-item>
+              <v-list-item
                 ripple
                 @click="() => createTab(links.bugs)"
               >
-                <v-list-tile-avatar>
-                  <v-icon>bug_report</v-icon>
-                </v-list-tile-avatar>
-                <v-list-tile-content>
-                  <v-list-tile-title>
+                <v-list-item-avatar>
+                  <v-icon class="mdi mdi-bug" />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title>
                     {{ $t('listItems.bugs.label') }}
-                  </v-list-tile-title>
-                </v-list-tile-content>
-                <v-list-tile-action>
-                  <v-icon>arrow_forward</v-icon>
-                </v-list-tile-action>
-              </v-list-tile>
+                  </v-list-item-title>
+                </v-list-item-content>
+                <v-list-item-action>
+                  <v-icon class="mdi mdi-arrow-right" />
+                </v-list-item-action>
+              </v-list-item>
             </v-list>
           </v-responsive>
           <v-card-actions>
             <v-btn
-              flat
+              text
               color="primary"
               to="/"
             >
