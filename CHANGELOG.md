@@ -1,3 +1,13 @@
+<a name="1.3.2"></a>
+## [1.3.2](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.1...1.3.2) (2019-07-22)
+
+
+### Bug Fixes
+
+* **constants:** show correct date time value in chart tooltip ([fc58541](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/fc58541))
+
+
+
 <a name="1.3.1"></a>
 ## [1.3.1](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.0...1.3.1) (2019-07-22)
 
