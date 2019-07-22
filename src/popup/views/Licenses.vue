@@ -22,8 +22,7 @@
             <v-icon
               light
               class="pl-3 mdi mdi-script-text"
-            >
-            </v-icon>
+            />
             <span class="subtitle-1 pl-3">
               {{ $t('headline') }}
             </span>
