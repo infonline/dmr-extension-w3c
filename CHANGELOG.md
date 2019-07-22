@@ -1,3 +1,13 @@
+<a name="1.3.1"></a>
+## [1.3.1](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.0...1.3.1) (2019-07-22)
+
+
+### Bug Fixes
+
+* **popup:** rename about navigation item to info ([df57abf](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/df57abf))
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.2.1...1.3.0) (2019-07-19)
 
