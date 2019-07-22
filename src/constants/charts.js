@@ -97,6 +97,11 @@ export const OVERALL_USAGE_CHART = {
       title: {
         text: 'Gesamtnutzung',
       },
+      tooltip: {
+        x: {
+          format: 'dd.MM.yyyy HH:mm',
+        },
+      },
       noData: {
         text: 'Keine Daten vorhanden',
       },
@@ -106,6 +111,11 @@ export const OVERALL_USAGE_CHART = {
     options: {
       title: {
         text: 'Overall usage',
+      },
+      tooltip: {
+        x: {
+          format: 'dd/MM/yyyy HH:mm',
+        },
       },
       noData: {
         text: 'No data available',
@@ -120,12 +130,22 @@ export const SITE_USAGE_CHART = {
       title: {
         text: 'Websitenutzung',
       },
+      tooltip: {
+        x: {
+          format: 'dd/MM/yyyy HH:mm',
+        },
+      },
     },
   },
   EN: {
     options: {
       title: {
         text: 'Website usage',
+      },
+      tooltip: {
+        x: {
+          format: 'dd/MM/yyyy HH:mm',
+        },
       },
     },
   },
