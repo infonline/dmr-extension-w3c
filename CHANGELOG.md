@@ -1,3 +1,18 @@
+<a name="1.3.3"></a>
+## [1.3.3](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.1...1.3.3) (2019-07-22)
+
+
+### Bug Fixes
+
+* **constants:** show correct date time value in chart tooltip ([fc58541](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/fc58541))
+
+
+### Features
+
+* **views:** render no data available when chart series are empty ([0a25c63](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/0a25c63))
+
+
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.1...1.3.2) (2019-07-22)
 
