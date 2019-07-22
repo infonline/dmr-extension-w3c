@@ -20,14 +20,39 @@
             @change="(range) => toggleRange(range)"
             @reload="() => reload('overallUsage')"
           />
-          <v-card-text>
-            <v-chart
-              type="bar"
-              height="390"
-              :options="siteUsage.options"
-              :series="siteUsage.series"
-            />
-          </v-card-text>
+          <template v-if="siteUsage.series[0].data.length > 0">
+            <v-card-text class="pa-0">
+              <v-chart
+                type="bar"
+                height="420"
+                :options="siteUsage.options"
+                :series="siteUsage.series"
+              />
+            </v-card-text>
+          </template>
+          <template v-else>
+            <v-container
+              fluid
+              style="height: 435px"
+            >
+              <v-layout
+                align-center
+                justify-center
+                column
+                fill-height
+              >
+                <v-avatar>
+                  <v-icon
+                    size="64"
+                    class="mdi mdi-cancel grey--text"
+                  />
+                </v-avatar>
+                <span class="subtitle-2 mt-3 text-xs-center grey--text">
+                  {{ $t('noData') }}
+                </span>
+              </v-layout>
+            </v-container>
+          </template>
         </v-card>
       </v-flex>
     </v-layout>

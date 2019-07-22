@@ -54,11 +54,13 @@ export default {
         timeRanges: {
           label: 'Zeitraum',
         },
+        noData: 'Keine Daten vorhanden.',
       },
       en: {
         timeRanges: {
           label: 'Time range',
         },
+        noData: 'No data available.',
       },
     },
   },
