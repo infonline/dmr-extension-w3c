@@ -17,8 +17,8 @@ export default {
         headline: 'Einstellungen',
         listItems: {
           tracking: {
-            label: 'Digital Market Research',
-            text: 'Messung aktiviert | Messung deaktiviert',
+            label: 'Messung',
+            text: 'aktiviert | deaktiviert',
           },
         },
       },
@@ -30,8 +30,8 @@ export default {
         headline: 'Settings',
         listItems: {
           tracking: {
-            label: 'Digital Market Research',
-            text: 'Measurement activated | Measurement deactivated',
+            label: 'Measurement',
+            text: 'activated | deactivated',
           },
         },
       },

@@ -13,7 +13,7 @@ export default {
       de: {
         heading: 'Registrierung',
         listItems: {
-          userId: 'INFOnline Nutzer-ID',
+          userId: 'Nutzeridentifikationsnummer',
           provider: 'Panelanbieter',
           createdAt: 'Erstellt',
           updatedAt: 'Aktualisiert',
@@ -27,7 +27,7 @@ export default {
       en: {
         heading: 'Registration',
         listItems: {
-          userId: 'INFOnline User-ID',
+          userId: 'User identification number',
           provider: 'Panel provider',
           createdAt: 'Created',
           updatedAt: 'Updated',
