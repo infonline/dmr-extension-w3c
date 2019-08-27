@@ -1,3 +1,13 @@
+<a name="1.3.4"></a>
+## [1.3.4](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.3...1.3.4) (2019-08-27)
+
+
+### Bug Fixes
+
+* **popup:** fix wrong translations with correct translations provided by PaC ([3ee67f0](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/3ee67f0))
+
+
+
 <a name="1.3.3"></a>
 ## [1.3.3](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.1...1.3.3) (2019-07-22)
 
