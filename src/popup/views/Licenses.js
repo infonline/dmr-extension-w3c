@@ -54,9 +54,16 @@ export default {
   },
   methods: {
     createTab(url) {
-      browser.tabs.create({
-        url,
-      });
+      // Check if url contains a comma delimiter. When true split url up into parts and open tab for every url in split.
+      if (url.includes(',')) {
+        const urlParts = url.split(',');
+        urlParts.forEach(urlPart => browser.tabs.create({ url: urlPart }));
+      } else {
+        // Open single tab
+        browser.tabs.create({
+          url,
+        });
+      }
     },
   },
 };
