@@ -93,22 +93,6 @@
                   <v-icon class="mdi mdi-arrow-right" />
                 </v-list-item-action>
               </v-list-item>
-              <v-list-item
-                ripple
-                @click="() => createTab(links.bugs)"
-              >
-                <v-list-item-avatar>
-                  <v-icon class="mdi mdi-bug" />
-                </v-list-item-avatar>
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{ $t('listItems.bugs.label') }}
-                  </v-list-item-title>
-                </v-list-item-content>
-                <v-list-item-action>
-                  <v-icon class="mdi mdi-arrow-right" />
-                </v-list-item-action>
-              </v-list-item>
             </v-list>
           </v-responsive>
           <v-card-actions>
