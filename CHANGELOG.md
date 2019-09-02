@@ -1,3 +1,19 @@
+<a name="1.3.5"></a>
+## [1.3.5](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.3...1.3.5) (2019-09-02)
+
+
+### Bug Fixes
+
+* **popup:** fix tab creation for multiple urls in licensing view ([da56a95](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/da56a95)), closes [#18](https://vgitbn003.infon/IAM/dmr-extension-w3c/issues/18)
+* **popup:** fix wrong translations with correct translations provided by PaC ([3ee67f0](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/3ee67f0))
+
+
+### Features
+
+* **popup:** remove unnecessary bug report ability from about view ([ff29118](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/ff29118)), closes [#19](https://vgitbn003.infon/IAM/dmr-extension-w3c/issues/19)
+
+
+
 <a name="1.3.4"></a>
 ## [1.3.4](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.3...1.3.4) (2019-08-27)
 
