@@ -3,7 +3,8 @@ image: node:latest
 stages:
   - install
   - build
-  - deploy
+  - deploy_staging
+  - deploy_production
 
 install:
   tags:
@@ -11,6 +12,7 @@ install:
   stage: install
   only:
     - master
+    - staging
   script:
     - 'yarn install'
   artifacts:
@@ -24,6 +26,7 @@ build:
   stage: build
   only:
     - master
+    - staging
   dependencies:
     - install
   script:
@@ -33,12 +36,12 @@ build:
       - 'dist/'
     expire_in: 1 week
 
-deploy:
+deploy_staging:
   tags:
     - docker
-  stage: deploy
+  stage: deploy_staging
   only:
-    - master
+    - staging
   dependencies:
     - build
   artifacts:
@@ -57,3 +60,28 @@ deploy:
     - 'ssh imarex@vwebbn002.rzbn.infon "mkdir -p /var/www/html/dmr.infonline.de/extensions"'
     - 'ssh imarex@vwebbn002.rzbn.infon "rm -rf /var/www/html/dmr.infonline.de/extensions/*"'
     - 'scp -P22 -r dist/packages/* imarex@vwebbn002.rzbn.infon:/var/www/html/dmr.infonline.de/extensions'
+
+deploy_production:
+  tags:
+    - docker
+  stage: deploy_staging
+  only:
+    - master
+  dependencies:
+    - build
+  artifacts:
+    paths:
+      - 'dist/'
+    expire_in: 1 week
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_DEPLOY_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_DEPLOY_TARGET_HOST_KEY" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - 'ssh deploy@vdmrbn001.infon "mkdir -p /usr/share/nginx/dmr-frontend/extensions"'
+    - 'ssh deploy@vdmrbn001.infon "rm -rf /usr/share/nginx/dmr-frontend/extensions/*"'
+    - 'scp -P22 -r dist/packages/* deploy@vdmrbn001.infon:/usr/share/nginx/dmr-frontend/extensions'
