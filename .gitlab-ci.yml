@@ -14,10 +14,10 @@ install:
     - master
     - staging
   script:
-    - 'yarn install'
+    - yarn install
   artifacts:
     paths:
-      - 'node_modules/'
+      - node_modules/
     expire_in: 1 day
 
 build:
@@ -30,10 +30,10 @@ build:
   dependencies:
     - install
   script:
-    - 'yarn run build:staging'
+    - yarn run build:staging
   artifacts:
     paths:
-      - 'dist/'
+      - dist/
     expire_in: 1 week
 
 deploy_staging:
@@ -46,20 +46,20 @@ deploy_staging:
     - build
   artifacts:
     paths:
-    - 'dist/'
+    - dist/
     expire_in: 1 week
   before_script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - which ssh-agent || (apt-get update -y && apt-get install openssh-client -y)
     - eval $(ssh-agent -s)
     - echo "$SSH_DEPLOY_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - echo "$SSH_DEPLOY_TARGET_HOST_KEY" > ~/.ssh/known_hosts
+    - echo "$SSH_DEPLOY_STAGING_HOST_KEY" > ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - 'ssh imarex@vwebbn002.rzbn.infon "mkdir -p /var/www/html/dmr.infonline.de/extensions"'
-    - 'ssh imarex@vwebbn002.rzbn.infon "rm -rf /var/www/html/dmr.infonline.de/extensions/*"'
-    - 'scp -P22 -r dist/packages/* imarex@vwebbn002.rzbn.infon:/var/www/html/dmr.infonline.de/extensions'
+    - ssh imarex@vwebbn002.rzbn.infon "mkdir -p /var/www/html/dmr.infonline.de/extensions"
+    - ssh imarex@vwebbn002.rzbn.infon "rm -rf /var/www/html/dmr.infonline.de/extensions/*"
+    - scp -P22 -r dist/packages/* imarex@vwebbn002.rzbn.infon:/var/www/html/dmr.infonline.de/extensions
 
 deploy_production:
   tags:
@@ -71,17 +71,18 @@ deploy_production:
     - build
   artifacts:
     paths:
-      - 'dist/'
+      - dist/
     expire_in: 1 week
   before_script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
     - eval $(ssh-agent -s)
     - echo "$SSH_DEPLOY_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - echo "$SSH_DEPLOY_TARGET_HOST_KEY" > ~/.ssh/known_hosts
+    - echo "$SSH_DEPLOY_PRODUCTION_HOST_KEY" > ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - 'ssh deploy@vdmrbn001.infon "mkdir -p /usr/share/nginx/dmr-frontend/extensions"'
-    - 'ssh deploy@vdmrbn001.infon "rm -rf /usr/share/nginx/dmr-frontend/extensions/*"'
-    - 'scp -P22 -r dist/packages/* deploy@vdmrbn001.infon:/usr/share/nginx/dmr-frontend/extensions'
+    - ssh deploy@vdmrbn001.infon "mkdir -p /usr/share/nginx/dmr-frontend/extensions"
+    - ssh deploy@vdmrbn001.infon "rm -rf /usr/share/nginx/dmr-frontend/extensions/*"
+    - scp -P22 -r dist/packages/* deploy@vdmrbn001.infon:/usr/share/nginx/dmr-frontend/extensions
+    - ssh deploy@vdmrbn001.infon "chown -R deploy:nginx /usr/share/nginx/dmr-frontend/extensions"
