@@ -32,7 +32,10 @@ export const uuidv4 = () => ([1e7] + -1e3 + -4e3 + -8e3 + -1e11)
  * @param provider - Provider name
  */
 export const setUninstallUrl = (userId, provider) => {
-  browser.runtime.setUninstallURL(`${DEFAULT_DMR_WEB_APP_URL}/remove?&userId=${encodeURIComponent(userId)}&provider=${encodeURIComponent(provider)}`);
+  if (provider) {
+    browser.runtime.setUninstallURL(`${DEFAULT_DMR_WEB_APP_URL}/remove?&userId=${encodeURIComponent(userId)}\
+    &provider=${encodeURIComponent(provider)}`);
+  }
 };
 /**
  * Gets the current browser vendor name via extension api or when not available via user agent parser.

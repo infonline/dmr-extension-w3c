@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { uuidv4 } from '../../common/utils';
+import { uuidv4, setUninstallUrl } from '../../common/utils';
 import { DEFAULT_DMR_WEB_APP_URL } from '../../constants';
 
 const SAVE = 'SAVE';
@@ -20,16 +20,6 @@ const defaultState = () => ({
     updatedAt: undefined,
   },
 });
-
-/**
- * Sets the uninstall URL for the current extension
- *
- * @param {String} userId - User identifier
- * @param {String} provider - Name of the provider
- */
-const setUninstallUrl = (userId, provider) => {
-  browser.runtime.setUninstallURL(`${DEFAULT_DMR_WEB_APP_URL}/remove?&userId=${encodeURIComponent(userId)}&provider=${encodeURIComponent(provider)}`);
-};
 
 const actions = {
   /**
@@ -57,7 +47,7 @@ const actions = {
       // Persistent state
       await browser.storage.local.set(newState);
       dispatch('settings/save', { tracking: false }, { root: true });
-      // Create a new tab with the IMAREX registration site url
+      // Create a new tab with the DMR registration site url
       browser.tabs.create({
         url: `${DEFAULT_DMR_WEB_APP_URL}/registration/wizard`,
       });
