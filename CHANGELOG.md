@@ -1,3 +1,20 @@
+<a name="1.3.6"></a>
+## [1.3.6](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.5...1.3.6) (2019-11-10)
+
+
+### Bug Fixes
+
+* don't set the uninstall url when no provider was transmitted to the extension ([1d9e783](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/1d9e783))
+* **ci:** fix wrong path for production target folder ([b9c8350](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/b9c8350))
+
+
+### Features
+
+* **ci:** refactor ci integration ([4d4b9b2](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/4d4b9b2))
+* **ci:** split up deployment into production and staging ([30db1a0](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/30db1a0))
+
+
+
 <a name="1.3.5"></a>
 ## [1.3.5](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.3...1.3.5) (2019-09-02)
 
