@@ -33,8 +33,8 @@ export const uuidv4 = () => ([1e7] + -1e3 + -4e3 + -8e3 + -1e11)
  */
 export const setUninstallUrl = (userId, provider) => {
   if (provider) {
-    browser.runtime.setUninstallURL(`${DEFAULT_DMR_WEB_APP_URL}/remove?&userId=${encodeURIComponent(userId)}\
-    &provider=${encodeURIComponent(provider)}`);
+    browser.runtime
+      .setUninstallURL(`${DEFAULT_DMR_WEB_APP_URL}/remove?&userId=${encodeURIComponent(userId)}&provider=${encodeURIComponent(provider)}`);
   }
 };
 /**
