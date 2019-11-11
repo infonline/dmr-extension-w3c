@@ -2,7 +2,8 @@ image: node:latest
 
 stages:
   - install
-  - build
+  - build_staging
+  - build_production
   - deploy_staging
   - deploy_production
 
@@ -20,17 +21,31 @@ install:
       - node_modules/
     expire_in: 1 day
 
-build:
+build_staging:
   tags:
     - docker
   stage: build
   only:
-    - master
     - staging
   dependencies:
     - install
   script:
     - yarn run build:staging
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 week
+
+build_production:
+  tags:
+    - docker
+  stage: build
+  only:
+    - master
+  dependencies:
+    - install
+  script:
+    - yarn run build:production
   artifacts:
     paths:
       - dist/
@@ -43,7 +58,7 @@ deploy_staging:
   only:
     - staging
   dependencies:
-    - build
+    - build_staging
   artifacts:
     paths:
     - dist/
@@ -64,11 +79,11 @@ deploy_staging:
 deploy_production:
   tags:
     - docker
-  stage: deploy_staging
+  stage: deploy_production
   only:
     - master
   dependencies:
-    - build
+    - build_production
   artifacts:
     paths:
       - dist/
