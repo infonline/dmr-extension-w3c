@@ -31,6 +31,8 @@
     },
     "vue-apexcharts@1.4.0": {
         "licenses": "MIT",
+        "repository": "https://github.com/apexcharts/vue-apexcharts",
+        "licenseUrl": "https://raw.githubusercontent.com/apexcharts/vue-apexcharts/master/LICENSE",
         "parents": "dmr-extension-w3c"
     },
     "vue-i18n@8.12.0": {
