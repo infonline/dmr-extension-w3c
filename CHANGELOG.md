@@ -1,3 +1,13 @@
+<a name="1.3.9"></a>
+## [1.3.9](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.8...1.3.9) (2019-11-11)
+
+
+### Bug Fixes
+
+* add missing urls for vue-apexcharts dependency in licenses ([1a09250](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/1a09250))
+
+
+
 <a name="1.3.8"></a>
 ## [1.3.8](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.7...1.3.8) (2019-11-11)
 
