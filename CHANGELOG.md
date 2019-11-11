@@ -1,3 +1,13 @@
+<a name="1.3.7"></a>
+## [1.3.7](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.6...1.3.7) (2019-11-11)
+
+
+### Bug Fixes
+
+* remove line break from uninstall uri ([694cb56](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/694cb56))
+
+
+
 <a name="1.3.6"></a>
 ## [1.3.6](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.5...1.3.6) (2019-11-10)
 
