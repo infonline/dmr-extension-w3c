@@ -42,7 +42,7 @@
     "vue-router@3.0.7": {
         "licenses": "MIT",
         "repository": "https://github.com/vuejs/vue-router",
-        "licenseUrl": "https://github.com/vuejs/vue-router/raw/master/LICENSE",
+        "licenseUrl": "https://raw.githubusercontent.com/vuejs/vue-router/dev/LICENSE",
         "parents": "dmr-extension-w3c"
     },
     "vue@2.6.10": {
