@@ -1,3 +1,13 @@
+<a name="1.3.8"></a>
+## [1.3.8](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.7...1.3.8) (2019-11-11)
+
+
+### Bug Fixes
+
+* wrong license url for vue router ([8b4c528](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/8b4c528))
+
+
+
 <a name="1.3.7"></a>
 ## [1.3.7](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.6...1.3.7) (2019-11-11)
 
