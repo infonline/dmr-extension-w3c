@@ -24,7 +24,7 @@ install:
 build_staging:
   tags:
     - docker
-  stage: build
+  stage: build_staging
   only:
     - staging
   dependencies:
@@ -39,7 +39,7 @@ build_staging:
 build_production:
   tags:
     - docker
-  stage: build
+  stage: build_production
   only:
     - master
   dependencies:
