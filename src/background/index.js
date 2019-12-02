@@ -190,10 +190,14 @@ const onMessage = async (request) => {
           },
         };
       } else if (request.message.action === MESSAGE_ACTIONS.SET_PANEL_ID) {
-        const { registration } = data;
+        const { registration, settings } = data;
         registration.panelId = request.message.panelId;
         registration.updatedAt = new Date().toJSON();
-        await browser.storage.local.set({ registration });
+        // Activate tracking
+        settings.tracking = true;
+        settings.updatedAt = new Date().toJSON();
+        // Update local storage
+        await browser.storage.local.set({ registration, settings });
         // Create response with set panel id
         response = {
           from: request.to,
@@ -221,14 +225,18 @@ const onMessage = async (request) => {
           },
         };
       } else if (request.message.action === MESSAGE_ACTIONS.REMOVE_PROVIDER) {
-        const { registration } = data;
+        const { registration, settings } = data;
         registration.provider = {
           id: undefined,
           name: undefined,
           label: undefined,
         };
         registration.updatedAt = new Date().toJSON();
-        await browser.storage.local.set({ registration });
+        // Deactivate tracking
+        settings.tracking = false;
+        settings.updatedAt = new Date().toJSON();
+        // Update local storage
+        await browser.storage.local.set({ registration, settings });
         // Create response with emptied provider
         response = {
           from: request.to,
@@ -239,14 +247,11 @@ const onMessage = async (request) => {
           },
         };
       } else if (request.message.action === MESSAGE_ACTIONS.TOGGLE_AGREEMENT) {
-        const { registration, settings } = data;
+        const { registration } = data;
         registration.agreed = request.message.agreed;
-        // Toggle tracking state according to the agreement state
-        settings.tracking = request.message.agreed;
-        settings.updatedAt = new Date().toJSON();
         registration.updatedAt = new Date().toJSON();
         // Persistent state
-        await browser.storage.local.set({ ...data, registration, settings });
+        await browser.storage.local.set({ ...data, registration });
         // Create response with updated registration object
         response = {
           from: request.to,
@@ -257,11 +262,14 @@ const onMessage = async (request) => {
           },
         };
       } else if (request.message.action === MESSAGE_ACTIONS.REMOVE_REGISTRATION) {
-        const { registration } = data;
+        const { registration, settings } = data;
         // Create new user id
         registration.userId = uuidv4();
         registration.agreed = false;
         registration.completed = false;
+        // Deactivate tracking
+        settings.tracking = false;
+        settings.updatedAt = new Date().toJSON();
         // Set the uninstall url which should be opened when the extension is uninstalled
         if (registration.provider.name) {
           setUninstallUrl(registration.userId, registration.provider.name);
@@ -276,7 +284,7 @@ const onMessage = async (request) => {
         };
         registration.updatedAt = new Date().toJSON();
         // Persistent state
-        await browser.storage.local.set({ ...data, registration });
+        await browser.storage.local.set({ ...data, registration, settings });
         response = {
           from: request.to,
           to: request.from,
