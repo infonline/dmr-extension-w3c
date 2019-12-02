@@ -76,7 +76,7 @@
     "dev": "cross-env NODE_ENV=development rollup -c --watch ./rollup.config.js",
     "dev:staging": "cross-env NODE_ENV=staging rollup -c --watch ./rollup.config.js",
     "lint": "eslint src/**/*.{js,vue}",
-    "pack": "node --experimental-modules build/pack.mjs"
+    "pack": "node --experimental-modules --experimental-json-modules build/pack.mjs"
   },
   "version": "1.3.10"
 }
