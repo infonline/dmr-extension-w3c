@@ -1,3 +1,14 @@
+<a name="1.3.10"></a>
+## [1.3.10](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.8...1.3.10) (2019-12-02)
+
+
+### Bug Fixes
+
+* activate tracking only when panel identifier was transmitted ([17ee92d](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/17ee92d)), closes [#20](https://vgitbn003.infon/IAM/dmr-extension-w3c/issues/20)
+* add missing urls for vue-apexcharts dependency in licenses ([1a09250](https://vgitbn003.infon/IAM/dmr-extension-w3c/commits/1a09250))
+
+
+
 <a name="1.3.9"></a>
 ## [1.3.9](https://vgitbn003.infon/IAM/dmr-extension-w3c/compare/1.3.8...1.3.9) (2019-11-11)
 
