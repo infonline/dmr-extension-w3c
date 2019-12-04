@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
   dmrWebAppUrl = 'https://dmr.infonline.de';
 }
 // By default we support sourcemaps via inline comment
-const sourcemap = 'inline';
+const sourcemap = true;
 // Copy options
 const COPYING_OPTIONS = [
   {
