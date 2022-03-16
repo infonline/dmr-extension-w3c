@@ -4,7 +4,7 @@
     "@mdi/font": "^3.8.95",
     "apexcharts": "^3.8.2",
     "bowser": "^2.4.0",
-    "lodash-es": "^4.17.14",
+    "lodash-es": "^4.17.21",
     "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-apexcharts": "^1.4.0",
