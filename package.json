@@ -2,7 +2,7 @@
   "author": "INFONline GmbH <support@infonline.de>",
   "dependencies": {
     "@mdi/font": "^3.8.95",
-    "apexcharts": "^3.8.2",
+    "apexcharts": "^3.24.0",
     "bowser": "^2.4.0",
     "lodash-es": "^4.17.21",
     "moment": "^2.24.0",
